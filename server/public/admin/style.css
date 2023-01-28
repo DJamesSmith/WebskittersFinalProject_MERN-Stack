@@ -1,0 +1,8 @@
+.web-height {
+    height: 780px !important;
+}
+
+.resize-disabled {
+    resize: none;
+    height: 200px;
+}
