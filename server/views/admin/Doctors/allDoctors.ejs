@@ -22,21 +22,21 @@
                                         <ol class="breadcrumb float-sm-right">
                                             <li class="breadcrumb-item"><a href="/admin">Home</a></li>
                                             <li class="breadcrumb-item active">Dashboard</li>
-                                            <li class="breadcrumb-item active"> Comment </li>
+                                            <li class="breadcrumb-item active"> Doctor </li>
                                         </ol>
                                     </div>
                                 </div>
 
                                 <div class="row mb-2">
                                     <div class="container mt-5">
-                                        <a href="/admin/addService"> <button type="button" class="btn btn-success mb-3"> Add New Comment </button> </a>
+                                        <a href="/admin/addService"> <button type="button" class="btn btn-success mb-3"> Add New Doctor </button> </a>
                                         <table class="table table-dark table-striped text-center mb-5">
                                             <thead>
                                                 <tr>
                                                     <th scope="col"> # </th>
                                                     <th scope="col"> Image </th>
-                                                    <th scope="col"> Comment Name </th>
-                                                    <th scope="col"> Comment Description </th>
+                                                    <th scope="col"> Doctor Name </th>
+                                                    <th scope="col"> Doctor Description </th>
                                                     <th colspan="2"> Action </th>
                                                 </tr>
                                             </thead>
@@ -55,15 +55,15 @@
                                                 <tbody>
                                                     <% if(displaydata.length > 0) {%>
                                                         <tbody>
-                                                            <% for(let comment of displaydata){ %>
-                                                                <% const p = comment.id %>
+                                                            <% for(let doctor of displaydata){ %>
+                                                                <% const p = doctor.id %>
                                                             <tr>
                                                                 <td scope="row"> <%=p.substring(20, 24)%> </td>
-                                                                <td> <img src="/serviceUploads/<%= comment.image %>" style="border-radius: 50%;" alt="" height="70" width="70"> </td>
-                                                                <td> <%= comment.serviceName %> </td>
-                                                                <td> <%= comment.description %> </td>
-                                                                <td> <a href="/admin/editService/<%=comment.id%>"> <button type="button" class="btn btn-outline-primary"> Edit </button> </a> </td>
-                                                                <td> <a href="/admin/deleteService/<%=comment._id%>"> <button class="btn btn-danger"> Delete </button> </a> </td>
+                                                                <td> <img src="/serviceUploads/<%= doctor.image %>" style="border-radius: 50%;" alt="" height="70" width="70"> </td>
+                                                                <td> <%= doctor.serviceName %> </td>
+                                                                <td> <%= doctor.description %> </td>
+                                                                <td> <a href="/admin/editService/<%=doctor.id%>"> <button type="button" class="btn btn-outline-primary"> Edit </button> </a> </td>
+                                                                <td> <a href="/admin/deleteService/<%=doctor._id%>"> <button class="btn btn-danger"> Delete </button> </a> </td>
                                                             </tr>
                                                         </tbody>
                                                     <%}}else{%>

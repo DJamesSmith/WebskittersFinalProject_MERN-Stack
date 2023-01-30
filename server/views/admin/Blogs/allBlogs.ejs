@@ -29,7 +29,7 @@
 
                                 <div class="row mb-2">
                                     <div class="container mt-5">
-                                        <a href="/admin/addService"> <button type="button" class="btn btn-success mb-3"> Add New Blog </button> </a>
+                                        <a href="/admin/addBlog"> <button type="button" class="btn btn-success mb-3"> Add New Blog </button> </a>
                                         <table class="table table-dark table-striped text-center mb-5">
                                             <thead>
                                                 <tr>
@@ -47,7 +47,7 @@
                                                     <td> Otto </td>
                                                     <td> @mdo </td>
                                                     <td>
-                                                        <a href="/admin/editService"> <button type="button" class="btn btn-outline-primary mr-2"> Edit </button> </a>
+                                                        <a href="/admin/editBlog"> <button type="button" class="btn btn-outline-primary mr-2"> Edit </button> </a>
                                                         <button type="button" class="btn btn-outline-danger"> Delete </button>
                                                     </td>
                                                 </tr> -->
@@ -59,11 +59,11 @@
                                                                 <% const p = blog.id %>
                                                             <tr>
                                                                 <td scope="row"> <%=p.substring(20, 24)%> </td>
-                                                                <td> <img src="/serviceUploads/<%= blog.image %>" style="border-radius: 50%;" alt="" height="70" width="70"> </td>
-                                                                <td> <%= blog.serviceName %> </td>
+                                                                <td> <img src="/blogUploads/<%= blog.image %>" style="border-radius: 50%;" alt="" height="70" width="70"> </td>
+                                                                <td> <%= blog.blogName %> </td>
                                                                 <td> <%= blog.description %> </td>
-                                                                <td> <a href="/admin/editService/<%=blog.id%>"> <button type="button" class="btn btn-outline-primary"> Edit </button> </a> </td>
-                                                                <td> <a href="/admin/deleteService/<%=blog._id%>"> <button class="btn btn-danger"> Delete </button> </a> </td>
+                                                                <td> <a href="/admin/editBlog/<%=blog.id%>"> <button type="button" class="btn btn-outline-primary"> Edit </button> </a> </td>
+                                                                <td> <a href="/admin/deleteBlog/<%=blog._id%>"> <button class="btn btn-danger"> Delete </button> </a> </td>
                                                             </tr>
                                                         </tbody>
                                                     <%}}else{%>

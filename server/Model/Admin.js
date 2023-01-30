@@ -13,19 +13,11 @@ const adminSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    adminPhone: {
-        type: String,
-        required: true
-    },
-    adminAddress: {
-        type: String,
-        required: true
-    },
     adminImage: {
         type: String,
         required: false
     },
-    type: {
+    status: {
         type: Number,
         default: '1'
     }

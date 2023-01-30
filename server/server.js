@@ -25,6 +25,7 @@ app.set('view engine', 'ejs')
 app.set('views', 'server/views/admin')
 
 app.use(express.static(path.join(__dirname, 'public/admin')))
+app.use(express.static(path.join(__dirname, 'public/imageUploads')))
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -40,26 +41,32 @@ const serviceRoute = require('../server/Router/apiRouter/serviceRoute')         
 app.use('/api', serviceRoute)
 
 // // Doctors
-// const adminDoctorRoute = require('../server/Router/templateRouter/adminDoctorRoute')                    // For Admin
-// app.use('/admin', adminDoctorRoute)
+const adminDoctorRoute = require('../server/Router/templateRouter/adminDoctorRoute')                    // For Admin
+app.use('/admin', adminDoctorRoute)
 // const doctorRoute = require('../server/Router/apiRouter/doctorRoute')                                   // For ReactJS API
 // app.use('/api', doctorRoute)
 
 // // Departments
-// const adminDepartmentRoute = require('../server/Router/templateRouter/adminDepartmentRoute')                    // For Admin
-// app.use('/admin', adminDepartmentRoute)
+const adminDepartmentRoute = require('../server/Router/templateRouter/adminDepartmentRoute')                    // For Admin
+app.use('/admin', adminDepartmentRoute)
 // const departmentRoute = require('../server/Router/apiRouter/departmentRoute')                                   // For ReactJS API
 // app.use('/api', departmentRoute)
 
-// // Blogs
-// const adminBlogRoute = require('../server/Router/templateRouter/adminBlogRoute')                    // For Admin
-// app.use('/admin', adminBlogRoute)
+// Blogs
+const adminBlogRoute = require('../server/Router/templateRouter/adminBlogRoute')                    // For Admin
+app.use('/admin', adminBlogRoute)
 // const blogRoute = require('../server/Router/apiRouter/blogRoute')                                   // For ReactJS API
 // app.use('/api', blogRoute)
 
-// // Appointments
-// const adminAppointmentRoute = require('../server/Router/templateRouter/adminAppointmentRoute')                    // For Admin
-// app.use('/admin', adminAppointmentRoute)
+// Comments
+const adminCommentRoute = require('../server/Router/templateRouter/adminCommentRoute')                    // For Admin
+app.use('/admin', adminCommentRoute)
+// const commentRoute = require('../server/Router/apiRouter/commentRoute')                                   // For ReactJS API
+// app.use('/api', commentRoute)
+
+// Appointments
+const adminAppointmentRoute = require('../server/Router/templateRouter/adminAppointmentRoute')                    // For Admin
+app.use('/admin', adminAppointmentRoute)
 // const appointmentRoute = require('../server/Router/apiRouter/appointmentRoute')                                   // For ReactJS API
 // app.use('/api', appointmentRoute)
 
@@ -75,7 +82,7 @@ app.use('/api', userRoute)
 
 // -------------------------------------- Routes --------------------------------------
 
-const dbcon = "mongodb+srv://dionjamessmith:W2nXCB1pFcf9YpNx@cluster0.apg8y7z.mongodb.net/cure-and-care"
+const dbcon = ""
 const port = process.env.PORT || 3002
 
 mongoose.connect(dbcon, { useNewUrlParser: true, useUnifiedTopology: true })

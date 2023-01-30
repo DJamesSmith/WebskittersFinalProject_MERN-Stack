@@ -39,12 +39,20 @@
 
                                         <form action="/admin/createUser" method="POST" enctype="multipart/form-data">
                                             <div class="mb-3">
-                                                <label for="exampleFormControlInput1" class="form-label"> User Name </label>
-                                                <input type="text" class="form-control" placeholder="Enter Type of User" name="userName" required>
+                                                <label for="exampleFormControlInput1" class="form-label"> Name </label>
+                                                <input type="text" class="form-control" placeholder="Enter Full Name" name="name" required>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="exampleFormControlTextarea1" class="form-label"> Description </label>
-                                                <textarea class="form-control resize-disabled" rows="3" placeholder="Enter User Description" name="description" required></textarea>
+                                                <label for="exampleFormControlInput1" class="form-label"> Email </label>
+                                                <input type="email" class="form-control" placeholder="Enter Email" name="email" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlInput1" class="form-label"> Password </label>
+                                                <input type="password" class="form-control" placeholder="Enter Password" name="password" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlInput1" class="form-label"> Phone </label>
+                                                <input type="text" class="form-control" placeholder="Enter Phone Number" name="mobile" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="formFile" class="form-label"> Choose Image </label>

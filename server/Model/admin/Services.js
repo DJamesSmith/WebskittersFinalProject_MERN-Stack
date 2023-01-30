@@ -19,4 +19,4 @@ const serviceSchema = mongoose.Schema({
     }
 )
 
-module.exports = mongoose.model('AdminService', serviceSchema)
+module.exports = mongoose.model('Service', serviceSchema)

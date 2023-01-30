@@ -41,7 +41,7 @@ const Home = () => {
                                     aperiam maiores sunt fugit, deserunt rem suscipit placeat.</p>
                                 <div className="btn-container ">
                                     <a href="/appointment" target="_blank"
-                                        className="btn btn-main-2 btn-icon btn-round-full"> Make appoinment <i className="icofont-simple-right ml-2  "></i></a>
+                                        className="btn btn-main-2 btn-icon btn-round-full"> Make appointment <i className="icofont-simple-right ml-2  "></i></a>
                                 </div>
                             </div>
                         </div>
@@ -62,7 +62,7 @@ const Home = () => {
                                     <h4 className="mb-3">Online Appoinment</h4>
                                     <p className="mb-4">Get ALl time support for emergency.We have introduced the principle of
                                         family medicine.</p>
-                                    <a href="/appointment" className="btn btn-main btn-round-full">Make a appoinment</a>
+                                    <a href="/appointment" className="btn btn-main btn-round-full">Make a appointment</a>
                                 </div>
 
                                 <div className="feature-item mb-5 mb-lg-0">
@@ -251,11 +251,11 @@ const Home = () => {
                 </div>
             </section>
 
-            <section className="section appoinment">
+            <section className="section appointment">
                 <div className="container">
                     <div className="row align-items-center">
                         <div className="col-lg-6 ">
-                            <div className="appoinment-content">
+                            <div className="appointment-content">
                                 <img src="./Assets/images/about/img-3.jpg" alt="" className="img-fluid" />
                                 <div className="emergency">
                                     <h2 className="text-lg"><i className="icofont-phone-circle text-lg"></i>+23 345 67980</h2>
@@ -263,11 +263,11 @@ const Home = () => {
                             </div>
                         </div>
                         <div className="col-lg-6 col-md-10 ">
-                            <div className="appoinment-wrap mt-5 mt-lg-0">
-                                <h2 className="mb-2 title-color">Book appoinment</h2>
+                            <div className="appointment-wrap mt-5 mt-lg-0">
+                                <h2 className="mb-2 title-color">Book appointment</h2>
                                 <p className="mb-4">Mollitia dicta commodi est recusandae iste, natus eum asperiores corrupti qui
                                     velit . Iste dolorum atque similique praesentium soluta.</p>
-                                <form id="#" className="appoinment-form" method="post" action="#">
+                                <form id="#" className="appointment-form" method="post" action="#">
                                     <div className="row">
                                         <div className="col-lg-6">
                                             <div className="form-group">

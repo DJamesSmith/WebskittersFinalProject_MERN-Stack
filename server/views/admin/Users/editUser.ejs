@@ -39,12 +39,20 @@
 
                                         <form action="/admin/updateUser/<%= data.id %>" method="POST" enctype="multipart/form-data">
                                             <div class="mb-3">
-                                                <label for="exampleFormControlInput1" class="form-label"> User Name </label>
-                                                <input type="text" class="form-control" name="userName" value="<%=data.userName%>" placeholder="Enter Type of User">
+                                                <label for="exampleFormControlInput1" class="form-label"> Name </label>
+                                                <input type="text" class="form-control" placeholder="Enter Full Name" name="name" value="<%=data.name%>" required>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="exampleFormControlTextarea1" class="form-label"> Description </label>
-                                                <textarea class="form-control resize-disabled" rows="3" name="description" placeholder="Enter User Description" required><%=data.description%></textarea>
+                                                <label for="exampleFormControlInput1" class="form-label"> Email </label>
+                                                <input type="text" class="form-control" placeholder="Enter Email" name="email" value="<%=data.email%>" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlInput1" class="form-label"> Password </label>
+                                                <input type="text" class="form-control" placeholder="Enter Password" name="password" value="<%=data.password%>" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlInput1" class="form-label"> Phone </label>
+                                                <input type="text" class="form-control" placeholder="Enter Phone Number" name="mobile" value="<%=data.mobile%>" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="formFile" class="form-label"> Choose Image </label>

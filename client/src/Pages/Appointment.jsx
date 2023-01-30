@@ -42,7 +42,7 @@ const Appointment = () => {
                 </div>
             </section>
 
-            <section className="appoinment section">
+            <section className="appointment section">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-4">
@@ -56,10 +56,10 @@ const Appointment = () => {
                         </div>
 
                         <div className="col-lg-8">
-                            <div className="appoinment-wrap mt-5 mt-lg-0 pl-lg-5">
+                            <div className="appointment-wrap mt-5 mt-lg-0 pl-lg-5">
                                 <h2 className="mb-2 title-color">Book an appointment</h2>
                                 <p className="mb-4">Mollitia dicta commodi est recusandae iste, natus eum asperiores corrupti qui velit . Iste dolorum atque similique praesentium soluta.</p>
-                                <form id="#" className="appoinment-form" method="post" action="#">
+                                <form id="#" className="appointment-form" method="post" action="#">
                                     <div className="row">
                                         <div className="col-lg-6">
                                             <div className="form-group">
@@ -117,7 +117,7 @@ const Appointment = () => {
                                         <textarea name="message" id="message" className="form-control" rows="6" placeholder="Your Message" required></textarea>
                                     </div>
 
-                                    <a className="btn btn-main btn-round-full" href="/confirmation">Make Appoinment<i className="icofont-simple-right ml-2"></i></a>
+                                    <a className="btn btn-main btn-round-full" href="/confirmation">Make Appointment<i className="icofont-simple-right ml-2"></i></a>
                                 </form>
                             </div>
                         </div>
