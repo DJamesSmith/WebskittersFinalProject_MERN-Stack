@@ -1,4 +1,4 @@
-// For the client for ReactJS
+// For the admin to make changes from the backend side through POSTMAN
 
 const express = require('express')
 const router = express.Router()
@@ -45,7 +45,5 @@ router.get('/test', auth, userController.test)
 
 // Update password
 router.post('/update-password', auth, userController.updatePassword)
-
-router.post('/forget-password', userController.forgetPassword)          // Does not work. Does send a random string to given email.
 
 module.exports = router

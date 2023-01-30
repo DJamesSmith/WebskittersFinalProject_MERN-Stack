@@ -86,8 +86,7 @@ const Footer = () => {
                         <div class="row align-items-center justify-content-between">
                             <div class="col-lg-6">
                                 <div class="copyright">
-                                    Copyright &copy; 2021, Designed &amp; Developed by <a
-                                        href="https://themefisher.com/">Themefisher</a>
+                                    Copyright &copy; 2023, Designed &amp; Developed by <a href="https://themefisher.com/"> Webskitters MERN Stack Team </a>
                                 </div>
                             </div>
                             <div class="col-lg-6">

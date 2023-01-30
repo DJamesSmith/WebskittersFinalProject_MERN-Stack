@@ -67,6 +67,7 @@ export const AuthSlice = createSlice({
     },
 
     extraReducers: {
+        // Register
         [registerUser.pending]: state => {
             state.loading = true
             state.error = null
@@ -97,6 +98,8 @@ export const AuthSlice = createSlice({
             state.isLoggedInToken = true
             state.loading = false
             // state.userInfo = payload
+
+            console.log('--------------------------sdfj-------------------------', payload?.user?.name)
         },
         [loginUser.rejected]: (state, action) => {
             state.loading = false

@@ -22,7 +22,7 @@ app.use(session({
 app.use(flash())
 
 app.set('view engine', 'ejs')
-app.set('views', 'views/admin')
+app.set('views', 'server/views/admin')
 
 app.use(express.static(path.join(__dirname, 'public/admin')))
 
@@ -31,20 +31,49 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(cors())
 
-// -------------------- Routes --------------------
+// -------------------------------------- Routes --------------------------------------
 
-const adminServiceRoute = require('./Router/adminRouter/adminServiceRoute')             // For Admin
+// Services
+const adminServiceRoute = require('../server/Router/templateRouter/adminServiceRoute')                    // For Admin
 app.use('/admin', adminServiceRoute)
-
-const serviceRoute = require('./Router/serviceRoute')                                   // For ReactJS API
+const serviceRoute = require('../server/Router/apiRouter/serviceRoute')                                   // For ReactJS API
 app.use('/api', serviceRoute)
 
+// // Doctors
+// const adminDoctorRoute = require('../server/Router/templateRouter/adminDoctorRoute')                    // For Admin
+// app.use('/admin', adminDoctorRoute)
+// const doctorRoute = require('../server/Router/apiRouter/doctorRoute')                                   // For ReactJS API
+// app.use('/api', doctorRoute)
+
+// // Departments
+// const adminDepartmentRoute = require('../server/Router/templateRouter/adminDepartmentRoute')                    // For Admin
+// app.use('/admin', adminDepartmentRoute)
+// const departmentRoute = require('../server/Router/apiRouter/departmentRoute')                                   // For ReactJS API
+// app.use('/api', departmentRoute)
+
+// // Blogs
+// const adminBlogRoute = require('../server/Router/templateRouter/adminBlogRoute')                    // For Admin
+// app.use('/admin', adminBlogRoute)
+// const blogRoute = require('../server/Router/apiRouter/blogRoute')                                   // For ReactJS API
+// app.use('/api', blogRoute)
+
+// // Appointments
+// const adminAppointmentRoute = require('../server/Router/templateRouter/adminAppointmentRoute')                    // For Admin
+// app.use('/admin', adminAppointmentRoute)
+// const appointmentRoute = require('../server/Router/apiRouter/appointmentRoute')                                   // For ReactJS API
+// app.use('/api', appointmentRoute)
+
+// Admin-User: Authenticated to Create, Edit and Delete User
+const adminUserRoute = require('../server/Router/templateRouter/adminUserRoute')                    // For Admin
+app.use('/admin', adminUserRoute)
+const apiAdminUserRoute = require('../server/Router/apiRouter/userRoute')                                   // For ReactJS API
+app.use('/api', apiAdminUserRoute)
+
+// Client-User
 const userRoute = require('./Router/UserRouter/userRoute')
 app.use('/api', userRoute)
 
-
-
-// -------------------- Routes --------------------
+// -------------------------------------- Routes --------------------------------------
 
 const dbcon = "mongodb+srv://dionjamessmith:W2nXCB1pFcf9YpNx@cluster0.apg8y7z.mongodb.net/cure-and-care"
 const port = process.env.PORT || 3002

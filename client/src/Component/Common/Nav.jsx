@@ -14,12 +14,12 @@ const Nav = () => {
     const [loggedInImage, setis_loggedInImage] = useState("")
 
     const name = localStorage.getItem("name")
-    // console.log('-------------------------------------------------------', name)
+    // console.log('name: ', name)
     const image = localStorage.getItem("image")
-    // console.log('-------------------------------------------------------', image)
+    // console.log('image: ', image)
     console.log(isLoggedInToken, "isLoggedInToken")
     console.log(setUser, "setUser")         // hgggggg
-    console.log("loggedInName: ", loggedInName)                          // Username on Console log
+    console.log("loggedInName:-------------------------------------------------- ", loggedInName)                          // Username on Console log
     console.log("loggedInImage: ", loggedInImage)              // Profile Pic String Info on Console log
 
     useEffect(() => {
