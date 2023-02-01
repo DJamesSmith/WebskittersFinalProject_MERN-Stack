@@ -6,11 +6,7 @@ const bodyParser = require('body-parser')
 const multer = require('multer')
 const path = require('path')
 
-// const adminAuth = require('../../Middleware/AdminAuth')
-// router.use(adminAuth.authAdminJwt)
-
 const verifyAdminRegister = require("../../Middleware/verifyAdminRegister")
-
 const adminController = require('../../Controller/AdminController')
 
 router.use(bodyParser.json())
