@@ -6,44 +6,52 @@ const bodyParser = require('body-parser')
 const multer = require('multer')
 const path = require('path')
 
-const auth = require('../../Middleware/Auth')
-const userController = require('../../Controller/UserController')
+const userController = require('../../Controller/apiController/UserController')
 
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: true }))
 
 // -------------------------- Multer --------------------------
 
-// Define static folder 
-router.use(express.static('public'))
-
-// Use multer diskStorage for file upload
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, '../../public/imageUploads/userUploads'), function (error, success) {
-            if (error) throw error
-        })
+    destination: (req, file, cb) => {
+        cb(null, "./server/public/imageUploads/userUploads/")
     },
-    filename: function (req, file, cb) {
-        const name = Date.now() + '_' + path.extname(file.originalname)
-        cb(null, name, function (error1, success1) {
-            if (error1) throw error1
-        })
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '-' + Date.now() + 'user' + path.extname(file.originalname))
     }
 })
 
-//define uploaded storage path
-const upload = multer({ storage: storage })
+const maxSize = 2 * 1024 * 1024 // for 1MB
+
+const upload = multer({
+    storage: storage,
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+            cb(null, true)
+        } else {
+            cb(null, false)
+            return cb(new Error("Only .png, .jpg and .jpeg format allowed!"))
+        }
+    },
+    limits: { fileSize: maxSize }
+})
 
 // -------------------------- Multer --------------------------
 
-router.get('/all-users', userController.home)
+// GET: All Users
+router.get('/allUsers', userController.allUsers)
 
-router.post('/register', upload.single('image'), userController.registerUser)
-router.post('/login', userController.userLogin)
-router.get('/test', auth, userController.test)
+// GET: Single User
+router.get('/singleUser/:id', userController.singleUser)
 
-// Update password
-router.post('/update-password', auth, userController.updatePassword)
+// POST
+router.post('/createUser',  upload.single('image'), userController.createUser)
+
+// PUT
+router.post('/updateUser/:id',  upload.single('image'), userController.updateUser)
+
+// DELETE
+router.get('/deleteUser/:id', userController.deleteUser)
 
 module.exports = router

@@ -1,19 +1,5 @@
 const ServiceModel = require('../../Model/admin/Services')
 
-exports.index = ((req, res) => {
-    res.render('index', {
-        title: 'AdminLTE | Dashboard',
-        dashboardtitle: 'Dashboard'
-    })
-})
-
-exports.contact = ((req, res) => {
-    res.render('contact', {
-        title: 'AdminLTE | Contact',
-        dashboardtitle: 'Contacts Page'
-    })
-})
-
 // GET - All Services
 exports.service = (req, res) => {
     ServiceModel.find((error, data) => {

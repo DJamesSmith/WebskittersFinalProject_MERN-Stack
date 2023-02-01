@@ -13,9 +13,17 @@ const adminSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    adminPasswordConfirm: {
+        type: String,
+        required: true
+    },
     adminImage: {
         type: String,
         required: false
+    },
+    isVerified: {
+        type: Boolean,
+        default: true
     },
     status: {
         type: Number,

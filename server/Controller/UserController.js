@@ -70,7 +70,7 @@ exports.registerUser = async (req, res) => {
             mobile: req.body.mobile,
             password: setpassword,
             image: req.file.filename,
-            type: req.body.type
+            status: 1
         })
         const userData = await userModel.collection.findOne({ email: req.body.email })
         if (userData) {

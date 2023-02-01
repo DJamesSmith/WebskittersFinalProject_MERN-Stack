@@ -12,7 +12,7 @@ const verifyToken = async (req, res, next) => {
         const decoded = jwt.verify(token, config.secret_jwt)
         req.user = decoded
     } catch (err) {
-        return res.status(401).send({ "status": false, "msg": "invalid Token Access" })
+        return res.status(401).send({ "status": false, "msg": "Invalid Token Access" })
     }
     return next()
 }

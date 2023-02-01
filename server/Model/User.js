@@ -24,6 +24,9 @@ const userSchema = mongoose.Schema({
     type: {
         type: Number,
         default: '1'
+    },
+    status: {
+        type: Number
     }
 },
     {

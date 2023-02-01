@@ -10,7 +10,7 @@ exports.service = (req, res) => {
     })
 }
 
-// GET - Single Service for "Edit Service Page"
+// GET - Single Service
 exports.singleService = ((req, res) => {
 
     const serviceID = req.params.id

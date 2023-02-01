@@ -3,10 +3,14 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const path = require('path')
+const cookieParser = require('cookie-parser')
 const flash = require('connect-flash')
 const session = require('express-session')
 
 const app = express()
+
+// app.use(express.json())
+app.use(cookieParser())
 
 app.use(express.json({ limit: "30mb", extended: true }))
 app.use(express.urlencoded({ limit: "30mb", extended: true }))
@@ -26,13 +30,24 @@ app.set('views', 'server/views/admin')
 
 app.use(express.static(path.join(__dirname, 'public/admin')))
 app.use(express.static(path.join(__dirname, 'public/imageUploads')))
+app.use(express.static(path.join(__dirname, 'public/adminUpload')))
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(cors())
 
+const authAdmin = require('./Middleware/AdminAuth')
+app.use(authAdmin.authAdminJwt)
+
 // -------------------------------------- Routes --------------------------------------
+
+// ---------- ADMIN ----------
+
+const adminAuthRoute = require('./Router/AdminRouter/adminRouter')
+app.use('/admin', adminAuthRoute)
+
+// ---------- ADMIN ----------
 
 // Services
 const adminServiceRoute = require('../server/Router/templateRouter/adminServiceRoute')                    // For Admin
@@ -82,7 +97,7 @@ app.use('/api', userRoute)
 
 // -------------------------------------- Routes --------------------------------------
 
-const dbcon = ""
+const dbcon = "mongodb+srv://dionjamessmith:W2nXCB1pFcf9YpNx@cluster0.apg8y7z.mongodb.net/cure-and-care"
 const port = process.env.PORT || 3002
 
 mongoose.connect(dbcon, { useNewUrlParser: true, useUnifiedTopology: true })

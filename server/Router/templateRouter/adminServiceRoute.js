@@ -37,9 +37,6 @@ const upload = multer({
 
 // ---------------- Multer ----------------
 
-router.get('/', adminController.index)
-router.get('/contact', adminController.contact)
-
 // GET: All Services
 router.get('/service', adminController.service)
 
