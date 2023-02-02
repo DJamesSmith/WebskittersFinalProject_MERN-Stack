@@ -9,7 +9,6 @@ const session = require('express-session')
 
 const app = express()
 
-// app.use(express.json())
 app.use(cookieParser())
 
 app.use(express.json({ limit: "30mb", extended: true }))
@@ -56,48 +55,48 @@ const serviceRoute = require('../server/Router/apiRouter/serviceRoute')         
 app.use('/api', serviceRoute)
 
 // // Doctors
-const adminDoctorRoute = require('../server/Router/templateRouter/adminDoctorRoute')                    // For Admin
+const adminDoctorRoute = require('../server/Router/templateRouter/adminDoctorRoute')                      // For Admin
 app.use('/admin', adminDoctorRoute)
-// const doctorRoute = require('../server/Router/apiRouter/doctorRoute')                                   // For ReactJS API
+// const doctorRoute = require('../server/Router/apiRouter/doctorRoute')                                  // For ReactJS API
 // app.use('/api', doctorRoute)
 
 // // Departments
-const adminDepartmentRoute = require('../server/Router/templateRouter/adminDepartmentRoute')                    // For Admin
+const adminDepartmentRoute = require('../server/Router/templateRouter/adminDepartmentRoute')              // For Admin
 app.use('/admin', adminDepartmentRoute)
-// const departmentRoute = require('../server/Router/apiRouter/departmentRoute')                                   // For ReactJS API
+// const departmentRoute = require('../server/Router/apiRouter/departmentRoute')                          // For ReactJS API
 // app.use('/api', departmentRoute)
 
 // Blogs
-const adminBlogRoute = require('../server/Router/templateRouter/adminBlogRoute')                    // For Admin
+const adminBlogRoute = require('../server/Router/templateRouter/adminBlogRoute')                         // For Admin
 app.use('/admin', adminBlogRoute)
-// const blogRoute = require('../server/Router/apiRouter/blogRoute')                                   // For ReactJS API
+// const blogRoute = require('../server/Router/apiRouter/blogRoute')                                     // For ReactJS API
 // app.use('/api', blogRoute)
 
 // Comments
-const adminCommentRoute = require('../server/Router/templateRouter/adminCommentRoute')                    // For Admin
+const adminCommentRoute = require('../server/Router/templateRouter/adminCommentRoute')                   // For Admin
 app.use('/admin', adminCommentRoute)
-// const commentRoute = require('../server/Router/apiRouter/commentRoute')                                   // For ReactJS API
+// const commentRoute = require('../server/Router/apiRouter/commentRoute')                               // For ReactJS API
 // app.use('/api', commentRoute)
 
 // Appointments
-const adminAppointmentRoute = require('../server/Router/templateRouter/adminAppointmentRoute')                    // For Admin
+const adminAppointmentRoute = require('../server/Router/templateRouter/adminAppointmentRoute')           // For Admin
 app.use('/admin', adminAppointmentRoute)
-// const appointmentRoute = require('../server/Router/apiRouter/appointmentRoute')                                   // For ReactJS API
+// const appointmentRoute = require('../server/Router/apiRouter/appointmentRoute')                       // For ReactJS API
 // app.use('/api', appointmentRoute)
 
 // Admin-User: Authenticated to Create, Edit and Delete User
-const adminUserRoute = require('../server/Router/templateRouter/adminUserRoute')                    // For Admin
+const adminUserRoute = require('../server/Router/templateRouter/adminUserRoute')                         // For Admin
 app.use('/admin', adminUserRoute)
-const apiAdminUserRoute = require('../server/Router/apiRouter/userRoute')                                   // For ReactJS API
+const apiAdminUserRoute = require('../server/Router/apiRouter/userRoute')                                // For ReactJS API
 app.use('/api', apiAdminUserRoute)
 
 // Client-User
-const userRoute = require('./Router/UserRouter/userRoute')
+const userRoute = require('./Router/UserRouter/userRoute')                                               // For ReactJS API
 app.use('/api', userRoute)
 
 // -------------------------------------- Routes --------------------------------------
 
-const dbcon = ""
+const dbcon = "mongodb+srv://mernstack:uEcMUsb0BmH7CMbo@cluster0.atdylte.mongodb.net/cure-and-care"
 const port = process.env.PORT || 3002
 
 mongoose.connect(dbcon, { useNewUrlParser: true, useUnifiedTopology: true })

@@ -26,23 +26,23 @@ exports.addComment = ((req, res) => {
 
 // POST - Add Comment
 exports.createComment = ((req, res) => {
-    // //console.log(req.body)
-    // const Comment = new CommentModel({
-    //     commentName: req.body.commentName,
-    //     description: req.body.description,
-    //     image: req.file.filename
-    // })
-    // Comment.save()
-    //     .then(result => {
-    //         console.log(result, "Comment data created successfully.")
-    //         req.flash('message', 'Added comment successfully')
-    //         res.redirect('/admin/comment')
-    //     })
-    //     .catch(err => {
-    //         console.log(err, "No Data Saved.")
-    //         req.flash('error', 'You can not send Empty data.')
-    //         res.redirect('/admin/addComment')
-    //     })
+    //console.log(req.body)
+    const Comment = new CommentModel({
+        commentName: req.body.commentName,
+        description: req.body.description,
+        image: req.file.filename
+    })
+    Comment.save()
+        .then(result => {
+            console.log(result, "Comment data created successfully.")
+            req.flash('message', 'Added comment successfully')
+            res.redirect('/admin/comment')
+        })
+        .catch(err => {
+            console.log(err, "No Data Saved.")
+            req.flash('error', 'You can not send Empty data.')
+            res.redirect('/admin/addComment')
+        })
 })
 
 // GET - Single Comment for "Edit Comment Page"

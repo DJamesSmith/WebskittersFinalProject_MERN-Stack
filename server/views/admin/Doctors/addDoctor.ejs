@@ -22,14 +22,14 @@
                                         <ol class="breadcrumb float-sm-right">
                                             <li class="breadcrumb-item"><a href="/admin">Home</a></li>
                                             <li class="breadcrumb-item active">Dashboard</li>
-                                            <li class="breadcrumb-item active"> Comment </li>
+                                            <li class="breadcrumb-item active"> Doctor </li>
                                         </ol>
                                     </div>
                                 </div>
 
                                 <div class="row mb-2">
                                     <div class="container mt-5">
-                                        <h1 class="text-center mb-4"> Add New Comment </h1>
+                                        <h1 class="text-center mb-4"> Add New Doctor </h1>
 
                                         <% if (message.length > 0) {%> 
                                             <div class="alert alert-success">
@@ -37,18 +37,42 @@
                                             </div>
                                         <% } %>
 
-                                        <form action="/admin/createService" method="POST" enctype="multipart/form-data">
+                                        <form action="/admin/createDoctor" method="POST" enctype="multipart/form-data">
                                             <div class="mb-3">
-                                                <label for="exampleFormControlInput1" class="form-label"> Comment Name </label>
-                                                <input type="text" class="form-control" placeholder="Enter Type of Comment" name="serviceName" required>
+                                                <label for="formFile" class="form-label"> Choose Image </label>
+                                                <input class="form-control" type="file" id="formFile" name="docImage" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlInput1" class="form-label"> Name </label>
+                                                <input type="text" class="form-control" placeholder="Enter Doctor Name" name="docName" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlInput1" class="form-label"> Department Name </label>
+                                                <input type="text" class="form-control" placeholder="Enter Department Name" name="deptName" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="exampleFormControlTextarea1" class="form-label"> Description </label>
-                                                <textarea class="form-control resize-disabled" rows="3" placeholder="Enter Comment Description" name="description" required></textarea>
+                                                <textarea class="form-control resize-disabled" rows="3" placeholder="Enter Doctor Description" name="docDescription" required></textarea>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="formFile" class="form-label"> Choose Image </label>
-                                                <input class="form-control" type="file" id="formFile" name="image" required>
+                                                <label for="exampleFormControlInput1" class="form-label"> Qualification </label>
+                                                <input type="text" class="form-control" placeholder="Enter Qualification" name="docQualificationName" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlInput1" class="form-label"> Year </label>
+                                                <input type="text" class="form-control" placeholder="Enter Year" name="docYear" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlTextarea1" class="form-label"> Qualification Description </label>
+                                                <textarea class="form-control resize-disabled" rows="3" placeholder="Enter Qualification Description" name="docQualificationDescription" required></textarea>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlInput1" class="form-label"> Skills </label>
+                                                <input type="text" class="form-control" placeholder="Enter Skills" name="docSkills" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlInput1" class="form-label"> Expertise </label>
+                                                <input type="text" class="form-control" placeholder="Enter Expertise" name="docExpertise" required>
                                             </div>
                                             <button type="submit" class="btn btn-success"> Submit </button>
                                         </form>
@@ -56,10 +80,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <%-include("../common/footer.ejs")%>
+                    </div>             
         </div>
+        <%-include("../common/footer.ejs")%>
         <%-include("../common/scripts.ejs")%>
     </body>
 

@@ -5,6 +5,7 @@ const multer = require('multer')
 const path = require('path')
 
 const adminController = require('../../Controller/adminController/adminBlogController')
+const adminCommentController = require('../../Controller/adminController/adminCommentController')
 
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: true }))
@@ -42,13 +43,16 @@ router.get('/allBlogs', adminController.allBlogs)
 
 // POST
 router.get('/addBlog', adminController.addBlog)
-router.post('/createBlog', upload.single('image'), adminController.createBlog)
+router.post('/createBlog', upload.single('blogImage'), adminController.createBlog)
 
 // PUT
 router.get('/editBlog/:id', adminController.singleBlog)
-router.post('/updateBlog/:id', upload.single('image'), adminController.updateBlog)
+router.post('/updateBlog/:id', upload.single('blogImage'), adminController.updateBlog)
 
 // DELETE
 router.get('/deleteBlog/:id', adminController.deleteBlog)
+
+// GET Comments
+router.get('/allComments/:id', adminCommentController.allComments)
 
 module.exports = router

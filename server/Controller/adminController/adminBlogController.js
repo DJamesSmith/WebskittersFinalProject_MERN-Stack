@@ -2,7 +2,7 @@ const BlogModel = require('../../Model/admin/Blog')
 
 // GET - All Blogs
 exports.allBlogs = (req, res) => {
-    BlogModel.find((error, data) => {
+    BlogModel.find(((error, data) => {
         if (!error) {
             res.render('Blogs/AllBlogs', {
                 title: 'AdminLTE | All Blogs',
@@ -12,7 +12,19 @@ exports.allBlogs = (req, res) => {
                 displaydata: data
             })
         }
-    })
+    }))
+
+    // Post.find()
+    //     .populate("author")
+    //     .exec((err, data) => {
+    //         if (!err) {
+    //             res.render("home", {
+    //                 title: "Populate | Home",
+    //                 displayData: data
+    //             })
+    //         }
+    //         console.log(data)
+    //     })
 }
 
 // GET - Add Blog
@@ -25,25 +37,26 @@ exports.addBlog = ((req, res) => {
 })
 
 // POST - Add Blog
-exports.createBlog = ((req, res) => {
-    // //console.log(req.body)
-    // const Blog = new BlogModel({
-    //     blogName: req.body.blogName,
-    //     description: req.body.description,
-    //     image: req.file.filename
-    // })
-    // Blog.save()
-    //     .then(result => {
-    //         console.log(result, "Blog data created successfully.")
-    //         req.flash('message', 'Added blog successfully')
-    //         res.redirect('/admin/blog')
-    //     })
-    //     .catch(err => {
-    //         console.log(err, "No Data Saved.")
-    //         req.flash('error', 'You can not send Empty data.')
-    //         res.redirect('/admin/addBlog')
-    //     })
-})
+exports.createBlog = (req, res) => {
+    //console.log(req.body)
+    const Blog = new BlogModel({
+        blogName: req.body.blogName,
+        blogDescription: req.body.blogDescription,
+        blogQuote: req.body.blogQuote,
+        blogImage: req.file.filename
+    })
+    Blog.save()
+        .then(result => {
+            console.log(result, "Blog data Created Successfully.")
+            req.flash('message', 'Blog Added Successfully.')
+            res.redirect('/admin/allBlogs')
+        })
+        .catch(err => {
+            console.log(err, "No Data Saved.")
+            req.flash('error', 'You can not send Empty data.')
+            res.redirect('/admin/addBlog')
+        })
+}
 
 // GET - Single Blog for "Edit Blog Page"
 exports.singleBlog = ((req, res) => {
@@ -63,21 +76,22 @@ exports.singleBlog = ((req, res) => {
 
 // PUT - Edit Blog
 exports.updateBlog = ((req, res) => {
-    // BlogModel.findByIdAndUpdate(req.params.id, {
-    //     blogName: req.body.blogName,
-    //     description: req.body.description,
-    //     image: req.file.filename
-    // }, (error, result) => {
-    //     if (!error) {
-    //         console.log(result, "Blog data saved successfully.")
-    //         req.flash('message', 'Blog edited successfully')
-    //         res.redirect('/admin/blog')
-    //     } else {
-    //         console.log(err, "No Data Saved.")
-    //         req.flash('error', 'You can not save Empty data.')
-    //         res.redirect('/admin/editBlog')
-    //     }
-    // })
+    BlogModel.findByIdAndUpdate(req.params.id, {
+        blogName: req.body.blogName,
+        blogDescription: req.body.blogDescription,
+        blogQuote: req.body.blogQuote,
+        blogImage: req.file.filename
+    }, (error, result) => {
+        if (!error) {
+            console.log(result, "Blog data edit successfully.")
+            req.flash('message', 'Blog edited successfully')
+            res.redirect('/admin/allBlogs')
+        } else {
+            console.log(err, "No Data Saved.")
+            req.flash('error', 'You can not save Empty data.')
+            res.redirect('/admin/editBlog')
+        }
+    })
 })
 
 // DELETE - Blog
@@ -88,11 +102,11 @@ exports.deleteBlog = ((req, res, next) => {
     //     .then(result => {
     //         console.log(result, "Blog data deleted successfully.")
     //         req.flash('message', 'Deleted Blog data successfully')
-    //         res.redirect('/admin/blog')
+    //         res.redirect('/admin/allBlogs')
     //     })
     //     .catch(err => {
     //         console.log(err, "No Data Deleted.")
     //         req.flash('error', 'Unable to delete blog data.')
-    //         res.redirect('/admin/blog')
+    //         res.redirect('/admin/allBlogs')
     //     })
 })

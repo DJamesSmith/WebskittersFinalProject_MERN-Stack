@@ -61,7 +61,7 @@ const BlogSingle = () => {
                                                     class="icofont-calendar mr-2"></i> 28th January 2019</span>
                                             </div>
 
-                                            <h2 class="mb-4 text-md"><a href="blog-single.html">Healthy environment to care with
+                                            <h2 class="mb-4 text-md"><a href="/blogSingle">Healthy environment to care with
                                                 modern equipment</a></h2>
 
                                             <p class="lead mb-4">Non illo quas blanditiis repellendus laboriosam minima animi.

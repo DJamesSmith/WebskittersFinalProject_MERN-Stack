@@ -27,53 +27,57 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-2">
-                                    <div class="container mt-5">
-                                        <a href="/admin/addBlog"> <button type="button" class="btn btn-success mb-3"> Add New Blog </button> </a>
-                                        <table class="table table-dark table-striped text-center mb-5">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col"> # </th>
-                                                    <th scope="col"> Image </th>
-                                                    <th scope="col"> Blog Name </th>
-                                                    <th scope="col"> Blog Description </th>
-                                                    <th colspan="2"> Action </th>
-                                                </tr>
-                                            </thead>
+                                <div class="mt-5">
+                                    <a href="/admin/addBlog"> <button type="button" class="btn btn-success mb-3"> Add New Blog </button> </a>
+                                    <table class="table table-dark table-striped text-center mb-5">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"> # </th>
+                                                <th scope="col"> Image </th>
+                                                <th scope="col"> Blog Name </th>
+                                                <th scope="col"> Description </th>
+                                                <th scope="col"> Quote </th>
+                                                <th scope="col"> Date Uploaded </th>
+                                                <th colspan="3"> Action </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- <tr>
+                                                <th scope="row"> 1 </th>
+                                                <td> Mark </td>
+                                                <td> Otto </td>
+                                                <td> @mdo </td>
+                                                <td>
+                                                    <a href="/admin/editBlog"> <button type="button" class="btn btn-outline-primary mr-2"> Edit </button> </a>
+                                                    <button type="button" class="btn btn-outline-danger"> Delete </button>
+                                                </td>
+                                            </tr> -->
+
                                             <tbody>
-                                                <!-- <tr>
-                                                    <th scope="row"> 1 </th>
-                                                    <td> Mark </td>
-                                                    <td> Otto </td>
-                                                    <td> @mdo </td>
-                                                    <td>
-                                                        <a href="/admin/editBlog"> <button type="button" class="btn btn-outline-primary mr-2"> Edit </button> </a>
-                                                        <button type="button" class="btn btn-outline-danger"> Delete </button>
-                                                    </td>
-                                                </tr> -->
-
-                                                <tbody>
-                                                    <% if(displaydata.length > 0) {%>
-                                                        <tbody>
-                                                            <% for(let blog of displaydata){ %>
-                                                                <% const p = blog.id %>
-                                                            <tr>
-                                                                <td scope="row"> <%=p.substring(20, 24)%> </td>
-                                                                <td> <img src="/blogUploads/<%= blog.image %>" style="border-radius: 50%;" alt="" height="70" width="70"> </td>
-                                                                <td> <%= blog.blogName %> </td>
-                                                                <td> <%= blog.description %> </td>
-                                                                <td> <a href="/admin/editBlog/<%=blog.id%>"> <button type="button" class="btn btn-outline-primary"> Edit </button> </a> </td>
-                                                                <td> <a href="/admin/deleteBlog/<%=blog._id%>"> <button class="btn btn-danger"> Delete </button> </a> </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    <%}}else{%>
-                                                    <h1> No data found </h1>
-                                                    <% } %>
-                                                </tbody>
-
+                                                <% if(displaydata.length > 0) {%>
+                                                    <tbody>
+                                                        <% for(let blog of displaydata){ %>
+                                                            <% const p = blog.id %>
+                                                            <% const z = blog.createdAt %>
+                                                        <tr>
+                                                            <td scope="row"> <%=p.substring(20, 24)%> </td>
+                                                            <td> <img src="/blogUploads/<%= blog.blogImage %>" style="border-radius: 50%;" alt="" height="50" width="50"> </td>
+                                                            <td> <%= blog.blogName %> </td>
+                                                            <td style="text-align: justify;"> <%= blog.blogDescription %> </td>
+                                                            <td style="text-align: justify;"> <%= blog.blogQuote %> </td>
+                                                            <td> <%= z %> </td>
+                                                            <td> <a href="/admin/editBlog/<%=blog.id%>"> <button type="button" class="btn btn-outline-primary"> Edit </button> </a> </td>
+                                                            <td> <a href="/admin/deleteBlog/<%=blog.id%>"> <button class="btn btn-danger"> Delete </button> </a> </td>
+                                                            <td> <a href="/admin/allComments/<%=blog.id%>"> <button type="button" class="btn btn-outline-light"> Comments </button> </a> </td>
+                                                        </tr>
+                                                    </tbody>
+                                                <%}}else{%>
+                                                <h1> No data found </h1>
+                                                <% } %>
                                             </tbody>
-                                        </table>
-                                    </div>
+
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>

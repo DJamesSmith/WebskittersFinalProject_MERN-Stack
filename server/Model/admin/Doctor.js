@@ -1,42 +1,46 @@
 const mongoose = require('mongoose')
 
 const doctorSchema = mongoose.Schema({
-    deptImage: {
+    docImage: {
         type: String,
-        require: false
+        required: true
     },
     docName: {
         type: String,
-        require: true
+        required: true
     },
     deptName: {
         type: String,
-        require: true
+        required: true
     },
     docDescription: {
         type: String,
-        require: true
+        required: true
     },
     docQualificationName: {
         type: String,
-        require: true
-    },
-    docQualificationDescription: {
-        type: String,
-        require: true
+        required: true
     },
     docYear: {
         type: String,
-        require: true
+        required: true
+    },
+    docQualificationDescription: {
+        type: String,
+        required: true
     },
     docSkills: {
         type: String,
-        require: true
+        required: true
     },
     docExpertise: {
         type: String,
-        require: true
+        required: true
     }
-})
+},
+    {
+        timestamps: true
+    }
+)
 
-module.exports = mongoose.model('Doctor', doctorSchema)
+module.exports = mongoose.model('AdminDoctor', doctorSchema)

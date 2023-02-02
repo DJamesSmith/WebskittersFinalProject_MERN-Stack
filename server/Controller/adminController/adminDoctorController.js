@@ -1,6 +1,20 @@
-const DoctorModel = require('../../Model/admin/Doctor')
+const DoctorModel=require('../../Model/Admin/Doctor')
 
-// GET - All Doctors
+exports.index = ((req, res) => {
+    res.render('index', {
+        title: 'AdminLTE | Dashboard',
+        dashboardtitle: 'Dashboard'
+    })
+})
+
+exports.contact = ((req, res) => {
+    res.render('contact', {
+        title: 'AdminLTE | Contact',
+        dashboardtitle: 'Contacts Page'
+    })
+})
+
+// // GET - All Doctors
 exports.allDoctors = (req, res) => {
     DoctorModel.find((error, data) => {
         if (!error) {
@@ -24,19 +38,25 @@ exports.addDoctor = ((req, res) => {
     })
 })
 
-// POST - Add Doctor
+// // POST - Add Doctor
 exports.createDoctor = ((req, res) => {
     //console.log(req.body)
     const Doctor = new DoctorModel({
-        doctorName: req.body.doctorName,
-        description: req.body.description,
-        image: req.file.filename
+        docImage: req.file.filename,
+        docName: req.body.docName,
+        deptName: req.body.deptName,
+        docDescription: req.body.docDescription,
+        docQualificationName: req.body.docQualificationName,
+        docYear: req.body.docYear,
+        docQualificationDescription: req.body.docQualificationDescription,
+        docSkills: req.body.docSkills,
+        docExpertise: req.body.docExpertise
     })
     Doctor.save()
         .then(result => {
             console.log(result, "Doctor data created successfully.")
-            req.flash('message', 'Added doctor successfully')
-            res.redirect('/admin/doctor')
+            req.flash('message', 'Added Doctor successfully')
+            res.redirect('/admin/allDoctors')
         })
         .catch(err => {
             console.log(err, "No Data Saved.")
@@ -45,7 +65,7 @@ exports.createDoctor = ((req, res) => {
         })
 })
 
-// GET - Single Doctor for "Edit Doctor Page"
+// // GET - Single Doctor for "Edit Doctor Page"
 exports.singleDoctor = ((req, res) => {
 
     const doctorID = req.params.id
@@ -61,17 +81,23 @@ exports.singleDoctor = ((req, res) => {
         })
 })
 
-// PUT - Edit Doctor
+// // PUT - Edit Doctor
 exports.updateDoctor = ((req, res) => {
     DoctorModel.findByIdAndUpdate(req.params.id, {
-        doctorName: req.body.doctorName,
-        description: req.body.description,
-        image: req.file.filename
+        docImage: req.file.filename,
+        docName:req.body.docName,
+        deptName:req.body.deptName,
+        docDescription: req.body.docDescription,
+        docQualificationName: req.body.docQualificationName,
+        docYear: req.body.docYear,
+        docQualificationDescription: req.body.docQualificationDescription,
+        docSkills: req.body.docSkills,
+        docExpertise: req.body.docExpertise
     }, (error, result) => {
         if (!error) {
             console.log(result, "Doctor data saved successfully.")
             req.flash('message', 'Doctor edited successfully')
-            res.redirect('/admin/doctor')
+            res.redirect('/admin/allDoctors')
         } else {
             console.log(err, "No Data Saved.")
             req.flash('error', 'You can not save Empty data.')
@@ -80,7 +106,7 @@ exports.updateDoctor = ((req, res) => {
     })
 })
 
-// DELETE - Doctor
+// // DELETE - Doctor
 exports.deleteDoctor = ((req, res, next) => {
     const doctorID = req.params.id
 
@@ -88,11 +114,11 @@ exports.deleteDoctor = ((req, res, next) => {
         .then(result => {
             console.log(result, "Doctor data deleted successfully.")
             req.flash('message', 'Deleted Doctor data successfully')
-            res.redirect('/admin/doctor')
+            res.redirect('/admin/allDoctors')
         })
         .catch(err => {
             console.log(err, "No Data Deleted.")
             req.flash('error', 'Unable to delete doctor data.')
-            res.redirect('/admin/doctor')
+            res.redirect('/admin/allDoctors')
         })
 })
