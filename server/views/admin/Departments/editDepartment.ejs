@@ -29,7 +29,7 @@
 
                                 <div class="row mb-2">
                                     <div class="container mt-5">
-                                        <h1 class="text-center mb-4"> Edit Comment </h1>
+                                        <h1 class="text-center mb-4"> Edit Deapartment </h1>
 
                                         <% if (message.length > 0) {%> 
                                             <div class="alert alert-success">
@@ -37,18 +37,26 @@
                                             </div>
                                         <% } %>
 
-                                        <form action="/admin/updateService/<%= data.id %>" method="POST" enctype="multipart/form-data">
+                                        <form action="/admin/updateDepartment/<%= data.id %>" method="POST" enctype="multipart/form-data">
                                             <div class="mb-3">
-                                                <label for="exampleFormControlInput1" class="form-label"> Comment Name </label>
-                                                <input type="text" class="form-control" name="serviceName" value="<%=data.serviceName%>" placeholder="Enter Type of Comment">
+                                                <label for="formFile" class="form-label"> Choose Image </label>
+                                                <input class="form-control" type="file" id="formFile" name="deptImage" value="<%=data.deptImage%>" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlInput1" class="form-label"> Department Name </label>
+                                                <input type="text" class="form-control" name="deptName" value="<%=data.deptName%>" placeholder="Enter Type of Comment">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="exampleFormControlTextarea1" class="form-label"> Description </label>
-                                                <textarea class="form-control resize-disabled" rows="3" name="description" placeholder="Enter Comment Description" required><%=data.description%></textarea>
+                                                <textarea class="form-control resize-disabled" rows="3" name="deptDescription" value="<%=data.deptDescription%>" placeholder="Enter Comment Description" required><%=data.deptDescription%></textarea>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="formFile" class="form-label"> Choose Image </label>
-                                                <input class="form-control" type="file" id="formFile" name="image" value="<%=data.image%>" required>
+                                                <label for="exampleFormControlTextarea1" class="form-label"> Medicine and Health </label>
+                                                <textarea class="form-control resize-disabled" rows="3" placeholder="Enter Medicine and Health" name="deptMedHealth"  value="<%=data.deptMedHealth%>" required><%=data.deptMedHealth%></textarea>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlTextarea1" class="form-label"> Features </label>
+                                                <input class="form-control" rows="3" placeholder="Enter Medical Features" name="deptFeatures" value="<%=data.deptFeatures%>" required />
                                             </div>
                                             <button type="submit" class="btn btn-success"> Update </button>
                                         </form>
@@ -58,8 +66,9 @@
                         </div>
                     </div>
 
-                    <%-include("../common/footer.ejs")%>
+                  
         </div>
+        <%-include("../common/footer.ejs")%>
         <%-include("../common/scripts.ejs")%>
     </body>
 

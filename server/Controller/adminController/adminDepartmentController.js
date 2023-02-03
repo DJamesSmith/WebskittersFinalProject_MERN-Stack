@@ -1,11 +1,25 @@
-const DepartmentModel = require('../../Model/admin/Department')
+const departmentModel = require('../../Model/admin/Department');
 
-// GET - All Departments
-exports.allDepartments = (req, res) => {
-    DepartmentModel.find((error, data) => {
+exports.index = ((req, res) => {
+    res.render('index', {
+        title: 'AdminLTE | Dashboard',
+        dashboardtitle: 'Dashboard'
+    })
+})
+
+exports.contact = ((req, res) => {
+    res.render('contact', {
+        title: 'AdminLTE | Contact',
+        dashboardtitle: 'Contacts Page'
+    })
+})
+
+// GET - All Department
+exports.allDepartment = (req, res) => {
+    departmentModel.find((error, data) => {
         if (!error) {
             res.render('Departments/allDepartments', {
-                title: 'AdminLTE | All Departments',
+                title: 'AdminLTE | All Department',
                 dashboardtitle: 'Departments Page',
                 message: req.flash('message'),
                 error: req.flash('error'),
@@ -24,33 +38,38 @@ exports.addDepartment = ((req, res) => {
     })
 })
 
+
 // POST - Add Department
 exports.createDepartment = ((req, res) => {
-    // //console.log(req.body)
-    // const Department = new DepartmentModel({
-    //     departmentName: req.body.departmentName,
-    //     description: req.body.description,
-    //     image: req.file.filename
-    // })
-    // Department.save()
-    //     .then(result => {
-    //         console.log(result, "Department data created successfully.")
-    //         req.flash('message', 'Added department successfully')
-    //         res.redirect('/admin/department')
-    //     })
-    //     .catch(err => {
-    //         console.log(err, "No Data Saved.")
-    //         req.flash('error', 'You can not send Empty data.')
-    //         res.redirect('/admin/addDepartment')
-    //     })
+    //console.log(req.body)
+    const Department = new departmentModel({
+        deptImage: req.file.filename,
+        deptName: req.body.deptName,
+        deptDescription: req.body.deptDescription,
+        deptMedHealth: req.body.deptMedHealth,
+        deptFeatures: req.body.deptFeatures
+    })
+    Department.save()
+        .then(result => {
+            console.log(result, "Department data created successfully.")
+            req.flash('message', 'Added department successfully')
+            res.redirect('/admin/allDepartments')
+        })
+        .catch(err => {
+            console.log(err, "No Data Saved.")
+            req.flash('error', 'You can not send Empty data.')
+            res.redirect('/admin/addDepartment')
+        })
 })
 
-// GET - Single Department for "Edit Department Page"
-exports.singleDepartment = ((req, res) => {
+
+
+// GET - Single Deaprtment for "Edit Department Page"
+exports.singleDeaprtment = ((req, res) => {
 
     const departmentID = req.params.id
 
-    DepartmentModel.findById(departmentID)
+    departmentModel.findById(departmentID)
         .then(result => {
             res.render('Departments/editDepartment', {
                 title: 'AdminLTE | Edit Department',
@@ -63,36 +82,38 @@ exports.singleDepartment = ((req, res) => {
 
 // PUT - Edit Department
 exports.updateDepartment = ((req, res) => {
-    // DepartmentModel.findByIdAndUpdate(req.params.id, {
-    //     departmentName: req.body.departmentName,
-    //     description: req.body.description,
-    //     image: req.file.filename
-    // }, (error, result) => {
-    //     if (!error) {
-    //         console.log(result, "Department data saved successfully.")
-    //         req.flash('message', 'Department edited successfully')
-    //         res.redirect('/admin/department')
-    //     } else {
-    //         console.log(err, "No Data Saved.")
-    //         req.flash('error', 'You can not save Empty data.')
-    //         res.redirect('/admin/editDepartment')
-    //     }
-    // })
+    departmentModel.findByIdAndUpdate(req.params.id, {
+        deptImage: req.file.filename,
+        deptName: req.body.deptName,
+        deptDescription: req.body.deptDescription,
+        deptMedHealth: req.body.deptMedHealth,
+        deptFeatures: req.body.deptFeatures
+    }, (error, result) => {
+        if (!error) {
+            console.log(result, "Departments data saved successfully.")
+            req.flash('message', 'Departments edited successfully')
+            res.redirect('/admin/allDepartments')
+        } else {
+            console.log(err, "No Data Saved.")
+            req.flash('error', 'You can not save Empty data.')
+            res.redirect('/admin/editDepartment')
+        }
+    })
 })
 
 // DELETE - Department
 exports.deleteDepartment = ((req, res, next) => {
-    // const departmentID = req.params.id
+    const departmentID = req.params.id
 
-    // DepartmentModel.deleteOne({ _id: departmentID })
-    //     .then(result => {
-    //         console.log(result, "Department data deleted successfully.")
-    //         req.flash('message', 'Deleted Department data successfully')
-    //         res.redirect('/admin/department')
-    //     })
-    //     .catch(err => {
-    //         console.log(err, "No Data Deleted.")
-    //         req.flash('error', 'Unable to delete department data.')
-    //         res.redirect('/admin/department')
-    //     })
-})
+    departmentModel.deleteOne({ _id: departmentID })
+        .then(result => {
+            console.log(result, "Department data deleted successfully.")
+            req.flash('message', 'Deleted department data successfully')
+            res.redirect('/admin/allDepartments')
+        })
+        .catch(err => {
+            console.log(err, "No Data Deleted.")
+            req.flash('error', 'Unable to delete department data.')
+            res.redirect('/admin/allDeaprtments')
+        })
+});

@@ -1,13 +1,13 @@
 const express = require('express')
 const router = express.Router()
-const bodyParser = require('body-parser')
-const multer = require('multer')
+const bodyParser = require('body-parser');
+const multer = require('multer');
 const path = require('path')
 
-const adminController = require('../../Controller/adminController/adminDepartmentController')
+const adminController = require('../../Controller/adminController/adminDepartmentController');
 
-router.use(bodyParser.json())
-router.use(bodyParser.urlencoded({ extended: true }))
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
 
 // ---------------- Multer ----------------
 
@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
         cb(null, "./server/public/imageUploads/departmentUploads/")
     },
     filename: (req, file, cb) => {
-        cb(null, file.fieldname + '-' + Date.now() + 'department' + path.extname(file.originalname))
+        cb(null, file.fieldname + '-' + Date.now() + 'deapartment' + path.extname(file.originalname))
     }
 })
 
@@ -37,18 +37,22 @@ const upload = multer({
 
 // ---------------- Multer ----------------
 
-// GET: All Departments
-router.get('/allDepartments', adminController.allDepartments)
+
+router.get('/', adminController.index)
+// router.get('/contact', adminController.contact)
+
+// GET: All Services
+router.get('/allDepartments', adminController.allDepartment)
 
 // POST
 router.get('/addDepartment', adminController.addDepartment)
-router.post('/createDepartment', upload.single('image'), adminController.createDepartment)
+router.post('/createDepartment', upload.single('deptImage'), adminController.createDepartment)
 
 // PUT
-router.get('/editDepartment/:id', adminController.singleDepartment)
-router.post('/updateDepartment/:id', upload.single('image'), adminController.updateDepartment)
+router.get('/editDepartment/:id', adminController.singleDeaprtment)
+router.post('/updateDepartment/:id', upload.single('deptImage'), adminController.updateDepartment)
 
-// DELETE
+// // DELETE
 router.get('/deleteDepartment/:id', adminController.deleteDepartment)
 
-module.exports = router
+module.exports = router;

@@ -11,8 +11,8 @@ router.use(bodyParser.urlencoded({ extended: true }))
 router.get('/allAppointments', adminController.allAppointments)
 
 // POST
-router.get('/addAppointment', adminController.addAppointment)
-router.post('/createAppointment', adminController.createAppointment)
+router.get('/showAddDoctor', adminController.showAddDoctor)
+router.post('/AddDoctor', adminController.AddDoctor)
 
 // PUT
 router.get('/editAppointment/:id', adminController.singleAppointment)

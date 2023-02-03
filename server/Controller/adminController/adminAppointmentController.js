@@ -1,8 +1,10 @@
 const AppointmentModel = require('../../Model/admin/Appointment')
+const DoctorModel=require('../../Model/Admin/Doctor')
+// const DepartmentModel=require('../../Model/Admin/Department')
 
 // GET - All Appointments
 exports.allAppointments = (req, res) => {
-    AppointmentModel.find((error, data) => {
+    AppointmentModel.find().populate("Department").populate("Doctor").exec((error, data) => {
         if (!error) {
             res.render('Appointments/allAppointments', {
                 title: 'AdminLTE | All Appointments',
@@ -25,26 +27,37 @@ exports.addAppointment = ((req, res) => {
 })
 
 // POST - Add Appointment
-exports.createAppointment = ((req, res) => {
-    // //console.log(req.body)
-    // const Appointment = new AppointmentModel({
-    //     appointmentName: req.body.appointmentName,
-    //     description: req.body.description,
-    //     image: req.file.filename
-    // })
-    // Appointment.save()
-    //     .then(result => {
-    //         console.log(result, "Appointment data created successfully.")
-    //         req.flash('message', 'Added appointment successfully')
-    //         res.redirect('/admin/appointment')
-    //     })
-    //     .catch(err => {
-    //         console.log(err, "No Data Saved.")
-    //         req.flash('error', 'You can not send Empty data.')
-    //         res.redirect('/admin/addAppointment')
-    //     })
-})
 
+exports.showAddDoctor = (req, res) => {
+    res.render("Appointments/addDoctor", {
+        title: "Add | Doctors"
+    });
+}
+
+exports.AddDoctor = (req, res) => {
+    const Doctor = new DoctorModel({
+        docImage: req.file.filename,
+        docName: req.body.docName,
+        deptName: req.body.deptName,
+        docDescription: req.body.docDescription,
+        docQualificationName: req.body.docQualificationName,
+        docYear: req.body.docYear,
+        docQualificationDescription: req.body.docQualificationDescription,
+        docSkills: req.body.docSkills,
+        docExpertise: req.body.docExpertise
+    })
+    Doctor.save()
+        .then(result => {
+            console.log(result, "Doctor data created successfully.")
+            req.flash('message', 'Added Doctor successfully')
+            res.redirect('/admin/addDepartment')
+        })
+        .catch(err => {
+            console.log(err, "No Data Saved.")
+            req.flash('error', 'You can not send Empty data.')
+            res.redirect('/admin/addDoctor')
+        })
+}
 // GET - Single Appointment for "Edit Appointment Page"
 exports.singleAppointment = ((req, res) => {
 
@@ -96,3 +109,4 @@ exports.deleteAppointment = ((req, res, next) => {
     //         res.redirect('/admin/appointment')
     //     })
 })
+

@@ -72,12 +72,6 @@ app.use('/admin', adminBlogRoute)
 // const blogRoute = require('../server/Router/apiRouter/blogRoute')                                     // For ReactJS API
 // app.use('/api', blogRoute)
 
-// Comments
-const adminCommentRoute = require('../server/Router/templateRouter/adminCommentRoute')                   // For Admin
-app.use('/admin', adminCommentRoute)
-// const commentRoute = require('../server/Router/apiRouter/commentRoute')                               // For ReactJS API
-// app.use('/api', commentRoute)
-
 // Appointments
 const adminAppointmentRoute = require('../server/Router/templateRouter/adminAppointmentRoute')           // For Admin
 app.use('/admin', adminAppointmentRoute)
