@@ -54,38 +54,44 @@ app.use('/admin', adminServiceRoute)
 const serviceRoute = require('../server/Router/apiRouter/serviceRoute')                                   // For ReactJS API
 app.use('/api', serviceRoute)
 
-// // Doctors
+// Doctors
 const adminDoctorRoute = require('../server/Router/templateRouter/adminDoctorRoute')                      // For Admin
 app.use('/admin', adminDoctorRoute)
 // const doctorRoute = require('../server/Router/apiRouter/doctorRoute')                                  // For ReactJS API
 // app.use('/api', doctorRoute)
 
-// // Departments
+// Departments
 const adminDepartmentRoute = require('../server/Router/templateRouter/adminDepartmentRoute')              // For Admin
 app.use('/admin', adminDepartmentRoute)
 // const departmentRoute = require('../server/Router/apiRouter/departmentRoute')                          // For ReactJS API
 // app.use('/api', departmentRoute)
 
-// Blogs
-const adminBlogRoute = require('../server/Router/templateRouter/adminBlogRoute')                         // For Admin
-app.use('/admin', adminBlogRoute)
-// const blogRoute = require('../server/Router/apiRouter/blogRoute')                                     // For ReactJS API
-// app.use('/api', blogRoute)
-
 // Appointments
-const adminAppointmentRoute = require('../server/Router/templateRouter/adminAppointmentRoute')           // For Admin
+const adminAppointmentRoute = require('../server/Router/templateRouter/adminAppointmentRoute')            // For Admin
 app.use('/admin', adminAppointmentRoute)
-// const appointmentRoute = require('../server/Router/apiRouter/appointmentRoute')                       // For ReactJS API
+// const appointmentRoute = require('../server/Router/apiRouter/appointmentRoute')                        // For ReactJS API
 // app.use('/api', appointmentRoute)
 
+// Blogs
+const adminBlogRoute = require('../server/Router/templateRouter/adminBlogRoute')                          // For Admin
+app.use('/admin', adminBlogRoute)
+const blogRoute = require('../server/Router/apiRouter/blogRoute')                                         // For ReactJS API
+app.use('/api', blogRoute)
+
+// Comments
+const adminCommentRoute = require('../server/Router/templateRouter/adminCommentRoute')                    // For Admin
+app.use('/admin', adminCommentRoute)
+const commentRoute = require('../server/Router/apiRouter/commentRoute')                                   // For ReactJS API
+app.use('/api', commentRoute)
+
 // Admin-User: Authenticated to Create, Edit and Delete User
-const adminUserRoute = require('../server/Router/templateRouter/adminUserRoute')                         // For Admin
+const adminUserRoute = require('../server/Router/templateRouter/adminUserRoute')                          // For Admin
 app.use('/admin', adminUserRoute)
-const apiAdminUserRoute = require('../server/Router/apiRouter/userRoute')                                // For ReactJS API
+const apiAdminUserRoute = require('../server/Router/apiRouter/userRoute')                                 // For ReactJS API
 app.use('/api', apiAdminUserRoute)
 
 // Client-User
-const userRoute = require('./Router/UserRouter/userRoute')                                               // For ReactJS API
+const userRoute = require('./Router/UserRouter/userRoute')                                                // For ReactJS API
 app.use('/api', userRoute)
 
 // -------------------------------------- Routes --------------------------------------

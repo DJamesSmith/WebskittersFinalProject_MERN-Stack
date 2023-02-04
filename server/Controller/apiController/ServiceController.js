@@ -11,7 +11,7 @@ exports.service = (req, res) => {
 }
 
 // GET - Single Service
-exports.singleService = ((req, res) => {
+exports.singleService = (req, res) => {
 
     const serviceID = req.params.id
 
@@ -24,7 +24,7 @@ exports.singleService = ((req, res) => {
                 message: err.message || "Some error occurred while creating User"
             })
         })
-})
+}
 
 // POST - Add Service
 exports.createService = async (req, res) => {
@@ -50,8 +50,8 @@ exports.createService = async (req, res) => {
 }
 
 // PUT - Edit Service
-exports.updateService = ((req, res) => {
-    if (!req.body.email && !req.body.password) {
+exports.updateService = (req, res) => {
+    if (!req.body) {
         res.status(400).send({ message: "Please fill all the input fields." })
     }
 
@@ -74,10 +74,10 @@ exports.updateService = ((req, res) => {
                     res.status(500).send({ message: err.message || "Some error occurred while creating a Service" })
                 })
         })
-})
+}
 
 // DELETE - Service
-exports.deleteService = ((req, res) => {
+exports.deleteService = (req, res) => {
     const serviceID = req.params.id
 
     console.log('serviceID Value: ', serviceID)
@@ -89,4 +89,4 @@ exports.deleteService = ((req, res) => {
         .catch(error => {
             console.log(`Error: ${error}`)
         })
-})
+}

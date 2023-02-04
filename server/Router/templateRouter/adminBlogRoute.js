@@ -51,21 +51,4 @@ router.post('/updateBlog/:id', upload.single('blogImage'), adminController.updat
 // DELETE
 router.get('/deleteBlog/:id', adminController.deleteBlog)
 
-// --------------------------------- Comment Section ---------------------------------
-// GET Comments
-router.get('/allComments/:id', adminController.allComments)          // Add using Blog's ID
-
-// // POST
-router.get('/addComment/:id', adminController.addComment)                       
-router.post('/createComment/:id', adminController.createComment)
-
-// // PUT
-// router.get('/editComment/:id', adminController.singleComment)
-// router.post('/updateComment/:id', adminController.updateComment)
-
-// // DELETE
-// router.get('/deleteComment/:id', adminController.deleteComment)
-
-// --------------------------------- Comment Section ---------------------------------
-
 module.exports = router
