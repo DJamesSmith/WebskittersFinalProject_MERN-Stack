@@ -9,10 +9,6 @@ const blogSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    blogDescription: {
-        type: String,
-        required: true
-    },
     blogQuote: {
         type: String,
         required: true

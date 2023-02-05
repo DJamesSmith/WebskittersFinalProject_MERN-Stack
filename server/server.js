@@ -78,12 +78,6 @@ app.use('/admin', adminBlogRoute)
 const blogRoute = require('../server/Router/apiRouter/blogRoute')                                         // For ReactJS API
 app.use('/api', blogRoute)
 
-// Comments
-const adminCommentRoute = require('../server/Router/templateRouter/adminCommentRoute')                    // For Admin
-app.use('/admin', adminCommentRoute)
-const commentRoute = require('../server/Router/apiRouter/commentRoute')                                   // For ReactJS API
-app.use('/api', commentRoute)
-
 // Admin-User: Authenticated to Create, Edit and Delete User
 const adminUserRoute = require('../server/Router/templateRouter/adminUserRoute')                          // For Admin
 app.use('/admin', adminUserRoute)

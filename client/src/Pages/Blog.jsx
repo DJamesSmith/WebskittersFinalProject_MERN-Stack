@@ -1,4 +1,20 @@
+import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { Vortex } from 'react-loader-spinner'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { fetchBlog } from '../Redux/BlogSlice'
+
 const Blog = () => {
+
+    const dispatch = useDispatch()
+    const { blogData } = useSelector(state => state?.blogSlice)
+    // console.log('blogData: ', blogData)
+
+    useEffect(() => {
+        dispatch(fetchBlog())
+    }, [dispatch])
+
     return (
         <div>
             <header>
@@ -15,13 +31,13 @@ const Blog = () => {
 
                         <div className="collapse navbar-collapse" id="navbarmain">
                             <ul className="navbar-nav ml-auto">
-                                <li className="nav-item"><a className="nav-link" href="/">Home</a></li>
-                                <li className="nav-item"><a className="nav-link" href="/about">About</a></li>
-                                <li className="nav-item"><a className="nav-link" href="/service">Services</a></li>
-                                <li className="nav-item"><a className="nav-link" href="/department">Department</a></li>
-                                <li className="nav-item"><a className="nav-link" href="/doctors">Doctors</a></li>
-                                <li className="nav-item active"><a className="nav-link" href="/blog">Blog</a></li>
-                                <li className="nav-item"><a className="nav-link" href="/contact">Contact</a></li>
+                                <li className="nav-item"><a className="nav-link" href="/"> Home </a></li>
+                                <li className="nav-item"><a className="nav-link" href="/about"> About </a></li>
+                                <li className="nav-item"><a className="nav-link" href="/service"> Services </a></li>
+                                <li className="nav-item"><a className="nav-link" href="/department"> Department </a></li>
+                                <li className="nav-item"><a className="nav-link" href="/doctors"> Doctors </a></li>
+                                <li className="nav-item active"><a className="nav-link" href="/blog"> Blog </a></li>
+                                <li className="nav-item"><a className="nav-link" href="/contact"> Contact </a></li>
                             </ul>
                         </div>
                     </div>
@@ -34,8 +50,8 @@ const Blog = () => {
                     <div className="row">
                         <div className="col-md-12">
                             <div className="block text-center">
-                                <span className="text-white">Our blog</span>
-                                <h1 className="text-capitalize mb-5 text-lg">Blog articles</h1>
+                                <span className="text-white"> Our blog </span>
+                                <h1 className="text-capitalize mb-5 text-lg"> Blog articles </h1>
                             </div>
                         </div>
                     </div>
@@ -47,84 +63,48 @@ const Blog = () => {
                     <div className="row">
                         <div className="col-lg-8">
                             <div className="row">
-                                <div className="col-lg-12 col-md-12 mb-5">
-                                    <div className="blog-item">
-                                        <div className="blog-thumb">
-                                            <img src="./Assets/images/blog/blog-1.jpg" alt="" className="img-fluid" />
-                                        </div>
-
-                                        <div className="blog-item-content">
-                                            <div className="blog-item-meta mb-3 mt-4">
-                                                <span className="text-muted text-capitalize mr-3"><i
-                                                    className="icofont-comment mr-2"></i>5 Comments</span>
-                                                <span className="text-black text-capitalize mr-3"><i
-                                                    className="icofont-calendar mr-1"></i> 28th January</span>
-                                            </div>
-
-                                            <h2 className="mt-3 mb-3"><a href="/blogSingle">Choose quality service over cheap
-                                                service all type of things</a></h2>
-
-                                            <p className="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis
-                                                aliquid architecto facere commodi cupiditate omnis voluptatibus inventore atque
-                                                velit cum rem id assumenda quam recusandae ipsam ea porro, dicta ad.</p>
-
-                                            <a href="/blogSingle" target="_blank"
-                                                className="btn btn-main btn-icon btn-round-full"> Read More <i className="icofont-simple-right ml-2  "></i></a>
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <div className="col-lg-12 col-md-12 mb-5">
                                     <div className="blog-item">
-                                        <div className="blog-thumb">
-                                            <img src="./Assets/images/blog/blog-2.jpg" alt="" className="img-fluid" />
-                                        </div>
 
-                                        <div className="blog-item-content">
-                                            <div className="blog-item-meta mb-3 mt-4">
-                                                <span className="text-muted text-capitalize mr-3"><i
-                                                    className="icofont-comment mr-2"></i>5 Comments</span>
-                                                <span className="text-black text-capitalize mr-3"><i
-                                                    className="icofont-calendar mr-1"></i> 28th January</span>
-                                            </div>
+                                        {
+                                            blogData !== null ? (
+                                                <>
+                                                    {
+                                                        blogData?.displayBlogs?.map((blog, key) => {
+                                                            const { _id, createdAt, blogName, blogQuote } = blog
+                                                            return (
+                                                                <>
 
-                                            <h2 className="mt-3 mb-3"><a href="/blogSingle">All test cost 25% in always in our
-                                                laboratory</a></h2>
+                                                                    <div className="blog-thumb">
+                                                                        <img src="./Assets/images/blog/blog-1.jpg" alt="" className="img-fluid" />
+                                                                    </div>
 
-                                            <p className="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis
-                                                aliquid architecto facere commodi cupiditate omnis voluptatibus inventore atque
-                                                velit cum rem id assumenda quam recusandae ipsam ea porro, dicta ad.</p>
+                                                                    <div className="blog-item-content">
+                                                                        <div className="blog-item-meta mb-3 mt-4">
+                                                                            <span className="text-muted text-capitalize mr-3"><i className="icofont-comment mr-2"></i> 5 Comments </span>
+                                                                            <span className="text-black text-capitalize mr-3" key={_id}><i className="icofont-calendar mr-1"></i> {createdAt} </span>
+                                                                        </div>
 
-                                            <a href="/blogSingle" target="_blank"
-                                                className="btn btn-main btn-icon btn-round-full"> Read More <i className="icofont-simple-right ml-2  "></i></a>
-                                        </div>
-                                    </div>
-                                </div>
+                                                                        <h2 className="mt-3 mb-3"><Link to={`/blogSingle/${_id}`}> {blogName} </Link></h2>
+                                                                        <p className="mb-4"> {blogQuote} </p>
+                                                                        <p className="mb-4"> {_id} </p>
 
+                                                                        <Link to={`/blogSingle/${_id}`} className="btn btn-main btn-icon btn-round-full mb-5"> Read More <i className="icofont-simple-right ml-2  "></i></Link>
+                                                                    </div>
 
-                                <div className="col-lg-12 col-md-12 mb-5">
-                                    <div className="blog-item">
-                                        <div className="blog-thumb">
-                                            <img src="./Assets/images/blog/blog-4.jpg" alt="" className="img-fluid" />
-                                        </div>
+                                                                </>
+                                                            )
+                                                        })
+                                                    }
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Vortex visible={true} height="50" width="50" ariaLabel="vortex-loading" wrapperStyle={{}} wrapperclassName="vortex-wrapper" colors={['red', 'green', 'blue', 'yellow', 'orange', 'purple']} />
+                                                </>
+                                            )
+                                        }
 
-                                        <div className="blog-item-content">
-                                            <div className="blog-item-meta mb-3 mt-4">
-                                                <span className="text-muted text-capitalize mr-3"><i
-                                                    className="icofont-comment mr-2"></i>5 Comments</span>
-                                                <span className="text-black text-capitalize mr-3"><i
-                                                    className="icofont-calendar mr-1"></i> 28th January</span>
-                                            </div>
-                                            <h2 className="mt-3 mb-3"><a href="/blogSingle">Get Free consulation from our
-                                                special surgeon and doctors</a></h2>
-
-                                            <p className="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis
-                                                aliquid architecto facere commodi cupiditate omnis voluptatibus inventore atque
-                                                velit cum rem id assumenda quam recusandae ipsam ea porro, dicta ad.</p>
-
-                                            <a href="/blogSingle" target="_blank"
-                                                className="btn btn-main btn-icon btn-round-full"> Read More <i className="icofont-simple-right ml-2  "></i></a>
-                                        </div>
                                     </div>
                                 </div>
 
@@ -154,20 +134,32 @@ const Blog = () => {
                                 <div className="sidebar-widget latest-post mb-3">
                                     <h5>Popular Posts</h5>
 
-                                    <div className="py-2">
-                                        <span className="text-sm text-muted">03 Mar 2018</span>
-                                        <h6 className="my-2"><a href="#">Thoughtful living in los Angeles</a></h6>
-                                    </div>
+                                    {
+                                        blogData !== null ? (
+                                            <>
+                                                {
+                                                    blogData?.displayBlogs?.map((blog, key) => {
+                                                        const { _id, createdAt, blogName, blogQuote } = blog
+                                                        return (
+                                                            <>
 
-                                    <div className="py-2">
-                                        <span className="text-sm text-muted">03 Mar 2018</span>
-                                        <h6 className="my-2"><a href="#">Vivamus molestie gravida turpis.</a></h6>
-                                    </div>
+                                                                <div className="py-2">
+                                                                    <span className="text-sm text-muted"> {createdAt} </span>
+                                                                    <h6 className="my-2"><a href="#"> {blogName} </a></h6>
+                                                                </div>
 
-                                    <div className="py-2">
-                                        <span className="text-sm text-muted">03 Mar 2018</span>
-                                        <h6 className="my-2"><a href="#">Fusce lobortis lorem at ipsum semper sagittis</a></h6>
-                                    </div>
+                                                            </>
+                                                        )
+                                                    })
+                                                }
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Vortex visible={true} height="50" width="50" ariaLabel="vortex-loading" wrapperStyle={{}} wrapperclassName="vortex-wrapper" colors={['red', 'green', 'blue', 'yellow', 'orange', 'purple']} />
+                                            </>
+                                        )
+                                    }
+
                                 </div>
 
                                 <div className="sidebar-widget category mb-3">
@@ -247,3 +239,9 @@ const Blog = () => {
 }
 
 export default Blog
+
+{/* 
+<img src="./Assets/images/blog/blog-1.jpg" alt="" className="img-fluid" />
+<img src="./Assets/images/blog/blog-2.jpg" alt="" className="img-fluid" />
+<img src="./Assets/images/blog/blog-4.jpg" alt="" className="img-fluid" />
+*/}

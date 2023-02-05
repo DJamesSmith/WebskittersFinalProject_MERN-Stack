@@ -94,7 +94,7 @@ const Login = () => {
             "password": user.password
         }
         dispatch(loginUser(data))
-        navigate('/')
+        navigate('/blog')
     }
 
     return (

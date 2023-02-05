@@ -1,3 +1,7 @@
+import img1 from '../Assets/images/blog/blog-1.jpg'
+import img2 from '../Assets/images/blog/testimonial1.jpg'
+import img3 from '../Assets/images/blog/testimonial2.jpg'
+
 const BlogSingle = () => {
     return (
         <div>
@@ -49,7 +53,7 @@ const BlogSingle = () => {
                             <div class="row">
                                 <div class="col-lg-12 mb-5">
                                     <div class="single-blog-item">
-                                        <img src="./Assets/images/blog/blog-1.jpg" alt="" class="img-fluid" />
+                                        <img src={img1} alt="" class="img-fluid" />
 
                                         <div class="blog-item-content mt-5">
                                             <div class="blog-item-meta mb-3">
@@ -126,7 +130,7 @@ const BlogSingle = () => {
                                             <li class="mb-5">
                                                 <div class="comment-area-box d-block d-sm-flex">
                                                     <div class="comment-thumb">
-                                                        <img src="./Assets/images/blog/testimonial1.jpg" alt="" style={{ width: '70px' }} />
+                                                        <img src={img2} alt="" style={{ width: '70px' }} />
                                                     </div>
 
                                                     <div class="block">
@@ -151,7 +155,7 @@ const BlogSingle = () => {
                                             <li>
                                                 <div class="comment-area-box d-block d-sm-flex">
                                                     <div class="comment-thumb">
-                                                        <img src="./Assets/images/blog/testimonial2.jpg" alt="" style={{ width: '70px' }} />
+                                                        <img src={img3} alt="" style={{ width: '70px' }} />
                                                     </div>
 
                                                     <div class="block">

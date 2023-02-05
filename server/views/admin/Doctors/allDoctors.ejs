@@ -38,26 +38,10 @@
                                                     <th scope="col"> Image </th>
                                                     <th scope="col"> Name</th>
                                                     <th scope="col"> Department Name </th>
-                                                    <th scope="col"> Description </th>
-                                                    <th colspan="col"> Qualification </th>
-                                                    <th scope="col"> Year </th>
-                                                    <th scope="col"> Qualification Description </th>
-                                                    <th scope="col"> Skills </th>
-                                                    <th colspan="col"> Expertise </th>
                                                     <th colspan="2"> Action </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <!-- <tr>
-                                                    <th scope="row"> 1 </th>
-                                                    <td> Mark </td>
-                                                    <td> Otto </td>
-                                                    <td> @mdo </td>
-                                                    <td>
-                                                        <a href="/admin/editService"> <button type="button" class="btn btn-outline-primary mr-2"> Edit </button> </a>
-                                                        <button type="button" class="btn btn-outline-danger"> Delete </button>
-                                                    </td>
-                                                </tr> -->
 
                                                 <tbody>
                                                     <% if(displaydata.length > 0) {%>
@@ -69,12 +53,6 @@
                                                                 <td> <img src="/doctorUploads/<%=data.docImage %>" style="border-radius: 50%;" alt="" height="70" width="70"> </td>
                                                                 <td> <%= data.docName %> </td>
                                                                 <td> <%= data.deptName %> </td>
-                                                                <td> <%= data.docDescription %> </td>
-                                                                <td> <%= data.docQualificationName %> </td>
-                                                                <td> <%= data.docYear %> </td>
-                                                                <td> <%= data.docQualificationDescription %> </td>
-                                                                <td> <%= data.docSkills %> </td>
-                                                                <td> <%= data.docExpertise %> </td>
                                                                 <td> <a href="/admin/editDoctor/<%=data.id%>"> <button type="button" class="btn btn-outline-primary"> Edit </button> </a> </td>
                                                                 <td> <a href="/admin/deleteDoctor/<%=data._id%>"> <button class="btn btn-danger"> Delete </button> </a> </td>
                                                             </tr>

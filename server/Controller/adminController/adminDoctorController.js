@@ -44,13 +44,7 @@ exports.createDoctor = ((req, res) => {
     const Doctor = new DoctorModel({
         docImage: req.file.filename,
         docName: req.body.docName,
-        deptName: req.body.deptName,
-        docDescription: req.body.docDescription,
-        docQualificationName: req.body.docQualificationName,
-        docYear: req.body.docYear,
-        docQualificationDescription: req.body.docQualificationDescription,
-        docSkills: req.body.docSkills,
-        docExpertise: req.body.docExpertise
+        deptName: req.body.deptName
     })
     Doctor.save()
         .then(result => {
@@ -86,13 +80,7 @@ exports.updateDoctor = ((req, res) => {
     DoctorModel.findByIdAndUpdate(req.params.id, {
         docImage: req.file.filename,
         docName:req.body.docName,
-        deptName:req.body.deptName,
-        docDescription: req.body.docDescription,
-        docQualificationName: req.body.docQualificationName,
-        docYear: req.body.docYear,
-        docQualificationDescription: req.body.docQualificationDescription,
-        docSkills: req.body.docSkills,
-        docExpertise: req.body.docExpertise
+        deptName:req.body.deptName
     }, (error, result) => {
         if (!error) {
             console.log(result, "Doctor data saved successfully.")

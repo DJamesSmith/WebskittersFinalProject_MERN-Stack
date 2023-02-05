@@ -35,7 +35,6 @@ exports.createBlog = async (req, res) => {
 
     const Blog = new BlogModel({
         blogName: req.body.blogName,
-        blogDescription: req.body.blogDescription,
         blogQuote: req.body.blogQuote,
         blogImage: req.file.filename
     })
@@ -58,7 +57,6 @@ exports.updateBlog = (req, res) => {
 
     const blogID = req.params.id
     const blogName = req.body.blogName
-    const blogDescription = req.body.blogDescription
     const blogQuote = req.body.blogQuote
     const blogImage = req.file.filename
 

@@ -30,7 +30,6 @@ exports.createBlog = (req, res) => {
     //console.log(req.body)
     const Blog = new BlogModel({
         blogName: req.body.blogName,
-        blogDescription: req.body.blogDescription,
         blogQuote: req.body.blogQuote,
         blogImage: req.file.filename
     })
@@ -67,7 +66,6 @@ exports.singleBlog = (req, res) => {
 exports.updateBlog = (req, res) => {
     BlogModel.findByIdAndUpdate(req.params.id, {
         blogName: req.body.blogName,
-        blogDescription: req.body.blogDescription,
         blogQuote: req.body.blogQuote,
         blogImage: req.file.filename
     }, (error, result) => {

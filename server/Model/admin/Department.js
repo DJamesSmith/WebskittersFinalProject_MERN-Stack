@@ -12,14 +12,6 @@ const departmentSchema = mongoose.Schema({
     deptDescription: {
         type: String,
         required: true
-    },
-    deptMedHealth: {
-        type: String,
-        required: true
-    },
-    deptFeatures: {
-        type: String,
-        required: true
     }
 },
     {

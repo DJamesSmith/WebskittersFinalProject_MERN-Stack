@@ -44,6 +44,7 @@ function App() {
         { path: '/doctors', Component: <Doctors /> },
         { path: '/doctorSingle', Component: <DoctorSingle /> },
         { path: '/service', Component: <Service /> },
+        { path: '/contact', Component: <Contact /> },
         { path: '/register', Component: <Register /> },
         { path: '/login', Component: <Login /> }
     ]
@@ -51,8 +52,8 @@ function App() {
     const PrivateRouteNames = [
         { path: '/appointment', Component: <Appointment /> },
         { path: '/blog', Component: <Blog /> },
-        { path: '/blogSingle', Component: <BlogSingle /> },
-        { path: '/contact', Component: <Contact /> }
+        { path: '/blogSingle', Component: <BlogSingle /> }
+
         // { path: '/blog-details/:id', Component: <BlogDetails /> }
     ]
 

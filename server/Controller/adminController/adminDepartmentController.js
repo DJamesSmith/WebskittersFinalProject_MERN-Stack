@@ -45,9 +45,7 @@ exports.createDepartment = ((req, res) => {
     const Department = new departmentModel({
         deptImage: req.file.filename,
         deptName: req.body.deptName,
-        deptDescription: req.body.deptDescription,
-        deptMedHealth: req.body.deptMedHealth,
-        deptFeatures: req.body.deptFeatures
+        deptDescription: req.body.deptDescription
     })
     Department.save()
         .then(result => {
@@ -85,9 +83,7 @@ exports.updateDepartment = ((req, res) => {
     departmentModel.findByIdAndUpdate(req.params.id, {
         deptImage: req.file.filename,
         deptName: req.body.deptName,
-        deptDescription: req.body.deptDescription,
-        deptMedHealth: req.body.deptMedHealth,
-        deptFeatures: req.body.deptFeatures
+        deptDescription: req.body.deptDescription
     }, (error, result) => {
         if (!error) {
             console.log(result, "Departments data saved successfully.")

@@ -12,30 +12,6 @@ const doctorSchema = mongoose.Schema({
     deptName: {
         type: String,
         required: true
-    },
-    docDescription: {
-        type: String,
-        required: true
-    },
-    docQualificationName: {
-        type: String,
-        required: true
-    },
-    docYear: {
-        type: String,
-        required: true
-    },
-    docQualificationDescription: {
-        type: String,
-        required: true
-    },
-    docSkills: {
-        type: String,
-        required: true
-    },
-    docExpertise: {
-        type: String,
-        required: true
     }
 },
     {
@@ -43,4 +19,4 @@ const doctorSchema = mongoose.Schema({
     }
 )
 
-module.exports = mongoose.model('AdminDoctor', doctorSchema)
+module.exports = mongoose.model('Doctor', doctorSchema)

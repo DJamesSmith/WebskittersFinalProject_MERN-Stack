@@ -17,10 +17,10 @@ const Nav = () => {
     // console.log('name: ', name)
     const image = localStorage.getItem("image")
     // console.log('image: ', image)
-    console.log(isLoggedInToken, "isLoggedInToken")
-    console.log(setUser, "setUser")         // hgggggg
-    console.log("loggedInName:-------------------------------------------------- ", loggedInName)                          // Username on Console log
-    console.log("loggedInImage: ", loggedInImage)              // Profile Pic String Info on Console log
+    // console.log(isLoggedInToken, "isLoggedInToken")
+    // console.log(setUser, "setUser")         // hgggggg
+    // console.log("loggedInName:-------------------------------------------------- ", loggedInName)                          // Username on Console log
+    // console.log("loggedInImage: ", loggedInImage)              // Profile Pic String Info on Console log
 
     useEffect(() => {
         setis_loggedIn(name)
@@ -32,8 +32,8 @@ const Nav = () => {
         navigate("/login")
     }
 
-    console.log(hellotoken, "HelloToken")           // efefwefe
-    console.log(isLoggedInToken, "isLoggedInToken")
+    // console.log(hellotoken, "HelloToken")           // efefwefe
+    // console.log(isLoggedInToken, "isLoggedInToken")
 
     return (
         <div>
@@ -65,7 +65,7 @@ const Nav = () => {
                                             <a href="/"> <span className="mr-5 ml-2"> {loggedInName} </span> </a>
                                         </>
                                     ) : (
-                                        <Link to="" style={{ color: "white" }}> <i class="fa fa-user-o" style={{ color: "white" }} aria-hidden="true"> </i> {" "} </Link>
+                                        <Link to="" style={{ color: "white" }}> <i className="fa fa-user-o" style={{ color: "white" }} aria-hidden="true"> </i> {" "} </Link>
                                     )
                                 }
 
