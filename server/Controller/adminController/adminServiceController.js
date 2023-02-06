@@ -1,18 +1,55 @@
 const ServiceModel = require('../../Model/admin/Services')
 
 // GET - All Services
-exports.service = (req, res) => {
-    ServiceModel.find((error, data) => {
-        if (!error) {
-            res.render('Services/service', {
-                title: 'AdminLTE | All Services',
-                dashboardtitle: 'Services Page',
-                message: req.flash('message'),
-                error: req.flash('error'),
-                displaydata: data
-            })
+exports.service = async (req, res) => {
+    try {
+
+        var search = ''
+        if (req.query.search) {
+            search = req.query.search
         }
-    })
+
+        var page = 1
+        if (req.query.page) {
+            page = req.query.page
+        }
+
+        const limit = 5
+
+        const serviceData = await ServiceModel.find({
+            $or: [
+                { serviceName: { $regex: '.*' + search + '.*', $options: 'i' } },
+                { description: { $regex: '.*' + search + '.*', $options: 'i' } }
+            ]
+        })
+        .limit(limit * 1)
+        .skip((page - 1) * limit)
+        .exec()
+
+        const count = await ServiceModel.find({
+            $or: [
+                { serviceName: { $regex: '.*' + search + '.*', $options: 'i' } },
+                { description: { $regex: '.*' + search + '.*', $options: 'i' } }
+            ]
+        })
+        .countDocuments()
+
+        res.render('Services/service', {
+            title: 'AdminLTE | All Services',
+            dashboardtitle: 'Services Page',
+            message: req.flash('message'),
+            error: req.flash('error'),
+            displaydata: serviceData,
+            totalPages: Math.ceil(count/limit),
+            currentPage: page,
+            previousPage: page-1,
+            nextPage: page-(-1),
+            count: count
+        })
+
+    } catch (error) {
+        console.log(error.message)
+    }
 }
 
 // GET - Add Service
