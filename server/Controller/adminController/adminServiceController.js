@@ -22,9 +22,9 @@ exports.service = async (req, res) => {
                 { description: { $regex: '.*' + search + '.*', $options: 'i' } }
             ]
         })
-        .limit(limit * 1)
-        .skip((page - 1) * limit)
-        .exec()
+            .limit(limit * 1)
+            .skip((page - 1) * limit)
+            .exec()
 
         const count = await ServiceModel.find({
             $or: [
@@ -32,7 +32,7 @@ exports.service = async (req, res) => {
                 { description: { $regex: '.*' + search + '.*', $options: 'i' } }
             ]
         })
-        .countDocuments()
+            .countDocuments()
 
         res.render('Services/service', {
             title: 'AdminLTE | All Services',
@@ -40,11 +40,12 @@ exports.service = async (req, res) => {
             message: req.flash('message'),
             error: req.flash('error'),
             displaydata: serviceData,
-            totalPages: Math.ceil(count/limit),
+            totalPages: Math.ceil(count / limit),
             currentPage: page,
-            previousPage: page-1,
-            nextPage: page-(-1),
-            count: count
+            previousPage: page - 1,
+            nextPage: page - (-1),
+            count: count,
+            limit: limit
         })
 
     } catch (error) {

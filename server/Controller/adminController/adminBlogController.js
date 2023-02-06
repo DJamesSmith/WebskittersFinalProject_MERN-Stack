@@ -1,19 +1,57 @@
 const BlogModel = require('../../Model/admin/Blog')
 
 // GET - All Blogs
-exports.allBlogs = (req, res) => {
-    BlogModel.find()
-    .exec((error, data) => {
-        if (!error) {
-            res.render('Blogs/AllBlogs', {
-                title: 'AdminLTE | All Blogs',
-                dashboardtitle: 'Blogs Page',
-                message: req.flash('message'),
-                error: req.flash('error'),
-                displaydata: data
-            })
+exports.allBlogs = async (req, res) => {
+
+    try {
+
+        var search = ''
+        if (req.query.search) {
+            search = req.query.search
         }
-    })
+
+        var page = 1
+        if (req.query.page) {
+            page = req.query.page
+        }
+
+        const limit = 5
+
+        const blogData = await BlogModel.find({
+            $or: [
+                { blogName: { $regex: '.*' + search + '.*', $options: 'i' } },
+                { blogQuote: { $regex: '.*' + search + '.*', $options: 'i' } }
+            ]
+        })
+            .limit(limit * 1)
+            .skip((page - 1) * limit)
+            .exec()
+
+        const count = await BlogModel.find({
+            $or: [
+                { blogName: { $regex: '.*' + search + '.*', $options: 'i' } },
+                { blogQuote: { $regex: '.*' + search + '.*', $options: 'i' } }
+            ]
+        })
+            .countDocuments()
+
+        res.render('Blogs/AllBlogs', {
+            title: 'AdminLTE | All Blogs',
+            dashboardtitle: 'Blogs Page',
+            message: req.flash('message'),
+            error: req.flash('error'),
+            displaydata: blogData,
+            totalPages: Math.ceil(count / limit),
+            currentPage: page,
+            previousPage: page - 1,
+            nextPage: page - (-1),
+            count: count,
+            limit: limit
+        })
+
+    } catch (error) {
+        console.log(error.message)
+    }
 }
 
 // GET - Add Blog

@@ -13,18 +13,75 @@ const securePassword = async (password) => {
 }
 
 // GET - All Users
-exports.allUsers = (req, res) => {
-    UserModel.find((error, data) => {
-        if (!error) {
-            res.render('Users/allUsers', {
-                title: 'AdminLTE | All Users',
-                dashboardtitle: 'Users Page',
-                message: req.flash('message'),
-                error: req.flash('error'),
-                displaydata: data
-            })
+// exports.allUsers = (req, res) => {
+//     UserModel.find((error, data) => {
+//         if (!error) {
+//             res.render('Users/allUsers', {
+//                 title: 'AdminLTE | All Users',
+//                 dashboardtitle: 'Users Page',
+//                 message: req.flash('message'),
+//                 error: req.flash('error'),
+//                 displaydata: data
+//             })
+//         }
+//     })
+// }
+
+exports.allUsers = async (req, res) => {
+
+    try {
+
+        var search = ''
+        if (req.query.search) {
+            search = req.query.search
         }
-    })
+
+        var page = 1
+        if (req.query.page) {
+            page = req.query.page
+        }
+
+        const limit = 5
+
+        const userData = await UserModel.find({
+            $or: [
+                { name: { $regex: '.*' + search + '.*', $options: 'i' } },
+                { email: { $regex: '.*' + search + '.*', $options: 'i' } },
+                { password: { $regex: '.*' + search + '.*', $options: 'i' } },
+                { mobile: { $regex: '.*' + search + '.*', $options: 'i' } }
+            ]
+        })
+            .limit(limit * 1)
+            .skip((page - 1) * limit)
+            .exec()
+
+        const count = await UserModel.find({
+            $or: [
+                { name: { $regex: '.*' + search + '.*', $options: 'i' } },
+                { email: { $regex: '.*' + search + '.*', $options: 'i' } },
+                { password: { $regex: '.*' + search + '.*', $options: 'i' } },
+                { mobile: { $regex: '.*' + search + '.*', $options: 'i' } }
+            ]
+        })
+            .countDocuments()
+
+        res.render('Users/allUsers', {
+            title: 'AdminLTE | All Users',
+            dashboardtitle: 'Users Page',
+            message: req.flash('message'),
+            error: req.flash('error'),
+            displaydata: userData,
+            totalPages: Math.ceil(count / limit),
+            currentPage: page,
+            previousPage: page - 1,
+            nextPage: page - (-1),
+            count: count,
+            limit: limit
+        })
+
+    } catch (error) {
+        console.log(error.message)
+    }
 }
 
 // GET - Add User

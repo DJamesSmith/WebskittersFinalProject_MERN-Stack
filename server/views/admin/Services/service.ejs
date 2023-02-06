@@ -11,6 +11,7 @@
                     <div class="content-wrapper">
                         <div class="content-header">
                             <div class="container-fluid">
+
                                 <div class="row mb-2">
                                     <div class="col-sm-6">
                                         <h1 class="m-0 text-dark">
@@ -36,23 +37,25 @@
                                     <a href="/admin/addService"> <button type="button" class="btn btn-success mb-3"> Add New Service </button> </a>
 
                                     <nav aria-label="Page navigation example">
-                                        <ul class="pagination">
-                                            <% if (currentPage == 1) { %>
-                                                <li class="page-item disabled"><a class="page-link" href="?page=<%= previousPage %>"> Previous </a></li>
-                                            <% } else { %>
-                                                <li class="page-ite m"><a class="page-link" href="?page=<%= previousPage %>"> Previous </a></li>
-                                            <% } %>
+                                        <% if (count > 5) { %>
+                                            <ul class="pagination">
+                                                <% if (currentPage == 1) { %>
+                                                    <li class="page-item disabled"><a class="page-link" href="?page=<%= previousPage %>"> Previous </a></li>
+                                                <% } else { %>
+                                                    <li class="page-ite m"><a class="page-link" href="?page=<%= previousPage %>"> Previous </a></li>
+                                                <% } %>
 
-                                            <% for (let i = 1; i <= totalPages; i++) { %>
-                                                <li class="page-item"><a class="page-link" href="?page=<%= i %>"> <%= i %> </a></li>
-                                            <% } %>
-                                            
-                                            <% if (nextPage-1 == totalPages) { %>
-                                                <li class="page-item disabled"><a class="page-link" href="?page=<%= nextPage %>"> Next </a></li>
-                                            <% } else { %>
-                                                <li class="page-item"><a class="page-link" href="?page=<%= nextPage %>"> Next </a></li>
-                                            <% } %>
-                                        </ul>
+                                                <% for (let i = 1; i <= totalPages; i++) { %>
+                                                    <li class="page-item"><a class="page-link" href="?page=<%= i %>"> <%= i %> </a></li>
+                                                <% } %>
+                                                
+                                                <% if (nextPage-1 == totalPages) { %>
+                                                    <li class="page-item disabled"><a class="page-link" href="?page=<%= nextPage %>"> Next </a></li>
+                                                <% } else { %>
+                                                    <li class="page-item"><a class="page-link" href="?page=<%= nextPage %>"> Next </a></li>
+                                                <% } %>
+                                            </ul>
+                                        <% } %>
                                     </nav>
 
                                     <!-- SEARCH FORM -->
@@ -74,29 +77,25 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
-                                        <tbody>
-                                            <% if(displaydata.length > 0) {%>
-                                                <tbody>
-                                                    <% for(let service of displaydata){ %>
-                                                        <% const p = service.id %>
-                                                    <tr>
-                                                        <td scope="row"> <%=p.substring(20, 24)%> </td>
-                                                        <td> <img src="/serviceUploads/<%= service.image %>" style="border-radius: 50%;" alt="" height="70" width="70"> </td>
-                                                        <td> <%= service.serviceName %> </td>
-                                                        <td style="text-align: justify;"> <%= service.description %> </td>
-                                                        <td> <a href="/admin/editService/<%=service.id%>"> <button type="button" class="btn btn-outline-primary"> Edit </button> </a> </td>
-                                                        <td> <a href="/admin/deleteService/<%=service._id%>"> <button class="btn btn-danger"> Delete </button> </a> </td>
-                                                    </tr>
-                                                </tbody>
-                                            <%}}else{%>
-                                            <h1> No data found </h1>
-                                            <% } %>
-                                        </tbody>
-
+                                        <% if(displaydata.length > 0) {%>
+                                            <tbody>
+                                                <% for(let service of displaydata){ %>
+                                                    <% const p = service.id %>
+                                                <tr>
+                                                    <td scope="row"> <%=p.substring(20, 24)%> </td>
+                                                    <td> <img src="/serviceUploads/<%= service.image %>" style="border-radius: 50%;" alt="" height="70" width="70"> </td>
+                                                    <td> <%= service.serviceName %> </td>
+                                                    <td style="text-align: justify;"> <%= service.description %> </td>
+                                                    <td> <a href="/admin/editService/<%=service.id%>"> <button type="button" class="btn btn-outline-primary"> Edit </button> </a> </td>
+                                                    <td> <a href="/admin/deleteService/<%=service._id%>"> <button class="btn btn-danger"> Delete </button> </a> </td>
+                                                </tr>
+                                            </tbody>
+                                        <%}}else{%>
+                                        <h1> No data found </h1>
+                                        <% } %>
                                     </tbody>
                                 </table>
-                                <p> Page <%= currentPage %> of <%= count %> entries </p>
+                                <p class="btn btn-outline-primary disabled"> Page <%= currentPage %> of <%= count %> entries </p>
                             </div>
                         </div>
 
