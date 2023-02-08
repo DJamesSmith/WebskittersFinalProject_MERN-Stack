@@ -110,3 +110,31 @@ exports.deleteUser = ((req, res) => {
             }
         })
 })
+
+exports.activateUser = (req, res) => {
+    UserModel.findByIdAndUpdate(req.params.id, {
+        status: true
+    })
+        .then(() => {
+            console.log("User Activated.")
+            res.status(200).send({ success: true, msg: `User Activated !`, user: data })
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).send({ message: err.message || "Some error occurred while activating a User" })
+        })
+}
+
+exports.deactivateUser = (req, res) => {
+    UserModel.findByIdAndUpdate(req.params.id, {
+        status: false
+    })
+        .then(() => {
+            console.log("User Deactivated.")
+            res.status(200).send({ success: true, msg: `User Deactivated !`, user: data })
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).send({ message: err.message || "Some error occurred while deactivating a User" })
+        })
+}

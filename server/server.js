@@ -57,20 +57,20 @@ app.use('/api', serviceRoute)
 // Doctors
 const adminDoctorRoute = require('../server/Router/templateRouter/adminDoctorRoute')                      // For Admin
 app.use('/admin', adminDoctorRoute)
-// const doctorRoute = require('../server/Router/apiRouter/doctorRoute')                                  // For ReactJS API
-// app.use('/api', doctorRoute)
+const doctorRoute = require('../server/Router/apiRouter/doctorRoute')                                  // For ReactJS API
+app.use('/api', doctorRoute)
 
 // Departments
 const adminDepartmentRoute = require('../server/Router/templateRouter/adminDepartmentRoute')              // For Admin
 app.use('/admin', adminDepartmentRoute)
-// const departmentRoute = require('../server/Router/apiRouter/departmentRoute')                          // For ReactJS API
-// app.use('/api', departmentRoute)
+const departmentRoute = require('../server/Router/apiRouter/departmentRoute')                          // For ReactJS API
+app.use('/api', departmentRoute)
 
 // Appointments
 const adminAppointmentRoute = require('../server/Router/templateRouter/adminAppointmentRoute')            // For Admin
 app.use('/admin', adminAppointmentRoute)
-// const appointmentRoute = require('../server/Router/apiRouter/appointmentRoute')                        // For ReactJS API
-// app.use('/api', appointmentRoute)
+const appointmentRoute = require('../server/Router/apiRouter/appointmentRoute')                        // For ReactJS API
+app.use('/api', appointmentRoute)
 
 // Blogs
 const adminBlogRoute = require('../server/Router/templateRouter/adminBlogRoute')                          // For Admin

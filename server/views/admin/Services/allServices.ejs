@@ -21,9 +21,9 @@
 
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="/admin"> Home </a></li>
-                                    <li class="breadcrumb-item active"> Dashboard </li>
-                                    <li class="breadcrumb-item active"> Departments </li>
+                                    <li class="breadcrumb-item"><a href="/admin">Home</a></li>
+                                    <li class="breadcrumb-item active">Dashboard</li>
+                                    <li class="breadcrumb-item active"> Service </li>
                                 </ol>
                             </div>
                         </div>
@@ -33,9 +33,8 @@
 
                 <div class="row mb-2 m-auto">
                     <div class="container mt-5">
-
                         <div class="d-flex justify-content-between">
-                            <a href="/admin/addDepartment"> <button type="button" class="btn btn-success mb-3"> Add New Department </button> </a>
+                            <a href="/admin/addService"> <button type="button" class="btn btn-success mb-3"> Add New Service </button> </a>
 
                             <nav aria-label="Page navigation example">
                                 <% if (count > 5) { %>
@@ -72,22 +71,22 @@
                                 <tr>
                                     <th scope="col"> # </th>
                                     <th scope="col"> Image </th>
-                                    <th scope="col"> Department Name </th>
-                                    <th scope="col"> Description </th>
+                                    <th scope="col"> Service Name </th>
+                                    <th scope="col"> Service Description </th>
                                     <th colspan="2"> Action </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <% if(displaydata.length > 0) {%>
-                                    <% for(let deptartmentDetails of displaydata){ %>
-                                        <% const p = deptartmentDetails.id %>
+                                    <% for(let service of displaydata){ %>
+                                        <% const p = service.id %>
                                         <tr>
                                             <td scope="row"> <%=p.substring(20, 24)%> </td>
-                                            <td> <img src="/departmentUploads/<%= deptartmentDetails.deptImage %>" style="border-radius: 50%;" alt="" height="50" width="50"> </td>
-                                            <td> <%= deptartmentDetails.deptName %> </td>
-                                            <td> <%= deptartmentDetails.deptDescription %> </td>
-                                            <td> <a href="/admin/editDepartment/<%=deptartmentDetails.id%>"> <button type="button" class="btn btn-outline-primary"> Edit </button> </a> </td>
-                                            <td> <a href="/admin/deleteDepartment/<%=deptartmentDetails._id%>"> <button class="btn btn-outline-danger"> Delete </button> </a> </td>
+                                            <td> <img src="/serviceUploads/<%= service.image %>" style="border-radius: 50%;" alt="" height="50" width="50"> </td>
+                                            <td> <%= service.serviceName %> </td>
+                                            <td style="text-align: justify;"> <%= service.description %> </td>
+                                            <td> <a href="/admin/editService/<%=service.id%>"> <button type="button" class="btn btn-outline-primary"> Edit </button> </a> </td>
+                                            <td> <a href="/admin/deleteService/<%=service._id%>"> <button class="btn btn-outline-danger"> Delete </button> </a> </td>
                                         </tr>
                                 <%}}else{%>
                                 <h1> No data found </h1>
@@ -95,7 +94,6 @@
                             </tbody>
                         </table>
                         <p class="btn btn-outline-primary disabled"> Page <%= currentPage %> of <%= count %> entries </p>
-
                     </div>
                 </div>
 

@@ -1,15 +1,11 @@
 const express = require('express')
 const router = express.Router()
-// const bodyParser = require('body-parser')
 const multer = require('multer')
 const path = require('path')
 
 const adminController = require('../../Controller/adminController/adminDoctorController')
 
-// router.use(bodyParser.json())
-// router.use(bodyParser.urlencoded({ extended: true }))
-
-// // ---------------- Multer ----------------
+// ---------------- Multer ----------------
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -35,23 +31,17 @@ const upload = multer({
     limits: { fileSize: maxSize }
 })
 
-// // ---------------- Multer ----------------
+// ---------------- Multer ----------------
 
-router.get('/', adminController.index)
-router.get('/contact', adminController.contact)
-
-// // GET: All Doctors
+// GET: All Doctors
 router.get('/allDoctors', adminController.allDoctors)
 
-// // POST
+// POST
 router.get('/addDoctor', adminController.addDoctor)
 router.post('/createDoctor', upload.single('docImage'), adminController.createDoctor)
 
-// // PUT
-router.get('/editDoctor/:id', adminController.singleDoctor)
-router.post('/updateDoctor/:id', upload.single('docImage'), adminController.updateDoctor)
 
-// // DELETE
+// DELETE
 router.get('/deleteDoctor/:id', adminController.deleteDoctor)
 
 module.exports = router

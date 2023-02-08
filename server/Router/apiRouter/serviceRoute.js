@@ -38,7 +38,7 @@ const upload = multer({
 // ---------------- Multer ----------------
 
 // GET: All Services
-router.get('/service', serviceController.service)                                   // Required for ReactJS fetching data
+router.get('/allServices', serviceController.allServices)                                   // Required for ReactJS fetching data
 
 // GET: Single Services
 router.get('/singleService/:id', serviceController.singleService)                       // Required for ReactJS fetching data

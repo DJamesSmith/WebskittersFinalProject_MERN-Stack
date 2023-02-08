@@ -1,7 +1,7 @@
 const ServiceModel = require('../../Model/admin/Services')
 
 // GET - All Services
-exports.service = (req, res) => {
+exports.allServices = (req, res) => {
     ServiceModel.find((error, data) => {
         console.log(data)
         if (!error) {

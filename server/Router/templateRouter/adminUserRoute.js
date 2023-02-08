@@ -2,14 +2,11 @@
 
 const express = require('express')
 const router = express.Router()
-const bodyParser = require('body-parser')
 const multer = require('multer')
 const path = require('path')
 
 const adminUserController = require('../../Controller/adminController/adminUserController')
-
-router.use(bodyParser.json())
-router.use(bodyParser.urlencoded({ extended: true }))
+const adminController = require('../../Controller/AdminController')
 
 // ---------------- Multer ----------------
 
@@ -52,5 +49,9 @@ router.post('/updateUser/:id', upload.single('image'), adminUserController.updat
 
 // DELETE
 router.get('/deleteUser/:id', adminUserController.deleteUser)
+
+// Activate-Deactivate
+router.get("/activateUser/:id", adminController.adminAuth, adminUserController.activateUser)
+router.get("/deactivateUser/:id", adminController.adminAuth, adminUserController.deactivateUser)
 
 module.exports = router

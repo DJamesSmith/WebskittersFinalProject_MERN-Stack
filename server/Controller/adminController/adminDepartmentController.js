@@ -1,32 +1,70 @@
-const departmentModel = require('../../Model/admin/Department');
-
-exports.index = ((req, res) => {
-    res.render('index', {
-        title: 'AdminLTE | Dashboard',
-        dashboardtitle: 'Dashboard'
-    })
-})
-
-exports.contact = ((req, res) => {
-    res.render('contact', {
-        title: 'AdminLTE | Contact',
-        dashboardtitle: 'Contacts Page'
-    })
-})
+const DepartmentModel = require('../../Model/admin/Department')
 
 // GET - All Department
-exports.allDepartment = (req, res) => {
-    departmentModel.find((error, data) => {
-        if (!error) {
-            res.render('Departments/allDepartments', {
-                title: 'AdminLTE | All Department',
-                dashboardtitle: 'Departments Page',
-                message: req.flash('message'),
-                error: req.flash('error'),
-                displaydata: data
-            })
+// exports.allDepartments = (req, res) => {
+//     DepartmentModel.find((error, data) => {
+//         if (!error) {
+//             res.render('Departments/allDepartments', {
+//                 title: 'AdminLTE | All Department',
+//                 dashboardtitle: 'Departments Page',
+//                 message: req.flash('message'),
+//                 error: req.flash('error'),
+//                 displaydata: data
+//             })
+//         }
+//     })
+// }
+
+exports.allDepartments = async (req, res) => {
+    try {
+
+        var search = ''
+        if (req.query.search) {
+            search = req.query.search
         }
-    })
+
+        var page = 1
+        if (req.query.page) {
+            page = req.query.page
+        }
+
+        const limit = 5
+
+        const departmentData = await DepartmentModel.find({
+            $or: [
+                { deptName: { $regex: '.*' + search + '.*', $options: 'i' } },
+                { deptDescription: { $regex: '.*' + search + '.*', $options: 'i' } }
+            ]
+        })
+            .limit(limit * 1)
+            .skip((page - 1) * limit)
+            .exec()
+
+        const count = await DepartmentModel.find({
+            $or: [
+                { deptName: { $regex: '.*' + search + '.*', $options: 'i' } },
+                { deptDescription: { $regex: '.*' + search + '.*', $options: 'i' } }
+            ]
+        })
+            .countDocuments()
+
+        res.render('Departments/allDepartments', {
+            title: 'AdminLTE | All Department',
+            dashboardtitle: 'Departments Page',
+            message: req.flash('message'),
+            error: req.flash('error'),
+            displaydata: departmentData,
+            totalPages: Math.ceil(count / limit),
+            currentPage: page,
+            previousPage: page - 1,
+            nextPage: page - (-1),
+            count: count,
+            limit: limit
+        })
+
+    } catch (error) {
+        console.log(error.message)
+    }
 }
 
 // GET - Add Department
@@ -42,7 +80,7 @@ exports.addDepartment = ((req, res) => {
 // POST - Add Department
 exports.createDepartment = ((req, res) => {
     //console.log(req.body)
-    const Department = new departmentModel({
+    const Department = new DepartmentModel({
         deptImage: req.file.filename,
         deptName: req.body.deptName,
         deptDescription: req.body.deptDescription
@@ -63,11 +101,11 @@ exports.createDepartment = ((req, res) => {
 
 
 // GET - Single Deaprtment for "Edit Department Page"
-exports.singleDeaprtment = ((req, res) => {
+exports.singleDepartment = ((req, res) => {
 
     const departmentID = req.params.id
 
-    departmentModel.findById(departmentID)
+    DepartmentModel.findById(departmentID)
         .then(result => {
             res.render('Departments/editDepartment', {
                 title: 'AdminLTE | Edit Department',
@@ -80,7 +118,7 @@ exports.singleDeaprtment = ((req, res) => {
 
 // PUT - Edit Department
 exports.updateDepartment = ((req, res) => {
-    departmentModel.findByIdAndUpdate(req.params.id, {
+    DepartmentModel.findByIdAndUpdate(req.params.id, {
         deptImage: req.file.filename,
         deptName: req.body.deptName,
         deptDescription: req.body.deptDescription
@@ -101,7 +139,7 @@ exports.updateDepartment = ((req, res) => {
 exports.deleteDepartment = ((req, res, next) => {
     const departmentID = req.params.id
 
-    departmentModel.deleteOne({ _id: departmentID })
+    DepartmentModel.deleteOne({ _id: departmentID })
         .then(result => {
             console.log(result, "Department data deleted successfully.")
             req.flash('message', 'Deleted department data successfully')

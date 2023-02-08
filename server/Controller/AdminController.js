@@ -28,6 +28,13 @@ exports.contact = (req, res) => {
     })
 }
 
+exports.about = (req, res) => {
+    res.render('about', {
+        title: 'AdminLTE | About',
+        dashboardtitle: 'About Page'    
+    })
+}
+
 exports.getAdminRegister = (req, res) => {
     res.render('adminAccess/adminRegister', {
         title: "Admin | Registration",

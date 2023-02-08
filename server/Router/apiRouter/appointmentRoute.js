@@ -13,8 +13,6 @@ router.get('/allAppointments', adminController.allAppointments)
 // POST
 router.post('/createAppointment', adminController.createAppointment)
 
-// PUT
-router.post('/updateAppointment/:id', adminController.updateAppointment)
 
 // DELETE
 router.get('/deleteAppointment/:id', adminController.deleteAppointment)

@@ -5,11 +5,11 @@ const doctorSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    docName: {
-        type: String,
-        required: true
+    department: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Department"
     },
-    deptName: {
+    docName: {
         type: String,
         required: true
     }

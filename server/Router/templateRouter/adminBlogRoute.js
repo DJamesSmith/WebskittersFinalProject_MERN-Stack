@@ -1,13 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const bodyParser = require('body-parser')
 const multer = require('multer')
 const path = require('path')
 
 const adminController = require('../../Controller/adminController/adminBlogController')
-
-router.use(bodyParser.json())
-router.use(bodyParser.urlencoded({ extended: true }))
 
 // ---------------- Multer ----------------
 

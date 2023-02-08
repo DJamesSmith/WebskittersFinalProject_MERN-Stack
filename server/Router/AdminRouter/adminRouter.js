@@ -41,6 +41,7 @@ const upload = multer({
 
 router.get('/', adminController.adminAuth, adminController.index)
 router.get('/contact', adminController.contact)
+router.get('/about', adminController.about)
 
 // GET Register Page
 router.get("/signUp", adminController.getAdminRegister)

@@ -1,12 +1,12 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const appointmentSchema = mongoose.Schema({
-    Department: {
+const appointmentSchema = Schema({
+    department: {
         type: Schema.Types.ObjectId,
         ref: "Department"
     },
-    Doctor: {
+    doctor: {
         type: Schema.Types.ObjectId,
         ref: "Doctor"
     },
@@ -18,7 +18,7 @@ const appointmentSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    name: {
+    patientName: {
         type: String,
         required: true
     },

@@ -1,7 +1,7 @@
 const ServiceModel = require('../../Model/admin/Services')
 
 // GET - All Services
-exports.service = async (req, res) => {
+exports.allServices = async (req, res) => {
     try {
 
         var search = ''
@@ -34,7 +34,7 @@ exports.service = async (req, res) => {
         })
             .countDocuments()
 
-        res.render('Services/service', {
+        res.render('Services/allServices', {
             title: 'AdminLTE | All Services',
             dashboardtitle: 'Services Page',
             message: req.flash('message'),

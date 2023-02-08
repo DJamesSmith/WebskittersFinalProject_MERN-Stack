@@ -22,11 +22,12 @@ const userSchema = mongoose.Schema({
         required: false
     },
     type: {
-        type: Number,
-        default: '1'
+        type: Number
+        // default: 1
     },
     status: {
-        type: Number
+        type: Boolean,
+        default: true
     }
 },
     {

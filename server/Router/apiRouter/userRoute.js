@@ -7,6 +7,8 @@ const multer = require('multer')
 const path = require('path')
 
 const userController = require('../../Controller/apiController/UserController')
+const adminController = require('../../Controller/AdminController')
+
 
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: true }))
@@ -53,5 +55,9 @@ router.post('/updateUser/:id',  upload.single('image'), userController.updateUse
 
 // DELETE
 router.get('/deleteUser/:id', userController.deleteUser)
+
+// Activate-Deactivate
+router.get("/activateUser/:id", adminController.adminAuth, userController.activateUser)
+router.get("/deactivateUser/:id", adminController.adminAuth, userController.deactivateUser)
 
 module.exports = router

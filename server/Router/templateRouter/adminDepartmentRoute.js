@@ -1,13 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const bodyParser = require('body-parser');
 const multer = require('multer');
 const path = require('path')
 
 const adminController = require('../../Controller/adminController/adminDepartmentController');
-
-router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({ extended: true }));
 
 // ---------------- Multer ----------------
 
@@ -38,21 +34,18 @@ const upload = multer({
 // ---------------- Multer ----------------
 
 
-router.get('/', adminController.index)
-// router.get('/contact', adminController.contact)
-
 // GET: All Services
-router.get('/allDepartments', adminController.allDepartment)
+router.get('/allDepartments', adminController.allDepartments)
 
 // POST
 router.get('/addDepartment', adminController.addDepartment)
 router.post('/createDepartment', upload.single('deptImage'), adminController.createDepartment)
 
 // PUT
-router.get('/editDepartment/:id', adminController.singleDeaprtment)
+router.get('/editDepartment/:id', adminController.singleDepartment)
 router.post('/updateDepartment/:id', upload.single('deptImage'), adminController.updateDepartment)
 
-// // DELETE
+// DELETE
 router.get('/deleteDepartment/:id', adminController.deleteDepartment)
 
 module.exports = router;

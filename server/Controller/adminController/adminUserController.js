@@ -12,21 +12,6 @@ const securePassword = async (password) => {
     }
 }
 
-// GET - All Users
-// exports.allUsers = (req, res) => {
-//     UserModel.find((error, data) => {
-//         if (!error) {
-//             res.render('Users/allUsers', {
-//                 title: 'AdminLTE | All Users',
-//                 dashboardtitle: 'Users Page',
-//                 message: req.flash('message'),
-//                 error: req.flash('error'),
-//                 displaydata: data
-//             })
-//         }
-//     })
-// }
-
 exports.allUsers = async (req, res) => {
 
     try {
@@ -48,7 +33,7 @@ exports.allUsers = async (req, res) => {
                 { name: { $regex: '.*' + search + '.*', $options: 'i' } },
                 { email: { $regex: '.*' + search + '.*', $options: 'i' } },
                 { password: { $regex: '.*' + search + '.*', $options: 'i' } },
-                { mobile: { $regex: '.*' + search + '.*', $options: 'i' } }
+                { mobile: { $regex: '.*' + search + '.*', $options: 'i' } }                         // If you put status, it cannot search the 'active' users
             ]
         })
             .limit(limit * 1)
@@ -60,7 +45,7 @@ exports.allUsers = async (req, res) => {
                 { name: { $regex: '.*' + search + '.*', $options: 'i' } },
                 { email: { $regex: '.*' + search + '.*', $options: 'i' } },
                 { password: { $regex: '.*' + search + '.*', $options: 'i' } },
-                { mobile: { $regex: '.*' + search + '.*', $options: 'i' } }
+                { mobile: { $regex: '.*' + search + '.*', $options: 'i' } }                        // If you put status, it cannot paginate the 'active' users
             ]
         })
             .countDocuments()
@@ -159,7 +144,7 @@ exports.updateUser = async (req, res) => {
 
 // DELETE - User (Soft Delete)
 exports.deleteUser = ((req, res) => {
-    UserModel.findByIdAndUpdate(req.params.id, { status: 0 },
+    UserModel.findByIdAndUpdate(req.params.id, { type: 0 },
         (error, data) => {
             if (!error) {
                 console.log('Deleted Successfully.', data)
@@ -170,3 +155,29 @@ exports.deleteUser = ((req, res) => {
             }
         })
 })
+
+exports.activateUser = (req, res) => {
+    UserModel.findByIdAndUpdate(req.params.id, {
+        status: true
+    })
+        .then(() => {
+            console.log("User Activated.")
+            res.redirect("/admin/allUsers")
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+exports.deactivateUser = (req, res) => {
+    UserModel.findByIdAndUpdate(req.params.id, {
+        status: false
+    })
+        .then(() => {
+            console.log("User Deactivated.")
+            res.redirect("/admin/allUsers")
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}

@@ -1,50 +1,99 @@
-const DoctorModel=require('../../Model/Admin/Doctor')
+const DoctorModel = require('../../Model/admin/Doctor');
+const DepartmentModel = require('../../Model/admin/Department')
 
-exports.index = ((req, res) => {
-    res.render('index', {
-        title: 'AdminLTE | Dashboard',
-        dashboardtitle: 'Dashboard'
-    })
-})
-
-exports.contact = ((req, res) => {
-    res.render('contact', {
-        title: 'AdminLTE | Contact',
-        dashboardtitle: 'Contacts Page'
-    })
-})
-
-// // GET - All Doctors
+// GET - All Doctors
 exports.allDoctors = (req, res) => {
-    DoctorModel.find((error, data) => {
-        if (!error) {
-            res.render('Doctors/allDoctors', {
-                title: 'AdminLTE | All Doctors',
-                dashboardtitle: 'Doctors Page',
-                message: req.flash('message'),
-                error: req.flash('error'),
-                displaydata: data
-            })
-        }
-    })
+    DoctorModel.find()
+        .populate("department")
+        .exec((error, data) => {
+            if (!error) {
+                res.render('Doctors/allDoctors', {
+                    title: 'AdminLTE | All Doctors',
+                    dashboardtitle: 'Doctors Page',
+                    message: req.flash('message'),
+                    error: req.flash('error'),
+                    displaydata: data
+                })
+            }
+        })
 }
+
+// exports.allDoctors = async (req, res) => {
+//     try {
+
+//         DoctorModel.find().populate("department")
+//         // console.log('--------------------------------', quickData)
+
+//         var search = ''
+//         if (req.query.search) {
+//             search = req.query.search
+//         }
+
+//         var page = 1
+//         if (req.query.page) {
+//             page = req.query.page
+//         }
+
+//         const limit = 5
+
+//         const doctorData = await DoctorModel.find({
+//             $or: [
+//                 { docName: { $regex: '.*' + search + '.*', $options: 'i' } },
+//                 { department: { $regex: '.*' + search + '.*', $options: 'i' } }
+//             ]
+//         })
+//             // .populate("department")
+//             .limit(limit * 1)
+//             .skip((page - 1) * limit)
+//             .exec()
+
+//         const count = await DoctorModel.find({
+//             $or: [
+//                 { docName: { $regex: '.*' + search + '.*', $options: 'i' } },
+//                 { department: { $regex: '.*' + search + '.*', $options: 'i' } }
+//             ]
+//         })
+//             // .populate("department")
+//             .countDocuments()
+
+//         res.render('Doctors/allDoctors', {
+//             title: 'AdminLTE | All Doctors',
+//             dashboardtitle: 'Doctors Page',
+//             message: req.flash('message'),
+//             error: req.flash('error'),
+//             displaydata: doctorData,
+//             totalPages: Math.ceil(count / limit),
+//             currentPage: page,
+//             previousPage: page - 1,
+//             nextPage: page - (-1),
+//             count: count,
+//             limit: limit
+//         })
+
+//     } catch (error) {
+//         console.log(error.message)
+//     }
+// }
 
 // GET - Add Doctor
 exports.addDoctor = ((req, res) => {
-    res.render('Doctors/addDoctor', {
-        title: 'AdminLTE | Add New Doctor',
-        dashboardtitle: 'Doctors Page',
-        message: req.flash('message')
+    DepartmentModel.find().then(result => {
+        res.render('Doctors/addDoctor', {
+            title: 'AdminLTE | Add New Doctor',
+            dashboardtitle: 'Doctors Page',
+            message: req.flash('message'),
+            displayDatas: result,
+        })
     })
 })
 
-// // POST - Add Doctor
+// POST - Add Doctor
 exports.createDoctor = ((req, res) => {
-    //console.log(req.body)
+    console.log(req.body)
     const Doctor = new DoctorModel({
         docImage: req.file.filename,
-        docName: req.body.docName,
-        deptName: req.body.deptName
+        department: req.body.department,
+        docName: req.body.docName
     })
     Doctor.save()
         .then(result => {
@@ -59,42 +108,8 @@ exports.createDoctor = ((req, res) => {
         })
 })
 
-// // GET - Single Doctor for "Edit Doctor Page"
-exports.singleDoctor = ((req, res) => {
 
-    const doctorID = req.params.id
-
-    DoctorModel.findById(doctorID)
-        .then(result => {
-            res.render('Doctors/editDoctor', {
-                title: 'AdminLTE | Edit Doctor',
-                dashboardtitle: 'Doctors Page',
-                message: req.flash('message'),
-                data: result
-            })
-        })
-})
-
-// // PUT - Edit Doctor
-exports.updateDoctor = ((req, res) => {
-    DoctorModel.findByIdAndUpdate(req.params.id, {
-        docImage: req.file.filename,
-        docName:req.body.docName,
-        deptName:req.body.deptName
-    }, (error, result) => {
-        if (!error) {
-            console.log(result, "Doctor data saved successfully.")
-            req.flash('message', 'Doctor edited successfully')
-            res.redirect('/admin/allDoctors')
-        } else {
-            console.log(err, "No Data Saved.")
-            req.flash('error', 'You can not save Empty data.')
-            res.redirect('/admin/editDoctor')
-        }
-    })
-})
-
-// // DELETE - Doctor
+// DELETE - Doctor
 exports.deleteDoctor = ((req, res, next) => {
     const doctorID = req.params.id
 
