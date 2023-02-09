@@ -57,19 +57,19 @@ app.use('/api', serviceRoute)
 // Doctors
 const adminDoctorRoute = require('../server/Router/templateRouter/adminDoctorRoute')                      // For Admin
 app.use('/admin', adminDoctorRoute)
-const doctorRoute = require('../server/Router/apiRouter/doctorRoute')                                  // For ReactJS API
+const doctorRoute = require('../server/Router/apiRouter/doctorRoute')                                     // For ReactJS API
 app.use('/api', doctorRoute)
 
 // Departments
 const adminDepartmentRoute = require('../server/Router/templateRouter/adminDepartmentRoute')              // For Admin
 app.use('/admin', adminDepartmentRoute)
-const departmentRoute = require('../server/Router/apiRouter/departmentRoute')                          // For ReactJS API
+const departmentRoute = require('../server/Router/apiRouter/departmentRoute')                             // For ReactJS API
 app.use('/api', departmentRoute)
 
 // Appointments
 const adminAppointmentRoute = require('../server/Router/templateRouter/adminAppointmentRoute')            // For Admin
 app.use('/admin', adminAppointmentRoute)
-const appointmentRoute = require('../server/Router/apiRouter/appointmentRoute')                        // For ReactJS API
+const appointmentRoute = require('../server/Router/apiRouter/appointmentRoute')                           // For ReactJS API
 app.use('/api', appointmentRoute)
 
 // Blogs
@@ -90,7 +90,7 @@ app.use('/api', userRoute)
 
 // -------------------------------------- Routes --------------------------------------
 
-const dbcon = ""
+const dbcon = "mongodb+srv://mernstack:uEcMUsb0BmH7CMbo@cluster0.atdylte.mongodb.net/cure-and-care"
 const port = process.env.PORT || 3002
 
 mongoose.connect(dbcon, { useNewUrlParser: true, useUnifiedTopology: true })

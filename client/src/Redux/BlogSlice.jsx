@@ -12,14 +12,13 @@ export const fetchBlog = createAsyncThunk(
     "Blogs/fetch",
     async () => {
         try {
-            const res = await axiosInstance.get('allBlogs')
-            console.log('API response: ', res.data)
-            return res?.data
+            const response = await axiosInstance.get('allBlogs')
+            console.log('API response: ', response.data)
+            return response?.data
         } catch (error) {
             console.log(error)
         }
     })
-
 
 export const BlogSlice = createSlice({
     name: 'blog',

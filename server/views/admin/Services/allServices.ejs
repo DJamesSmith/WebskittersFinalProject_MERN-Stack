@@ -86,7 +86,7 @@
                                             <td> <%= service.serviceName %> </td>
                                             <td style="text-align: justify;"> <%= service.description %> </td>
                                             <td> <a href="/admin/editService/<%=service.id%>"> <button type="button" class="btn btn-outline-primary"> Edit </button> </a> </td>
-                                            <td> <a href="/admin/deleteService/<%=service._id%>"> <button class="btn btn-outline-danger"> Delete </button> </a> </td>
+                                            <td> <a href="/admin/deleteService/<%=service.id%>"> <button class="btn btn-outline-danger"> Delete </button> </a> </td>
                                         </tr>
                                 <%}}else{%>
                                 <h1> No data found </h1>

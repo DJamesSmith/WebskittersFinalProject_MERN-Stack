@@ -11,7 +11,7 @@ export const fetchService = createAsyncThunk(
     "Services/fetch",
     async () => {
         try {
-            const res = await axiosInstance.get('service')
+            const res = await axiosInstance.get('allServices')
             return res?.data
         } catch (error) {
             console.log(error)

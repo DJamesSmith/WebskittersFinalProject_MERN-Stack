@@ -74,7 +74,7 @@ exports.createService = ((req, res) => {
         .then(result => {
             console.log(result, "Service data created successfully.")
             req.flash('message', 'Added service successfully')
-            res.redirect('/admin/service')
+            res.redirect('/admin/allServices')
         })
         .catch(err => {
             console.log(err, "No Data Saved.")
@@ -109,7 +109,7 @@ exports.updateService = ((req, res) => {
         if (!error) {
             console.log(result, "Service data saved successfully.")
             req.flash('message', 'Service edited successfully')
-            res.redirect('/admin/service')
+            res.redirect('/admin/allServices')
         } else {
             console.log(err, "No Data Saved.")
             req.flash('error', 'You can not save Empty data.')
@@ -126,11 +126,11 @@ exports.deleteService = ((req, res, next) => {
         .then(result => {
             console.log(result, "Service data deleted successfully.")
             req.flash('message', 'Deleted Service data successfully')
-            res.redirect('/admin/service')
+            res.redirect('/admin/allServices')
         })
         .catch(err => {
             console.log(err, "No Data Deleted.")
             req.flash('error', 'Unable to delete service data.')
-            res.redirect('/admin/service')
+            res.redirect('/admin/allServices')
         })
 })

@@ -118,6 +118,7 @@ const Login = () => {
                                 <li className="nav-item"><a className="nav-link" href="/service">Services</a></li>
                                 <li className="nav-item"><a className="nav-link" href="/department">Department</a></li>
                                 <li className="nav-item"><a className="nav-link" href="/doctors">Doctors</a></li>
+                                <li className="nav-item"><a className="nav-link" href="/appointment">Appointment</a></li>
                                 <li className="nav-item"><a className="nav-link" href="/blog">Blog</a></li>
                                 <li className="nav-item"><a className="nav-link" href="/contact">Contact</a></li>
                             </ul>

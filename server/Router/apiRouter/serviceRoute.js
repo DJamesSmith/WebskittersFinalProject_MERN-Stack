@@ -41,7 +41,7 @@ const upload = multer({
 router.get('/allServices', serviceController.allServices)                                   // Required for ReactJS fetching data
 
 // GET: Single Services
-router.get('/singleService/:id', serviceController.singleService)                       // Required for ReactJS fetching data
+router.get('/singleService/:id', serviceController.singleService)                           // Required for ReactJS fetching data
 
 // POST
 router.post('/createService', upload.single('image'), serviceController.createService)
