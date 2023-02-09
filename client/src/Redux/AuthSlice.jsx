@@ -97,9 +97,8 @@ export const AuthSlice = createSlice({
             state.redirectToIndex = "/"
             state.isLoggedInToken = true
             state.loading = false
-            // state.userInfo = payload
 
-            console.log('--------------------------sdfj-------------------------', payload?.user?.name)
+            console.log('', payload?.user?.name)
         },
         [loginUser.rejected]: (state, action) => {
             state.loading = false
