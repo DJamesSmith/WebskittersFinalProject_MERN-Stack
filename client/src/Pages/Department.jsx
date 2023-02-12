@@ -1,4 +1,20 @@
+import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { Vortex } from 'react-loader-spinner'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { fetchDepartment } from '../Redux/DepartmentSlice'
+
 const Department = () => {
+
+    const dispatch = useDispatch()
+    const { departmentData } = useSelector(state => state?.departmentSlice)
+    console.log('departmentData:----------------------------------------------------', departmentData)
+
+    useEffect(() => {
+        dispatch(fetchDepartment())
+    }, [dispatch])
+
     return (
         <div>
             <header>
@@ -17,7 +33,7 @@ const Department = () => {
                             <ul className="navbar-nav ml-auto">
                                 <li className="nav-item"><a className="nav-link" href="/">Home</a></li>
                                 <li className="nav-item"><a className="nav-link" href="/about">About</a></li>
-                                <li className="nav-item"><a className="nav-link" href="/service">Services</a></li>
+                                <li className="nav-item "><a className="nav-link" href="/service">Services</a></li>
                                 <li className="nav-item active"><a className="nav-link" href="/department">Department</a></li>
                                 <li className="nav-item"><a className="nav-link" href="/doctors">Doctors</a></li>
                                 <li className="nav-item"><a className="nav-link" href="/appointment">Appointment</a></li>
@@ -56,83 +72,47 @@ const Department = () => {
                             </div>
                         </div>
                     </div>
-
-                    <div className="row">
-                        <div className="col-lg-4 col-md-6 ">
-                            <div className="department-block mb-5">
-                                <img src="./Assets/images/service/service-1.jpg" alt="" className="img-fluid w-100" />
-                                <div className="content">
-                                    <h4 className="mt-4 mb-2 title-color">Opthomology</h4>
-                                    <p className="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
-                                    <a href="/departmentSingle" className="read-more">Learn More <i
-                                        className="icofont-simple-right ml-2"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-lg-4 col-md-6">
-                            <div className="department-block mb-5">
-                                <img src="./Assets/images/service/service-2.jpg" alt="" className="img-fluid w-100" />
-                                <div className="content">
-                                    <h4 className="mt-4 mb-2  title-color">Cardiology</h4>
-                                    <p className="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
-                                    <a href="/departmentSingle" className="read-more">Learn More <i
-                                        className="icofont-simple-right ml-2"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-lg-4 col-md-6">
-                            <div className="department-block mb-5">
-                                <img src="./Assets/images/service/service-3.jpg" alt="" className="img-fluid w-100" />
-                                <div className="content">
-                                    <h4 className="mt-4 mb-2 title-color">Dental Care</h4>
-                                    <p className="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
-                                    <a href="/departmentSingle" className="read-more">Learn More <i
-                                        className="icofont-simple-right ml-2"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div className="col-lg-4 col-md-6 ">
-                            <div className="department-block  mb-5 mb-lg-0">
-                                <img src="./Assets/images/service/service-4.jpg" alt="" className="img-fluid w-100" />
-                                <div className="content">
-                                    <h4 className="mt-4 mb-2 title-color">Child Care</h4>
-                                    <p className="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
-                                    <a href="/departmentSingle" className="read-more">Learn More <i
-                                        className="icofont-simple-right ml-2"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-lg-4 col-md-6">
-                            <div className="department-block mb-5 mb-lg-0">
-                                <img src="./Assets/images/service/service-6.jpg" alt="" className="img-fluid w-100" />
-                                <div className="content">
-                                    <h4 className="mt-4 mb-2 title-color">Pulmology</h4>
-                                    <p className="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
-                                    <a href="/departmentSingle" className="read-more">Learn More <i
-                                        className="icofont-simple-right ml-2"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-lg-4 col-md-6">
-                            <div className="department-block mb-5 mb-lg-0">
-                                <img src="./Assets/images/service/service-8.jpg" alt="" className="img-fluid w-100" />
-                                <div className="content">
-                                    <h4 className="mt-4 mb-2 title-color">Gynecology</h4>
-                                    <p className="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
-                                    <a href="/departmentSingle" className="read-more">Learn More <i
-                                        className="icofont-simple-right ml-2"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </section>
+            <section className="section service-2">
+                <div className="container">
+                    <div className="row">
+                        {
+                            departmentData !== null ? (
+                                <>
+                                    {
+                                        departmentData?.displaydata?.map((department, key) => {
+                                            const { _id, deptName, deptDescription } = department
+                                            return (
+                                                <>
+                                                    <div className="col-lg-4 col-md-6 col-sm-6">
+                                                        <div className="service-block mb-5">
+                                                            <img src="./Assets/images/service/service-1.jpg" alt="" className="img-fluid w-100" />
+                                                            <div className="content">
+                                                                <h4 className="mt-4 mb-2 title-color">{deptName}</h4>
+                                                                <p className="mb-4">{deptDescription}</p>
+                                                                <a href="/departmentSingle" className="read-more">Learn More <i
+                                                                    className="icofont-simple-right ml-2"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </>
+                                            )
+                                        })
+                                    }
+                                </>
+                            ) : (
+                                <>
+                                    <Vortex visible={true} height="50" width="50" ariaLabel="vortex-loading" wrapperStyle={{}} wrapperclassName="vortex-wrapper" colors={['red', 'green', 'blue', 'yellow', 'orange', 'purple']} />
+                                </>
+                            )
+                        }
+                    </div>
+
+                    
+                </div>
+            </section >
+
         </div>
     )
 }

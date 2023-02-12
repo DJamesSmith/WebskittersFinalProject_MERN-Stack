@@ -1,4 +1,21 @@
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchDoctor } from '../Redux/DoctorSlice'
+import { Vortex } from 'react-loader-spinner'
+import { fetchDepartment } from '../Redux/DepartmentSlice'
+
 const Doctors = () => {
+    const dispatch = useDispatch()
+    const { doctorData } = useSelector(state => state?.doctorSlice)
+    const { departmentData } = useSelector(state => state?.departmentSlice)
+    console.log('doctorData : ', doctorData)
+    console.log('departmentData : ', departmentData)
+
+    useEffect(() => {
+        dispatch(fetchDoctor())
+        dispatch(fetchDepartment())
+    }, [dispatch])
+
     return (
         <div>
             <header>
@@ -61,185 +78,64 @@ const Doctors = () => {
                             <label className="btn active ">
                                 <input type="radio" name="shuffle-filter" value="all" checked="checked" />All Department
                             </label>
-                            <label className="btn ">
-                                <input type="radio" name="shuffle-filter" value="cat1" />Cardiology
-                            </label>
-                            <label className="btn">
-                                <input type="radio" name="shuffle-filter" value="cat2" />Dental
-                            </label>
-                            <label className="btn">
-                                <input type="radio" name="shuffle-filter" value="cat3" />Neurology
-                            </label>
-                            <label className="btn">
-                                <input type="radio" name="shuffle-filter" value="cat4" />Medicine
-                            </label>
-                            <label className="btn">
-                                <input type="radio" name="shuffle-filter" value="cat5" />Pediatric
-                            </label>
-                            <label className="btn">
-                                <input type="radio" name="shuffle-filter" value="cat6" />Traumatology
-                            </label>
+
+                            {
+                                departmentData !== null ? (
+                                    <>
+                                        {
+                                            departmentData?.displaydata?.map((department, key) => {
+                                                return (
+                                                    <>
+                                                        <label className="btn ">
+                                                            <input type="radio" name="deptName" />{department.deptName}
+                                                        </label>
+                                                    </>
+                                                )
+                                            })
+                                        }
+                                    </>
+                                ) : (
+                                    <>
+                                        <Vortex visible={true} height="50" width="50" ariaLabel="vortex-loading" wrapperStyle={{}} wrapperclassName="vortex-wrapper" colors={['red', 'green', 'blue', 'yellow', 'orange', 'purple']} />
+                                    </>
+                                )
+                            }
                         </div>
                     </div>
 
                     <div className="row shuffle-wrapper portfolio-gallery">
-                        <div className="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item"
-                            data-groups="[&quot;cat1&quot;,&quot;cat2&quot;]">
-                            <div className="position-relative doctor-inner-box">
-                                <div className="doctor-profile">
-                                    <div className="doctor-img">
-                                        <img src="./Assets/images/team/1.jpg" alt="doctor-image" className="img-fluid w-100" />
-                                    </div>
-                                </div>
-                                <div className="content mt-3">
-                                    <h4 className="mb-0"><a href="/doctorSingle">Thomas Henry</a></h4>
-                                    <p>Cardiology</p>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div className="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item" data-groups="[&quot;cat2&quot;]">
-                            <div className="position-relative doctor-inner-box">
-                                <div className="doctor-profile">
-                                    <div className="doctor-img">
-                                        <img src="./Assets/images/team/2.jpg" alt="doctor-image" className="img-fluid w-100" />
-                                    </div>
-                                </div>
-                                <div className="content mt-3">
-                                    <h4 className="mb-0"><a href="/doctorSingle">Harrision Samuel</a></h4>
-                                    <p>Radiology</p>
-                                </div>
-                            </div>
-                        </div>
+                        {
+                            doctorData !== null ? (
+                                <>
+                                    {
+                                        doctorData?.displaydata?.map((doctor, key) => {
+                                            return (
+                                                <>
 
-                        <div className="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item" data-groups="[&quot;cat3&quot;]">
-                            <div className="position-relative doctor-inner-box">
-                                <div className="doctor-profile">
-                                    <div className="doctor-img">
-                                        <img src="./Assets/images/team/3.jpg" alt="doctor-image" className="img-fluid w-100" />
-                                    </div>
-                                </div>
-                                <div className="content mt-3">
-                                    <h4 className="mb-0"><a href="/doctorSingle">Alexandar James</a></h4>
-                                    <p>Dental</p>
-                                </div>
-                            </div>
-                        </div>
+                                                    <div className="col-lg-4 col-md-6 col-sm-6">
+                                                        <div className="service-block mb-5">
+                                                            <img src="./Assets/images/service/service-1.jpg" alt="" className="img-fluid" />
+                                                            {/* <img src={service.image} alt="" className="img-fluid" /> */}
+                                                            <div className="content">
+                                                                <h4 className="mt-4 mb-2 title-color" key={key}> {doctor.docName} </h4>
+                                                                <h6 className="mt-4 mb-2 title-color" key={key}> {doctor.department.deptName} </h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </>
+                                            )
+                                        })
+                                    }
+                                </>
+                            ) : (
+                                <>
+                                    <Vortex visible={true} height="50" width="50" ariaLabel="vortex-loading" wrapperStyle={{}} wrapperclassName="vortex-wrapper" colors={['red', 'green', 'blue', 'yellow', 'orange', 'purple']} />
+                                </>
+                            )
+                        }
 
-                        <div className="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item"
-                            data-groups="[&quot;cat3&quot;,&quot;cat4&quot;]">
-                            <div className="position-relative doctor-inner-box">
-                                <div className="doctor-profile">
-                                    <div className="doctor-img">
-                                        <img src="./Assets/images/team/4.jpg" alt="doctor-image" className="img-fluid w-100" />
-                                    </div>
-                                </div>
-                                <div className="content mt-3">
-                                    <h4 className="mb-0"><a href="/doctorSingle">Edward john</a></h4>
-                                    <p>Pediatry</p>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div className="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item" data-groups="[&quot;cat5&quot;]">
-                            <div className="position-relative doctor-inner-box">
-                                <div className="doctor-profile">
-                                    <div className="doctor-img">
-                                        <img src="./Assets/images/team/1.jpg" alt="doctor-image" className="img-fluid w-100" />
-                                    </div>
-                                </div>
-                                <div className="content mt-3">
-                                    <h4 className="mb-0"><a href="/doctorSingle">Thomas Henry</a></h4>
-                                    <p>Neurology</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item" data-groups="[&quot;cat6&quot;]">
-                            <div className="position-relative doctor-inner-box">
-                                <div className="doctor-profile">
-                                    <div className="doctor-img">
-                                        <img src="./Assets/images/team/3.jpg" alt="doctor-image" className="img-fluid w-100" />
-                                    </div>
-                                </div>
-                                <div className="content mt-3">
-                                    <h4 className="mb-0"><a href="/doctorSingle">Henry samuel</a></h4>
-                                    <p>Palmology</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item" data-groups="[&quot;cat4&quot;]">
-                            <div className="position-relative doctor-inner-box">
-                                <div className="doctor-profile">
-                                    <div className="doctor-img">
-                                        <img src="./Assets/images/team/1.jpg" alt="doctor-image" className="img-fluid w-100" />
-                                    </div>
-                                </div>
-                                <div className="content mt-3">
-                                    <h4 className="mb-0"><a href="/doctorSingle">Thomas alexandar</a></h4>
-                                    <p>Cardiology</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item"
-                            data-groups="[&quot;cat5&quot;,&quot;cat6&quot;,&quot;cat1&quot;]">
-                            <div className="position-relative doctor-inner-box">
-                                <div className="doctor-profile">
-                                    <div className="doctor-img">
-                                        <img src="./Assets/images/team/3.jpg" alt="doctor-image" className="img-fluid w-100" />
-                                    </div>
-                                </div>
-                                <div className="content mt-3">
-                                    <h4 className="mb-0"><a href="/doctorSingle">HarissonThomas </a></h4>
-                                    <p>Traumatology</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item illustration" data-groups="[&quot;cat2&quot;]">
-                            <div className="position-relative doctor-inner-box">
-                                <div className="doctor-profile">
-                                    <div className="doctor-img">
-                                        <img src="./Assets/images/team/4.jpg" alt="doctor-image" className="img-fluid w-100" />
-                                    </div>
-                                </div>
-                                <div className="content mt-3">
-                                    <h4 className="mb-0"><a href="/doctorSingle">Jonas Thomson</a></h4>
-                                    <p>Cardiology</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item"
-                            data-groups="[&quot;cat5&quot;,&quot;cat6&quot;,&quot;cat1&quot;]">
-                            <div className="position-relative doctor-inner-box">
-                                <div className="doctor-profile">
-                                    <div className="doctor-img">
-                                        <img src="./Assets/images/team/3.jpg" alt="doctor-image" className="img-fluid w-100" />
-                                    </div>
-                                </div>
-                                <div className="content mt-3">
-                                    <h4 className="mb-0"><a href="/doctorSingle">Henry Forth</a></h4>
-                                    <p>hematology</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item illustration" data-groups="[&quot;cat2&quot;]">
-                            <div className="position-relative doctor-inner-box">
-                                <div className="doctor-profile">
-                                    <div className="doctor-img">
-                                        <img src="./Assets/images/team/4.jpg" alt="doctor-image" className="img-fluid w-100" />
-                                    </div>
-                                </div>
-                                <div className="content mt-3">
-                                    <h4 className="mb-0"><a href="/doctorSingle">Thomas Henry</a></h4>
-                                    <p>Dental</p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </section>

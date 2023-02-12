@@ -43,7 +43,8 @@ const Nav = () => {
                     <div className="row align-items-center">
                         <div className="col-lg-6">
                             <ul className="top-bar-info list-inline-item pl-0 mb-0">
-                                <li className="list-inline-item"><a href="mailto:dion.smith070@gmail.com"><i className="icofont-support-faq mr-2"></i> dion.smith070@gmail.com </a></li>
+                                {/* <li className="list-inline-item"><a href="mailto:dion.smith070@gmail.com"><i className="icofont-support-faq mr-2"></i> dion.smith070@gmail.com </a></li> */}
+                                <li className="list-inline-item"><a href="dion.smith070@gmail.com"><i className="icofont-support-faq mr-2"></i> dion.smith070@gmail.com </a></li>
                                 <li className="list-inline-item"><i className="icofont-location-pin mr-2"></i> Address Ta-134/A, New York, USA </li>
                             </ul>
                         </div>
@@ -61,7 +62,7 @@ const Nav = () => {
                                     isLoggedInToken ? (
                                         <>
                                             {/* <img src={loggedInImage} alt="" style={{ borderrRadius: '50%' }} height='25px' width='25px' /> */}
-                                            <img src="/Assets/images/team/1.jpg" alt="profile_pic" style={{ borderrRadius: '50%' }} height='25px' width='25px' />
+                                            <img src="/Assets/images/team/1.jpg" alt="profile_pic" style={{ borderRadius: '50%' }} height='25px' width='25px' />
                                             <a href="/"> <span className="mr-5 ml-2"> {loggedInName} </span> </a>
                                         </>
                                     ) : (

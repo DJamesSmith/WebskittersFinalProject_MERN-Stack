@@ -84,12 +84,12 @@ const Blog = () => {
                                                                     <div className="blog-item-content">
                                                                         <div className="blog-item-meta mb-3 mt-4">
                                                                             <span className="text-muted text-capitalize mr-3"><i className="icofont-comment mr-2"></i> 5 Comments </span>
-                                                                            <span className="text-black text-capitalize mr-3" key={_id}><i className="icofont-calendar mr-1"></i> {createdAt} </span>
+                                                                            <span className="text-black text-capitalize mr-3" key={key}><i className="icofont-calendar mr-1"></i> {createdAt} </span>
                                                                         </div>
 
                                                                         <h2 className="mt-3 mb-3"><Link to={`/blogSingle/${_id}`}> {blogName} </Link></h2>
                                                                         <p className="mb-4"> {blogQuote} </p>
-                                                                        <p className="mb-4"> {_id} </p>
+                                                                        {/* <p className="mb-4"> {_id} </p> */}
 
                                                                         <Link to={`/blogSingle/${_id}`} className="btn btn-main btn-icon btn-round-full mb-5"> Read More <i className="icofont-simple-right ml-2  "></i></Link>
                                                                     </div>
@@ -112,10 +112,11 @@ const Blog = () => {
                                 <div className="col-lg-12 col-md-12">
                                     <nav className="pagination py-2 d-inline-block">
                                         <div className="nav-links">
-                                            <span aria-current="page" className="page-numbers current">1</span>
-                                            <a className="page-numbers" href="#!">2</a>
-                                            <a className="page-numbers" href="#!">3</a>
-                                            <a className="page-numbers" href="#!"><i className="icofont-thin-double-right"></i></a>
+                                            <a className="page-numbers" href="#!"><i className="icofont-thin-double-left"></i></a>
+                                            <span aria-current="page" className="page-numbers current"> 1 </span>
+                                            <a className="page-numbers" href="#!"> 2 </a>
+                                            <a className="page-numbers" href="#!"> 3 </a>
+                                            <a className="page-numbers" href="#!"> <i className="icofont-thin-double-right"></i> </a>
                                         </div>
                                     </nav>
                                 </div>
@@ -124,13 +125,12 @@ const Blog = () => {
                         <div className="col-lg-4">
                             <div className="sidebar-wrap pl-lg-4 mt-5 mt-lg-0">
                                 <div className="sidebar-widget search  mb-3 ">
-                                    <h5>Search Here</h5>
+                                    <h5> Search Here </h5>
                                     <form action="#" className="search-form">
-                                        <input type="text" className="form-control" placeholder="search" />
+                                        <input type="text" className="form-control" placeholder="search" name='search' />
                                         <i className="ti-search"></i>
                                     </form>
                                 </div>
-
 
                                 <div className="sidebar-widget latest-post mb-3">
                                     <h5>Popular Posts</h5>
@@ -140,13 +140,15 @@ const Blog = () => {
                                             <>
                                                 {
                                                     blogData?.displayBlogs?.map((blog, key) => {
-                                                        const { _id, createdAt, blogName, blogQuote } = blog
+                                                        const { createdAt, blogName } = blog
+                                                        // const d = new createdAt()
+                                                        // var time = d.toDateString()
                                                         return (
                                                             <>
 
-                                                                <div className="py-2">
+                                                                <div className="py-2" key={key}>
                                                                     <span className="text-sm text-muted"> {createdAt} </span>
-                                                                    <h6 className="my-2"><a href="#"> {blogName} </a></h6>
+                                                                    <h6 className="my-2"><a href="/blogSingle"> {blogName} </a></h6>
                                                                 </div>
 
                                                             </>

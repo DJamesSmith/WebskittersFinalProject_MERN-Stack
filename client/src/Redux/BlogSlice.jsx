@@ -13,7 +13,7 @@ export const fetchBlog = createAsyncThunk(
     async () => {
         try {
             const response = await axiosInstance.get('allBlogs')
-            console.log('API response: ', response.data)
+            // console.log('API response: ', response.data)
             return response?.data
         } catch (error) {
             console.log(error)

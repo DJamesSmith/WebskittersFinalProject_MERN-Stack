@@ -44,7 +44,7 @@ export const AuthSlice = createSlice({
     reducers: {
         setUser: (state, { payload }) => {
             state.user = payload
-            console.log(state.user, "jnvsfnvjnsf")
+            // console.log(state.user, "jnvsfnvjnsf")
         },
         reset_redirectTo: (state, { payload }) => {
             state.redirectToIndex = payload
@@ -56,6 +56,7 @@ export const AuthSlice = createSlice({
         handleLogoutName: (state, { payload }) => {
             localStorage.removeItem("name")
             localStorage.removeItem("image")
+            localStorage.removeItem("status")
             state.isLoggedInName = false
         },
         check_token: (state, { payload }) => {
@@ -78,6 +79,7 @@ export const AuthSlice = createSlice({
             state.isLoggedInName = true
             localStorage.setItem("name", payload?.data?.name)
             localStorage.setItem("image", payload?.data?.image)
+            localStorage.setItem("status", payload?.data?.status)
             state.redirectToLogin = "/login"
             state.userInfo = payload
         },
@@ -94,11 +96,13 @@ export const AuthSlice = createSlice({
             localStorage.setItem("token", payload?.token)
             localStorage.setItem("name", payload?.user?.name)
             localStorage.setItem("image", payload?.user?.image)
+            localStorage.setItem("status", payload?.user?.status)
             state.redirectToIndex = "/"
             state.isLoggedInToken = true
             state.loading = false
 
-            console.log('', payload?.user?.name)
+            console.log('-------------------------------', payload?.user?.name)
+            console.log('-------------------------------', payload?.user?.status)
         },
         [loginUser.rejected]: (state, action) => {
             state.loading = false
