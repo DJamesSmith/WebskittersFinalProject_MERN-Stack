@@ -84,7 +84,7 @@ exports.adminLogin = (req, res) => {
                 const token = jwt.sign({
                     id: data._id,
                     adminName: data.adminName
-                }, "admin#SecretKey@123", { expiresIn: '5m' })
+                }, "admin#SecretKey@123", { expiresIn: '5h' })
                 res.cookie("adminToken", token)
                 if (req.body.rememberme) {
                     res.cookie('adminEmail', req.body.adminEmail)

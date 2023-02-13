@@ -54,11 +54,11 @@
                                         <% const p = appointment.id %>
                                         <tr>
                                             <td scope="row"> <%=p.substring(20, 24)%> </td>
-                                            <td> <%= appointment.department.deptName %> </td>
-                                            <td> <%= appointment.doctor.docName %> </td>
+                                            <td style="color: yellow;"> <b> <%= appointment.department.deptName %> </b> </td>
+                                            <td> <b style="color: yellow;"> <%= appointment.doctor.docName %> </b> </td>
                                             <td> <%= appointment.date %> </td>
                                             <td> <%= appointment.time %> </td>
-                                            <td> <%= appointment.patientName %> </td>
+                                            <td> <b class="text-primary"> <%= appointment.patientName %> </b> </td>
                                             <td> <%= appointment.phone %> </td>
                                             <td> <%= appointment.message %> </td>
                                             <td> <a href="/admin/deleteAppointment/<%=appointment._id%>"> <button class="btn btn-outline-danger"> Delete </button> </a> </td>

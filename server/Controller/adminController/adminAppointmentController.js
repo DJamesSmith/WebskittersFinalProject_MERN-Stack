@@ -1,6 +1,6 @@
 const AppointmentModel = require('../../Model/admin/Appointment')
 const DoctorModel = require('../../Model/admin/Doctor')
-const DepartmentModel = require('../../Model/admin/Department');
+const DepartmentModel = require('../../Model/admin/Department')
 
 // GET - All Appointments
 exports.allAppointments = (req, res) => {
@@ -21,7 +21,7 @@ exports.allAppointments = (req, res) => {
 }
 
 // GET - Add Appointment
-exports.addAppointment = ((req, res) => {
+exports.addAppointment = (req, res) => {
     DepartmentModel.find().then(result => {
         DoctorModel.find().then(result1 => {
             res.render('Appointments/addAppointment', {
@@ -33,7 +33,7 @@ exports.addAppointment = ((req, res) => {
             })
         })
     })
-});
+}
 
 
 // POST - Add Appointment
@@ -58,7 +58,7 @@ exports.createAppointment = (req, res) => {
             req.flash('error', 'You can not send Empty data.')
             res.redirect('/admin/addAppointment')
         })
-};
+}
 
 
 // DELETE - Appointment

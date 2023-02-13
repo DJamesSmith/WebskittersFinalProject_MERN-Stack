@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchDoctor } from '../Redux/DoctorSlice'
 import { Vortex } from 'react-loader-spinner'
+
+import { fetchDoctor } from '../Redux/DoctorSlice'
 import { fetchDepartment } from '../Redux/DepartmentSlice'
 
 const Doctors = () => {
@@ -9,7 +10,7 @@ const Doctors = () => {
     const { doctorData } = useSelector(state => state?.doctorSlice)
     const { departmentData } = useSelector(state => state?.departmentSlice)
     console.log('doctorData : ', doctorData)
-    console.log('departmentData : ', departmentData)
+    // console.log('departmentData : ', departmentData)
 
     useEffect(() => {
         dispatch(fetchDoctor())
@@ -123,6 +124,7 @@ const Doctors = () => {
                                                             </div>
                                                         </div>
                                                     </div>
+
                                                 </>
                                             )
                                         })

@@ -29,13 +29,13 @@ const Confirmation = () => {
                 </nav>
             </header>
 
-            <section class="section confirmation">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <div class="confirmation-content text-center">
-                                <i class="icofont-check-circled text-lg text-color-2"></i>
-                                <h2 class="mt-3 mb-4">Thank you for your appointment</h2>
+            <section className="section confirmation">
+                <div className="container">
+                    <div className="row justify-content-center">
+                        <div className="col-lg-8">
+                            <div className="confirmation-content text-center">
+                                <i className="icofont-check-circled text-lg text-color-2"></i>
+                                <h2 className="mt-3 mb-4">Thank you for your appointment</h2>
                                 <p>We will contact you soon.</p>
                             </div>
                         </div>

@@ -1,4 +1,6 @@
 const AppointmentModel = require('../../Model/admin/Appointment')
+const DoctorModel = require('../../Model/admin/Doctor')
+const DepartmentModel = require('../../Model/admin/Department')
 
 // GET - All Appointments
 exports.allAppointments = (req, res) => {
@@ -7,7 +9,12 @@ exports.allAppointments = (req, res) => {
         .populate("doctor")
         .exec((error, result) => {
             if (!error) {
-                res.status(200).send({ success: true, msg: 'successs', allData: result })
+                // res.status(200).send({ success: true, msg: 'successs', allData: result })
+                DepartmentModel.find().then(resultDepartment => {
+                    DoctorModel.find().then(resultDoctor => {
+                        res.status(200).send({ success: true, msg: 'successs', allData: result, displayDepartment: resultDepartment, displayDoctor: resultDoctor })
+                    })
+                })
             }
         })
 }
@@ -18,8 +25,12 @@ exports.createAppointment = async (req, res, next) => {
         const { department, doctor, date, time, patientName, phone, message } = req.body
 
         const appointmentData = await AppointmentModel.create({ department, doctor, date, time, patientName, phone, message })
-        return res.json({ status: true, data: appointmentData })
-
+        // return res.json({ status: true, data: appointmentData })
+        DepartmentModel.find().then(resultDepartment => {
+            DoctorModel.find().then(resultDoctor => {
+                return res.json({ status: true, data: appointmentData, displayDepartment: resultDepartment, displayDoctor: resultDoctor })
+            })
+        })
     } catch (error) {
         next(error)
     }

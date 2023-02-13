@@ -1,4 +1,126 @@
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { fetchAppointment, postAppointment } from '../Redux/AppointmentSlice'
+
 const Appointment = () => {
+
+    const dispatch = useDispatch()
+    const { appointmentData } = useSelector(state => state?.appointmentSlice)
+    console.log('appointmentData: ', appointmentData)
+
+    useEffect(() => {
+        dispatch(fetchAppointment())
+    }, [dispatch])
+
+    const [appointment, setAppointment] = useState({
+        deptID: {},
+        docID: {},
+        date: "",
+        time: "",
+        patientName: "",
+        phone: "",
+        message: ""
+    })
+
+    const [error, setError] = useState({})
+    const navigate = useNavigate()
+
+    const validation = () => {
+        let error = {}
+
+        if (!appointment.date) {
+            error.date = "Date Required"
+        }
+
+        if (!appointment.time) {
+            error.time = "Time Required"
+        }
+
+        if (!appointment.patientName) {
+            error.patientName = "Patient's Name Required"
+        }
+
+        if (!appointment.phone) {
+            error.phone = "Phone Required"
+        }
+
+        if (!appointment.message) {
+            error.message = "Message Required"
+        }
+
+        return error
+    }
+
+    let name, value
+    const postAppointmentData = e => {
+        name = e.target.name
+        value = e.target.value
+        setAppointment({ ...appointment, [name]: value })
+
+        if (name === "date") {
+            if (value.length === 0) {
+                setError({ ...error, date: "@Date is Required" })
+                setAppointment({ ...appointment, date: "" })
+            } else {
+                setError({ ...error, date: "" })
+                setAppointment({ ...appointment, date: value })
+            }
+        }
+
+        if (name === "time") {
+            if (value.length === 0) {
+                setError({ ...error, time: "@Time is Required" })
+                setAppointment({ ...appointment, time: "" })
+            } else {
+                setError({ ...error, time: "" })
+                setAppointment({ ...appointment, time: value })
+            }
+        }
+
+        if (name === "patientName") {
+            if (value.length === 0) {
+                setError({ ...error, patientName: "@Patient's Name is Required" })
+                setAppointment({ ...appointment, patientName: "" })
+            } else {
+                setError({ ...error, patientName: "" })
+                setAppointment({ ...appointment, patientName: value })
+            }
+        }
+
+        if (name === "phone") {
+            if (value.length === 0) {
+                setError({ ...error, phone: "@Patient's Phone Number is Required" })
+                setAppointment({ ...appointment, phone: "" })
+            } else {
+                setError({ ...error, phone: "" })
+                setAppointment({ ...appointment, phone: value })
+            }
+        }
+
+        if (name === "message") {
+            if (value.length === 0) {
+                setError({ ...error, message: "@Urgent message for the Doctor ?" })
+                setAppointment({ ...appointment, message: "" })
+            } else {
+                setError({ ...error, message: "" })
+                setAppointment({ ...appointment, message: value })
+            }
+        }
+    }
+
+    const SubmitInfo = async e => {
+        e.preventDefault()
+        let ErrorList = validation()
+        setError(validation())
+
+        if (Object.keys(ErrorList).length === 0) {
+            await postAppointment(appointment)
+            navigate('/confirmation')
+        }
+    }
+
     return (
         <div>
             <header>
@@ -60,11 +182,13 @@ const Appointment = () => {
                             <div className="appointment-wrap mt-5 mt-lg-0 pl-lg-5">
                                 <h2 className="mb-2 title-color">Book an appointment</h2>
                                 <p className="mb-4">Mollitia dicta commodi est recusandae iste, natus eum asperiores corrupti qui velit . Iste dolorum atque similique praesentium soluta.</p>
-                                <form id="#" className="appointment-form" method="post" action="#">
+                                <form id="" className="appointment-form" method="POST" action="" onSubmit={SubmitInfo}>
+
                                     <div className="row">
-                                        <div className="col-lg-6">
-                                            <div className="form-group">
-                                                <select className="form-control" id="exampleFormControlSelect1" required>
+
+                                        {/* <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <select class="form-control" id="exampleFormControlSelect1">
                                                     <option>Choose Department</option>
                                                     <option>Software Design</option>
                                                     <option>Development cycle</option>
@@ -76,9 +200,9 @@ const Appointment = () => {
                                                 </select>
                                             </div>
                                         </div>
-                                        <div className="col-lg-6">
-                                            <div className="form-group">
-                                                <select className="form-control" id="exampleFormControlSelect2" required>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <select class="form-control" id="exampleFormControlSelect2">
                                                     <option>Select Doctors</option>
                                                     <option>Software Design</option>
                                                     <option>Development cycle</option>
@@ -89,36 +213,78 @@ const Appointment = () => {
                                                     <option>Modal Delivery</option>
                                                 </select>
                                             </div>
+                                        </div> */}
+
+                                        {/* Department */}
+                                        <div className="col-lg-6">
+                                            <div className="form-group">
+                                                <select className="form-control" id="exampleFormControlSelect1" name="department" required>
+                                                    <option value=''> Choose Department </option>
+                                                    {
+                                                        appointmentData?.displayDepartment?.map((appointment, key) => {
+                                                            return (
+                                                                <>
+                                                                    <option value={appointment.id} key={key}> {appointment.deptName} </option>
+                                                                </>
+                                                            )
+                                                        })
+                                                    }
+                                                </select>
+                                            </div>
                                         </div>
+
+                                        {/* Doctor */}
+                                        <div className="col-lg-6">
+                                            <div className="form-group">
+                                                <select className="form-control" id="exampleFormControlSelect2" name="doctor" required>
+                                                    <option value=''> Select Doctor </option>
+                                                    {
+                                                        appointmentData?.displayDoctor?.map((appointment, key) => {
+                                                            return (
+                                                                <>
+                                                                    <option value={appointment.id} key={key}> {appointment.docName} </option>
+                                                                </>
+                                                            )
+                                                        })
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+
 
                                         <div className="col-lg-6">
                                             <div className="form-group">
-                                                <input name="date" id="date" type="text" className="form-control" placeholder="dd/mm/yyyy" required />
+                                                <input name="date" value={appointment.date} type="date" onChange={e => postAppointmentData(e)} className="form-control" placeholder="dd/mm/yyyy" required />
+                                                <span style={{ color: "red", marginLeft: "24px" }}> {error.date} </span>
                                             </div>
                                         </div>
 
                                         <div className="col-lg-6">
                                             <div className="form-group">
-                                                <input name="time" id="time" type="text" className="form-control" placeholder="Time" required />
+                                                <input name="time" value={appointment.time} type="time" onChange={e => postAppointmentData(e)} className="form-control" placeholder="Time" required />
+                                                <span style={{ color: "red", marginLeft: "24px" }}> {error.time} </span>
                                             </div>
                                         </div>
                                         <div className="col-lg-6">
                                             <div className="form-group">
-                                                <input name="name" id="name" type="text" className="form-control" placeholder="Full Name" required />
+                                                <input name="patientName" value={appointment.patientName} type="text" onChange={e => postAppointmentData(e)} className="form-control" placeholder="Full Name" required />
+                                                <span style={{ color: "red", marginLeft: "24px" }}> {error.patientName} </span>
                                             </div>
                                         </div>
 
                                         <div className="col-lg-6">
                                             <div className="form-group">
-                                                <input name="phone" id="phone" type="Number" className="form-control" placeholder="Phone Number" required />
+                                                <input name="phone" value={appointment.phone} type="Number" onChange={e => postAppointmentData(e)} className="form-control" placeholder="Phone Number" required />
+                                                <span style={{ color: "red", marginLeft: "24px" }}> {error.phone} </span>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="form-group-2 mb-4">
-                                        <textarea name="message" id="message" className="form-control" rows="6" placeholder="Your Message" required></textarea>
+                                        <textarea style={{ resize: 'none' }} name="message" value={appointment.message} onChange={e => postAppointmentData(e)} className="form-control" rows="6" placeholder="Your Message" required />
+                                        <span style={{ color: "red", marginLeft: "24px" }}> {error.message} </span>
                                     </div>
 
-                                    <a className="btn btn-main btn-round-full" href="/confirmation">Make Appointment<i className="icofont-simple-right ml-2"></i></a>
+                                    <button type="submit" className="btn btn-main btn-round-full"> Make Appointment <i className="icofont-simple-right ml-2"></i> </button>
                                 </form>
                             </div>
                         </div>

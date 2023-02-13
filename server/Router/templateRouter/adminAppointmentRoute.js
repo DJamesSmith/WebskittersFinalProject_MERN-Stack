@@ -8,7 +8,7 @@ router.get('/allAppointments', adminController.allAppointments)
 
 // POST
 router.get('/addAppointment', adminController.addAppointment)
-router.post('/createappointment', adminController.createAppointment)
+router.post('/createAppointment', adminController.createAppointment)
 
 // DELETE
 router.get('/deleteAppointment/:id', adminController.deleteAppointment)

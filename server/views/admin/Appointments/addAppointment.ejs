@@ -42,7 +42,7 @@
                             </div>
                         <% } %>
 
-                        <form action="/admin/createappointment" method="POST" class="mb-5">
+                        <form action="/admin/createAppointment" method="POST" class="mb-5">
                             <div class="form-group">
                                 <label for="inputState"> Department </label>
                                 <select id="inputState" class="form-control" name="department">
@@ -51,7 +51,7 @@
                                         <option value="<%= data.id %>"> 
                                             <%= data.deptName %>
                                         </option>
-                                        <% } %>
+                                    <% } %>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -62,7 +62,7 @@
                                         <option value="<%= datas.id %>"> 
                                             <%= datas.docName %>
                                         </option>
-                                        <% } %>
+                                    <% } %>
                                 </select>
                             </div>
                             

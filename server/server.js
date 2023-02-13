@@ -90,7 +90,7 @@ app.use('/api', userRoute)
 
 // -------------------------------------- Routes --------------------------------------
 
-const dbcon = ""
+const dbcon = "mongodb+srv://mernstack:uEcMUsb0BmH7CMbo@cluster0.atdylte.mongodb.net/cure-and-care"
 const port = process.env.PORT || 3002
 
 mongoose.connect(dbcon, { useNewUrlParser: true, useUnifiedTopology: true })

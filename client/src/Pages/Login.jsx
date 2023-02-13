@@ -94,7 +94,7 @@ const Login = () => {
             "password": user.password
         }
         dispatch(loginUser(data))
-        navigate('/blog')
+        navigate('/')
     }
 
     return (
@@ -132,19 +132,19 @@ const Login = () => {
             <h1 className='text-uppercase text-center mt-5 letter-spacing'> Login </h1>
 
             <div className="container mt-5" style={{ height: '500px' }}>
-                <form class="row g-3">
-                    <div class="col-md-6 mb-3">
-                        <label for="inputEmail4" class="form-label"> Email </label>
-                        <input type="email" class="form-control" id="inputEmail4" name="email" value={user.email} onChange={e => postUserData(e)} />
+                <form className="row g-3">
+                    <div className="col-md-6 mb-3">
+                        <label htmlFor="inputEmail4" className="form-label"> Email </label>
+                        <input type="email" className="form-control" placeholder='Enter Email ID' name="email" value={user.email} onChange={e => postUserData(e)} />
                         <span style={{ color: "red" }}> {error.email} </span>
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="inputPassword4" class="form-label"> Password </label>
-                        <input type="password" class="form-control" id="inputPassword4" name="password" value={user.password} onChange={e => postUserData(e)} />
+                    <div className="col-md-6 mb-3">
+                        <label htmlFor="inputPassword4" className="form-label"> Password </label>
+                        <input type="password" className="form-control" placeholder='Enter Password' name="password" value={user.password} onChange={e => postUserData(e)} />
                         <span style={{ color: "red" }}> {error.password} </span>
                     </div>
-                    <div class="col-12 mb-5">
-                        <button type="submit" class="btn btn-primary mt-5 mb-5" onClick={SubmitInfo}> Sign In </button>
+                    <div className="col-12 mb-5">
+                        <button type="submit" className="btn btn-primary mt-5 mb-5" onClick={SubmitInfo}> Sign In </button>
                     </div>
                 </form>
                 <h4 className='text-center mt-5'> Don't have an account? <button type="submit" onClick={register} className="btn btn-success ml-2"> Register </button> </h4>

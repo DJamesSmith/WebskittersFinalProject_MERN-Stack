@@ -20,8 +20,9 @@ export const registerUser = createAsyncThunk(
     "register",
     async user => {
         try {
-            const ress = await axiosInstance.post("register", user)
-            return ress?.data
+            const response = await axiosInstance.post("register", user)
+            console.log('User API POST Response: ', response?.data)
+            return response?.data
         } catch (error) {
             console.log(error)
         }

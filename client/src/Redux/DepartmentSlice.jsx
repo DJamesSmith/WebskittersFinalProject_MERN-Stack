@@ -13,7 +13,7 @@ export const fetchDepartment = createAsyncThunk(
     async () => {
         try {
             const response = await axiosInstance.get('allDepartments')
-            console.log('API response: ', response.data)
+            console.log(`Department's API response:  ${response.data}`)
             return response?.data
         } catch (error) {
             console.log(error)
