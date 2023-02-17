@@ -2,14 +2,46 @@ import img1 from '../Assets/images/blog/blog-1.jpg'
 import img2 from '../Assets/images/blog/testimonial1.jpg'
 import img3 from '../Assets/images/blog/testimonial2.jpg'
 
+import React, { useEffect } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import { Vortex } from 'react-loader-spinner'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { fetchSingleBlog, popularBlog } from '../Redux/BlogSlice'
+import { fetchCategory } from '../Redux/CategorySlice'
+
 const BlogSingle = () => {
+
+    const id = useParams()
+    const dispatch = useDispatch()
+
+    const { singleBlogData, popularBlogData } = useSelector(state => state?.blogSlice)
+    // console.log('singleBlogData: ', singleBlogData)
+    // console.log('popularBlogData: ', popularBlogData)
+
+    const { categoryData } = useSelector(state => state?.categorySlice)
+    console.log('categoryData: ', categoryData)
+
+    useEffect(() => {
+        dispatch(popularBlog())
+        dispatch(fetchCategory())
+        dispatch(fetchSingleBlog(id))
+    }, [id, dispatch])
+
+    const options = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    }
+
     return (
         <div>
             <header>
                 <nav className="navbar navbar-expand-lg navigation" id="navbar">
                     <div className="container">
                         <a className="navbar-brand" href="/">
-                            <img src="./Assets/images/logo.png" alt="" className="img-fluid" />
+                            <img src="./Assets/images/cure-and-care-logo.png" alt="" className="img-fluid" style={{ height: '2em' }} />
                         </a>
 
                         <button className="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarmain"
@@ -38,10 +70,12 @@ const BlogSingle = () => {
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
+
                             <div class="block text-center">
-                                <span class="text-white">News details</span>
-                                <h1 class="text-capitalize mb-5 text-lg">Blog Single</h1>
+                                <span class="text-white"> News details </span>
+                                <h1 class="text-capitalize mb-5 text-lg"> {singleBlogData.singleBlogData?.blogTitle}  </h1>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -58,48 +92,31 @@ const BlogSingle = () => {
 
                                         <div class="blog-item-content mt-5">
                                             <div class="blog-item-meta mb-3">
-                                                <span class="text-color-2 text-capitalize mr-3"><i
-                                                    class="icofont-book-mark mr-2"></i> Equipment</span>
-                                                <span class="text-muted text-capitalize mr-3"><i
-                                                    class="icofont-comment mr-2"></i>5 Comments</span>
-                                                <span class="text-black text-capitalize mr-3"><i
-                                                    class="icofont-calendar mr-2"></i> 28th January 2019</span>
+
+                                                <span class="text-color-2 text-capitalize mr-3"><i class="icofont-book-mark mr-2"></i> Equipment </span>
+                                                <span class="text-muted text-capitalize mr-3"><i class="icofont-comment mr-2"></i> 5 Comments </span>
+                                                <span class="text-black text-capitalize mr-3">
+                                                    <i class="icofont-calendar mr-2"></i>
+                                                    <time> {(new Date(singleBlogData.singleBlogData?.createdAt)).toLocaleDateString("en-US", options)} </time>
+                                                    <b style={{ textTransform: 'lowercase' }}> at </b>
+                                                    <time> {(new Date(singleBlogData.singleBlogData?.createdAt)).toLocaleTimeString('en-US')} </time>
+                                                </span>
+
                                             </div>
 
-                                            <h2 class="mb-4 text-md"><a href="/blogSingle">Healthy environment to care with
-                                                modern equipment</a></h2>
+                                            <h2 class="mb-4 text-md"><a href="/blogSingle"> {singleBlogData.singleBlogData?.blogTitle} </a></h2>
 
-                                            <p class="lead mb-4">Non illo quas blanditiis repellendus laboriosam minima animi.
-                                                Consectetur accusantium
-                                                pariatur repudiandae!</p>
+                                            <p class="lead mb-4"> {singleBlogData.singleBlogData?.blogSubtitle} </p>
 
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus natus,
-                                                consectetur? Illum libero vel nihil
-                                                nisi quae, voluptatem, sapiente necessitatibus distinctio voluptates, iusto qui.
-                                                Laboriosam autem, nam
-                                                voluptate in beatae. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                Quae iure officia nihil nemo,
-                                                repudiandae itaque similique praesentium non aut nesciunt facere nulla, sequi
-                                                sunt nam temporibus atque earum,
-                                                ratione, labore.</p>
+                                            <p> {singleBlogData.singleBlogData?.blogDescription} </p>
 
                                             <blockquote class="quote">
-                                                A brand for a company is like a reputation for a person. You earn reputation by
-                                                trying to do hard things well.
+                                                {singleBlogData.singleBlogData?.blogQuote}
                                             </blockquote>
 
+                                            <p class="lead mb-4 font-weight-normal text-black"> {singleBlogData.singleBlogData?.blogGist} </p>
 
-                                            <p class="lead mb-4 font-weight-normal text-black">The same is true as we experience
-                                                the emotional sensation of
-                                                stress from our first instances of social rejection ridicule. We quickly learn
-                                                to fear and thus automatically.
-                                            </p>
-
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, rerum beatae
-                                                repellat tenetur incidunt
-                                                quisquam libero dolores laudantium. Nesciunt quis itaque quidem, voluptatem
-                                                autem eos animi laborum iusto
-                                                expedita sapiente.</p>
+                                            <p> {singleBlogData.singleBlogData?.blogConcluder} </p>
 
                                             <div class="mt-5 clearfix">
                                                 <ul class="float-left list-inline tag-option">
@@ -121,6 +138,7 @@ const BlogSingle = () => {
                                                 </ul>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
 
@@ -216,70 +234,80 @@ const BlogSingle = () => {
                                 </div>
 
 
-                                <div class="sidebar-widget latest-post mb-3">
-                                    <h5>Popular Posts</h5>
+                                <div className="sidebar-widget latest-post mb-3">
+                                    <h5> Popular Blogs </h5>
 
-                                    <div class="py-2">
-                                        <span class="text-sm text-muted">03 Mar 2018</span>
-                                        <h6 class="my-2"><a href="#">Thoughtful living in los Angeles</a></h6>
-                                    </div>
+                                    {
+                                        popularBlogData !== null ? (
+                                            <>
+                                                {
+                                                    popularBlogData?.displayPopularBlogData?.map(blog => {
+                                                        const { createdAt, blogTitle } = blog
+                                                        return (
+                                                            <>
 
-                                    <div class="py-2">
-                                        <span class="text-sm text-muted">03 Mar 2018</span>
-                                        <h6 class="my-2"><a href="#">Vivamus molestie gravida turpis.</a></h6>
-                                    </div>
+                                                                <div className="py-2">
+                                                                    <span className="text-sm text-muted">
+                                                                        <i class="icofont-calendar mr-2"></i>
+                                                                        <time> {(new Date(singleBlogData.singleBlogData?.createdAt)).toLocaleDateString("en-US", options)} </time>
+                                                                        <b style={{ textTransform: 'lowercase' }}> ---- </b>
+                                                                        <time> {(new Date(singleBlogData.singleBlogData?.createdAt)).toLocaleTimeString('en-US')} </time>
+                                                                    </span>
+                                                                    <h6 className="my-2"><Link to={`/blogSingle/${blog?._id}`}> {blogTitle} </Link></h6>
+                                                                </div>
 
-                                    <div class="py-2">
-                                        <span class="text-sm text-muted">03 Mar 2018</span>
-                                        <h6 class="my-2"><a href="#">Fusce lobortis lorem at ipsum semper sagittis</a></h6>
-                                    </div>
+                                                            </>
+                                                        )
+                                                    })
+                                                }
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Vortex visible={true} height="50" width="50" ariaLabel="vortex-loading" wrapperStyle={{}} wrapperclassName="vortex-wrapper" colors={['red', 'green', 'blue', 'yellow', 'orange', 'purple']} />
+                                            </>
+                                        )
+                                    }
+
                                 </div>
 
-                                <div class="sidebar-widget category mb-3">
-                                    <h5 class="mb-4">Categories</h5>
+                                <div className="sidebar-widget category mb-3">
+                                    <h5 className="mb-4"> Categories </h5>
 
-                                    <ul class="list-unstyled">
-                                        <li class="align-items-center">
-                                            <a href="#">Medicine</a>
-                                            <span>(14)</span>
-                                        </li>
-                                        <li class="align-items-center">
-                                            <a href="#">Equipments</a>
-                                            <span>(2)</span>
-                                        </li>
-                                        <li class="align-items-center">
-                                            <a href="#">Heart</a>
-                                            <span>(10)</span>
-                                        </li>
-                                        <li class="align-items-center">
-                                            <a href="#">Free counselling</a>
-                                            <span>(5)</span>
-                                        </li>
-                                        <li class="align-items-center">
-                                            <a href="#">Lab test</a>
-                                            <span>(5)</span>
-                                        </li>
+                                    {/* Medicine, Equipments, Heart, Free counselling, Lab test */}
+
+                                    <ul className="list-unstyled">
+
+                                        {
+                                            categoryData !== null ? (
+                                                <>
+                                                    {
+                                                        categoryData?.displayCategoryData?.map(category => {
+                                                            const { categoryName } = category
+                                                            return (
+                                                                <>
+
+                                                                    <li className="align-items-center">
+                                                                        <a href="#"> {categoryName} </a>
+                                                                        <span> (10) </span>
+                                                                    </li>
+
+                                                                </>
+                                                            )
+                                                        })
+                                                    }
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Vortex visible={true} height="50" width="50" ariaLabel="vortex-loading" wrapperStyle={{}} wrapperclassName="vortex-wrapper" colors={['red', 'green', 'blue', 'yellow', 'orange', 'purple']} />
+                                                </>
+                                            )
+                                        }
+
                                     </ul>
                                 </div>
 
-
-                                <div class="sidebar-widget tags mb-3">
-                                    <h5 class="mb-4">Tags</h5>
-
-                                    <a href="#">Doctors</a>
-                                    <a href="#">agency</a>
-                                    <a href="#">company</a>
-                                    <a href="#">medicine</a>
-                                    <a href="#">surgery</a>
-                                    <a href="#">Marketing</a>
-                                    <a href="#">Social Media</a>
-                                    <a href="#">Branding</a>
-                                    <a href="#">Laboratory</a>
-                                </div>
-
-
                                 <div class="sidebar-widget schedule-widget mb-3">
-                                    <h5 class="mb-4">Time Schedule</h5>
+                                    <h5 class="mb-4"> Time Schedule </h5>
 
                                     <ul class="list-unstyled">
                                         <li class="d-flex justify-content-between align-items-center">

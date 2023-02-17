@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { handleLogoutName, loginUser, reset_redirectTo } from '../Redux/AuthSlice'
+import { handleLogoutName, loginUser, reset_redirectTo, loggedInEmail, loggedInPassword } from '../Redux/AuthSlice'
 
 const Login = () => {
 
@@ -31,14 +31,14 @@ const Login = () => {
     const validation = () => {
         let error = {}
         if (!user.email) {
-            error.email = "Email is Required"
+            error.email = "Email Required"
         } else if (
             !/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(user.email)
         ) {
             error.email = "Enter a valid Email"
         }
         if (!user.password) {
-            error.password = "Password is Required"
+            error.password = "Password Required"
         }
         return error
     }
@@ -65,7 +65,7 @@ const Login = () => {
         setUser({ ...user, [name]: value })
         if (name === "email") {
             if (value.length === 0) {
-                setError({ ...error, email: "Email is required" })
+                setError({ ...error, email: "@Email is required" })
                 setUser({ ...user, email: "" })
             } else {
                 setError({ ...error, email: "" })
@@ -75,7 +75,7 @@ const Login = () => {
 
         if (name === "password") {
             if (value.length === 0) {
-                setError({ ...error, password: "Password is Required" })
+                setError({ ...error, password: "@Password is Required" })
                 setUser({ ...user, password: "" })
             } else {
                 setError({ ...error, password: "" })
@@ -93,8 +93,12 @@ const Login = () => {
             "email": user.email,
             "password": user.password
         }
-        dispatch(loginUser(data))
-        navigate('/')
+
+        if (Object.keys(ErrorList).length === 0) {
+            dispatch(loginUser(data))
+            navigate('/')
+        }
+
     }
 
     return (
@@ -103,7 +107,7 @@ const Login = () => {
                 <nav className="navbar navbar-expand-lg navigation" id="navbar">
                     <div className="container">
                         <a className="navbar-brand" href="/">
-                            <img src="./Assets/images/logo.png" alt="" className="img-fluid" />
+                            <img src="./Assets/images/cure-and-care-logo.png" alt="" className="img-fluid" style={{ height: '2em' }} />
                         </a>
 
                         <button className="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarmain"
@@ -129,25 +133,38 @@ const Login = () => {
 
             <hr />
 
-            <h1 className='text-uppercase text-center mt-5 letter-spacing'> Login </h1>
+            {/* <h1 className='text-uppercase text-center mt-5 letter-spacing'> Login </h1> */}
 
-            <div className="container mt-5" style={{ height: '500px' }}>
+            <div className="container" style={{ height: '42em', marginTop: '5em' }}>
                 <form className="row g-3">
-                    <div className="col-md-6 mb-3">
-                        <label htmlFor="inputEmail4" className="form-label"> Email </label>
-                        <input type="email" className="form-control" placeholder='Enter Email ID' name="email" value={user.email} onChange={e => postUserData(e)} />
-                        <span style={{ color: "red" }}> {error.email} </span>
-                    </div>
-                    <div className="col-md-6 mb-3">
-                        <label htmlFor="inputPassword4" className="form-label"> Password </label>
-                        <input type="password" className="form-control" placeholder='Enter Password' name="password" value={user.password} onChange={e => postUserData(e)} />
-                        <span style={{ color: "red" }}> {error.password} </span>
-                    </div>
-                    <div className="col-12 mb-5">
-                        <button type="submit" className="btn btn-primary mt-5 mb-5" onClick={SubmitInfo}> Sign In </button>
+                    <div className="card text-center m-auto bg-light" style={{ width: '30em' }}>
+
+                        <div className="card-header text-uppercase letter-spacing bg-primary text-light">
+                            Login
+                        </div>
+                        <div className="card-body">
+
+                            <img src="./Assets/images/team/5.png" alt="Hello" style={{ borderRadius: '50%', margin: '2em' }} height='100px' width='100px' />
+
+                            <div className="mb-4 text-left">
+                                {/* <label htmlFor="inputEmail4" className="form-label"> Email </label> */}
+                                <input type="email" className="form-control" placeholder='Email ID' name="email" value={user.email} onChange={e => postUserData(e)} style={{ borderRadius: '10px', width: '25em', margin: 'auto', border: 'none' }} />
+                                <span style={{ color: "red", marginLeft: '3.5em' }}> {error.email} </span>
+                            </div>
+                            <div className="mb-4 text-left">
+                                {/* <label htmlFor="inputPassword4" className="form-label"> Password </label> */}
+                                <input type="password" className="form-control" placeholder='Password' name="password" value={user.password} onChange={e => postUserData(e)} style={{ borderRadius: '10px', width: '25em', margin: 'auto', border: 'none' }} />
+                                <span style={{ color: "red", marginLeft: '3.5em' }}> {error.password} </span>
+                            </div>
+                            <a href="#" className="btn btn-primary mt-3" onClick={SubmitInfo}> Sign In </a>
+                        </div>
+                        <div className="card-footer text-muted" style={{ cursor: 'default' }}>
+                            Don't have an account? <b onClick={register} style={{ cursor: 'pointer' }} className='text-primary'> Register </b>
+                        </div>
+
                     </div>
                 </form>
-                <h4 className='text-center mt-5'> Don't have an account? <button type="submit" onClick={register} className="btn btn-success ml-2"> Register </button> </h4>
+
             </div>
 
         </div>

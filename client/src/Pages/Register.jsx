@@ -63,7 +63,7 @@ const Register = () => {
 
         if (name === "email") {
             if (value.length === 0) {
-                setError({ ...error, email: "Email is required" })
+                setError({ ...error, email: "@Email is required" })
                 setUser({ ...user, email: "" })
             } else {
                 setError({ ...error, email: "" })
@@ -135,7 +135,7 @@ const Register = () => {
                 <nav className="navbar navbar-expand-lg navigation" id="navbar">
                     <div className="container">
                         <a className="navbar-brand" href="/">
-                            <img src="./Assets/images/logo.png" alt="" className="img-fluid" />
+                            <img src="./Assets/images/cure-and-care-logo.png" alt="" className="img-fluid" style={{ height: '2em' }} />
                         </a>
 
                         <button className="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarmain"
@@ -161,41 +161,52 @@ const Register = () => {
 
             <hr />
 
-            <h1 className='text-uppercase text-center mt-5 letter-spacing'> Register User </h1>
+            {/* <h1 className='text-uppercase text-center mt-5 letter-spacing'> Register </h1> */}
 
             <div className="container mt-5">
-                <form className="row g-3" onSubmit={SubmitInfo} method='POST' encType="multipart/form-data">
-                    <div className="col-12 mb-3">
-                        <label htmlFor="inputEmail4" className="form-label"> Name </label>
-                        <input type="text" name='name' value={user.name} onChange={e => postUserData(e)} className="form-control" placeholder="Enter Full Name" aria-label="Name" required />
-                        <span style={{ color: "red", marginLeft: "24px" }}> {error.name} </span>
-                    </div>
-                    <div className="col-md-6 mb-3">
-                        <label htmlFor="inputEmail4" className="form-label"> Email </label>
-                        <input type="email" name='email' value={user.email} onChange={e => postUserData(e)} className="form-control" placeholder="Email ID" required />
-                        <span style={{ color: "red", marginLeft: "24px" }}> {error.email} </span>
-                    </div>
-                    <div className="col-md-6 mb-3">
-                        <label htmlFor="inputPassword4" className="form-label"> Password </label>
-                        <input type="password" name='password' value={user.password} onChange={e => postUserData(e)} className="form-control" placeholder="Enter Password" required />
-                        <span style={{ color: "red", marginLeft: "24px" }}> {error.password} </span>
-                    </div>
-                    <div className="col-md-6 mb-3">
-                        <label htmlFor="inputCity" className="form-label"> Mobile </label>
-                        <input type="number" name='mobile' value={user.mobile} onChange={e => postUserData(e)} className="form-control" placeholder="Enter Mobile Number" required />
-                        <span style={{ color: "red", marginLeft: "24px" }}> {error.mobile} </span>
-                    </div>
-                    <div className="col-md-12 mb-3">
-                        <label htmlFor="formFile" className="form-label"> Profile Picture </label>
-                        <input className="form-control" name='image' type="file" accept='.png, .jpg, .jpeg' onChange={handlePhoto} required />
-                        <span style={{ color: "red", marginLeft: "24px" }}> {error.image} </span>
-                    </div>
-                    <div className="col-12 mb-5">
-                        <button type="submit" className="btn btn-success mt-5"> Sign Up </button>
+                <form className="row g-3 mb-5" onSubmit={SubmitInfo} method='POST' encType="multipart/form-data">
+                    <div className="card text-center m-auto bg-light" style={{ width: '40em' }}>
+                        <div className="card-header text-uppercase letter-spacing bg-success text-light">
+                            Register
+                        </div>
+                        <div className="card-body p-5">
+
+                            <img src="./Assets/images/team/5.png" alt="User" style={{ borderRadius: '50%' }} height='100px' width='100px' />
+
+                            <div className="text-left">
+                                <label htmlFor="inputEmail4" className="form-label"> Name </label>
+                                <input type="text" name='name' value={user.name} onChange={e => postUserData(e)} className="form-control" placeholder="Enter Full Name" aria-label="Name" style={{  borderRadius: '10px', border: 'none' }} required />
+                                <span style={{ color: "red", marginLeft: "24px" }}> {error.name} </span>
+                            </div>
+                            <div className="text-left">
+                                <label htmlFor="inputEmail4" className="form-label"> Email </label>
+                                <input type="email" name='email' value={user.email} onChange={e => postUserData(e)} className="form-control" placeholder="Email ID" style={{  borderRadius: '10px', border: 'none' }} required />
+                                <span style={{ color: "red", marginLeft: "24px" }}> {error.email} </span>
+                            </div>
+                            <div className="text-left">
+                                <label htmlFor="inputPassword4" className="form-label"> Password </label>
+                                <input type="password" name='password' value={user.password} onChange={e => postUserData(e)} className="form-control" placeholder="Enter Password" style={{  borderRadius: '10px', border: 'none' }} required />
+                                <span style={{ color: "red", marginLeft: "24px" }}> {error.password} </span>
+                            </div>
+                            <div className="text-left">
+                                <label htmlFor="inputCity" className="form-label"> Mobile </label>
+                                <input type="number" name='mobile' value={user.mobile} onChange={e => postUserData(e)} className="form-control" placeholder="Enter Mobile Number" style={{  borderRadius: '10px', border: 'none' }} required />
+                                <span style={{ color: "red", marginLeft: "24px" }}> {error.mobile} </span>
+                            </div>
+                            <div className="text-left">
+                                <label htmlFor="formFile" className="form-label"> Profile Picture </label>
+                                <input className="form-control" name='image' type="file" accept='.png, .jpg, .jpeg' onChange={handlePhoto} style={{  borderRadius: '10px', border: 'none' }} required />
+                                <span style={{ color: "red", marginLeft: "24px" }}> {error.image} </span>
+                            </div>
+
+                            <a href="#"> <button type='submit' className='btn btn-success mt-3'> Sign Up </button> </a>
+
+                        </div>
+                        <div className="card-footer text-muted" style={{ cursor: 'default' }}>
+                            Already have an account? <a href="/login"> <b style={{ cursor: 'pointer' }} className='text-primary'> Login </b> </a>
+                        </div>
                     </div>
                 </form>
-                <h4 className='text-center mt-3' style={{ marginBottom: '5em' }}> Already have an account? <a href="/login"> <button type="submit" className="btn btn-primary ml-2"> Login </button> </a> </h4>
-                {/* onClick={register} */}
             </div>
 
         </div>

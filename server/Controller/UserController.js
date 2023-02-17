@@ -23,7 +23,7 @@ const resetPasswordMail = async (name, email, token) => {
             from: config.email,
             to: email,
             subject: "for reset password",
-            html: '<p> Hi..' + name + ',</p> Please copy the link and <a href="http://localhost:5000/api/reset-password?token=' + token + '">reset your password</a> '
+            html: '<p> Hi..' + name + ',</p> Please copy the link and <a href="http://localhost:3002/api/reset-password?token=' + token + '">reset your password</a> '
         }
 
         transPorter.sendMail(mailOption, function (err, info) {
@@ -70,7 +70,7 @@ exports.registerUser = async (req, res) => {
             mobile: req.body.mobile,
             password: setpassword,
             image: req.file.filename,
-            status: 1
+            status: true
         })
         const userData = await userModel.collection.findOne({ email: req.body.email })
         if (userData) {
@@ -81,8 +81,8 @@ exports.registerUser = async (req, res) => {
             return res.status(200).json({ success: true, data: user_data, "token": tokendata })
         }
     } catch (error) {
+        // console.log(error.message)
         return res.status(400).json(error.message)
-        console.log(error.message)
     }
 }
 
@@ -105,7 +105,8 @@ exports.userLogin = async (req, res) => {
             // user
             return res.status(200).json({ "user": user, "token": tokendata })
         }
-        return res.status(400).json("Invalid Credentials")
+        // return res.status(400).json("Invalid Credentials")
+        return res.status(400).send({ success: false, "msg": "Invalid Credentials" })
     } catch (err) {
         console.log(err)
     }
@@ -131,7 +132,7 @@ exports.updatePassword = async (req, res) => {
             })
             res.status(201).send({ success: true, "msg": "your password has been updated." })
         } else {
-            res.status(400).send({ succses: false, "msg": "User ID Not found" })
+            res.status(400).send({ success: false, "msg": "User ID Not found" })
         }
     } catch (error) {
         res.status(400).send(error, message)

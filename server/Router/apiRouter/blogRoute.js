@@ -38,16 +38,19 @@ const upload = multer({
 // ---------------- Multer ----------------
 
 // GET: All Blogs
-router.get('/allBlogs', blogController.allBlogs)                                   // Required for ReactJS fetching data
+router.get('/allBlogs', blogController.allBlogs)                               // Required for ReactJS fetching data
 
 // GET: Single Blog
 router.get('/singleBlog/:id', blogController.singleBlog)                       // Required for ReactJS fetching data
 
-// POST
-router.post('/createBlog', upload.single('blogImage'), blogController.createBlog)
+// GET: Popular Blogs
+router.get('/popularBlogs', blogController.popularBlogs)
 
-// PUT
-router.post('/updateBlog/:id', upload.single('blogImage'), blogController.updateBlog)
+// GET: Search Filter
+router.get('/filter', blogController.filter)
+
+// POST
+// router.post('/createBlog', upload.single('blogImage'), blogController.createBlog)
 
 // DELETE
 router.get('/deleteBlog/:id', blogController.deleteBlog)

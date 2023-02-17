@@ -15,8 +15,8 @@ const Appointment = () => {
     }, [dispatch])
 
     const [appointment, setAppointment] = useState({
-        deptID: {},
-        docID: {},
+        department: "",
+        doctor: "",
         date: "",
         time: "",
         patientName: "",
@@ -29,6 +29,14 @@ const Appointment = () => {
 
     const validation = () => {
         let error = {}
+
+        if (!appointment.department) {
+            error.department = "Department Required"
+        }
+
+        if (!appointment.doctor) {
+            error.doctor = "Doctor Required"
+        }
 
         if (!appointment.date) {
             error.date = "Date Required"
@@ -108,6 +116,26 @@ const Appointment = () => {
                 setAppointment({ ...appointment, message: value })
             }
         }
+
+        if (name === "department") {
+            if (value.length === 0) {
+                setError({ ...error, department: "@Department is Required" })
+                setAppointment({ ...appointment, department: "" })
+            } else {
+                setError({ ...error, department: "" })
+                setAppointment({ ...appointment, department: value })
+            }
+        }
+
+        if (name === "doctor") {
+            if (value.length === 0) {
+                setError({ ...error, doctor: "@Doctor is Required" })
+                setAppointment({ ...appointment, doctor: "" })
+            } else {
+                setError({ ...error, doctor: "" })
+                setAppointment({ ...appointment, doctor: value })
+            }
+        }
     }
 
     const SubmitInfo = async e => {
@@ -127,7 +155,7 @@ const Appointment = () => {
                 <nav className="navbar navbar-expand-lg navigation" id="navbar">
                     <div className="container">
                         <a className="navbar-brand" href="/">
-                            <img src="./Assets/images/logo.png" alt="" className="img-fluid" />
+                            <img src="./Assets/images/cure-and-care-logo.png" alt="" className="img-fluid" style={{ height: '2em' }} />
                         </a>
 
                         <button className="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarmain"
@@ -218,7 +246,7 @@ const Appointment = () => {
                                         {/* Department */}
                                         <div className="col-lg-6">
                                             <div className="form-group">
-                                                <select className="form-control" id="exampleFormControlSelect1" name="department" required>
+                                                <select className="form-control" id="exampleFormControlSelect1" name="department" onChange={e => postAppointmentData(e)} required>
                                                     <option value=''> Choose Department </option>
                                                     {
                                                         appointmentData?.displayDepartment?.map((appointment, key) => {
@@ -236,7 +264,7 @@ const Appointment = () => {
                                         {/* Doctor */}
                                         <div className="col-lg-6">
                                             <div className="form-group">
-                                                <select className="form-control" id="exampleFormControlSelect2" name="doctor" required>
+                                                <select className="form-control" id="exampleFormControlSelect2" name="doctor" onChange={e => postAppointmentData(e)} required>
                                                     <option value=''> Select Doctor </option>
                                                     {
                                                         appointmentData?.displayDoctor?.map((appointment, key) => {

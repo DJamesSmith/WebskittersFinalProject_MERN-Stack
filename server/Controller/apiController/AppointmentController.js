@@ -26,11 +26,7 @@ exports.createAppointment = async (req, res, next) => {
 
         const appointmentData = await AppointmentModel.create({ department, doctor, date, time, patientName, phone, message })
         // return res.json({ status: true, data: appointmentData })
-        DepartmentModel.find().then(resultDepartment => {
-            DoctorModel.find().then(resultDoctor => {
-                return res.json({ status: true, data: appointmentData, displayDepartment: resultDepartment, displayDoctor: resultDoctor })
-            })
-        })
+                return res.json({ status: true, data: appointmentData })
     } catch (error) {
         next(error)
     }

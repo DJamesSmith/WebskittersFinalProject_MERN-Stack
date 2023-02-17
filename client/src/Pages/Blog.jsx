@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import { Vortex } from 'react-loader-spinner'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { fetchBlog } from '../Redux/BlogSlice'
+import { fetchBlog, popularBlog } from '../Redux/BlogSlice'
+import { fetchCategory } from '../Redux/CategorySlice'
 
 const Blog = () => {
 
@@ -11,8 +12,16 @@ const Blog = () => {
     const { blogData } = useSelector(state => state?.blogSlice)
     // console.log('blogData: ', blogData)
 
+    const { popularBlogData } = useSelector(state => state?.blogSlice)
+    // console.log('popularBlogData: ', popularBlogData)
+
+    const { categoryData } = useSelector(state => state?.categorySlice)
+    // console.log('categoryData: ', categoryData)
+
     useEffect(() => {
         dispatch(fetchBlog())
+        dispatch(fetchCategory())
+        dispatch(popularBlog())
     }, [dispatch])
 
     return (
@@ -21,7 +30,7 @@ const Blog = () => {
                 <nav className="navbar navbar-expand-lg navigation" id="navbar">
                     <div className="container">
                         <a className="navbar-brand" href="/">
-                            <img src="./Assets/images/logo.png" alt="" className="img-fluid" />
+                            <img src="./Assets/images/cure-and-care-logo.png" alt="" className="img-fluid" style={{ height: '2em' }} />
                         </a>
 
                         <button className="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarmain"
@@ -72,8 +81,8 @@ const Blog = () => {
                                             blogData !== null ? (
                                                 <>
                                                     {
-                                                        blogData?.displayBlogs?.map((blog, key) => {
-                                                            const { _id, createdAt, blogName, blogQuote } = blog
+                                                        blogData?.displayBlogs?.map(blog => {
+                                                            const { _id, createdAt, blogTitle, blogSubtitle } = blog
                                                             return (
                                                                 <>
 
@@ -84,14 +93,15 @@ const Blog = () => {
                                                                     <div className="blog-item-content">
                                                                         <div className="blog-item-meta mb-3 mt-4">
                                                                             <span className="text-muted text-capitalize mr-3"><i className="icofont-comment mr-2"></i> 5 Comments </span>
-                                                                            <span className="text-black text-capitalize mr-3" key={key}><i className="icofont-calendar mr-1"></i> {createdAt} </span>
+                                                                            <span className="text-black text-capitalize mr-3" key={blog.id}><i className="icofont-calendar mr-1"></i> {createdAt} </span>
                                                                         </div>
 
-                                                                        <h2 className="mt-3 mb-3"><Link to={`/blogSingle/${_id}`}> {blogName} </Link></h2>
-                                                                        <p className="mb-4"> {blogQuote} </p>
+                                                                        <h2 className="mt-3 mb-3"><Link to={`/blogSingle/${blog?._id}`}> {blogTitle} </Link></h2>
+                                                                        <p className="mb-4"> {blogSubtitle} </p>
                                                                         {/* <p className="mb-4"> {_id} </p> */}
 
-                                                                        <Link to={`/blogSingle/${_id}`} className="btn btn-main btn-icon btn-round-full mb-5"> Read More <i className="icofont-simple-right ml-2  "></i></Link>
+                                                                        <Link to={`/blogSingle/${blog?._id}`} className="btn btn-main btn-icon btn-round-full mb-5"> Read More <i className="icofont-simple-right ml-2  "></i></Link>
+                                                                        {/* <Link to={`/blog-details/${blog?._id}`}> Read More </Link> */}
                                                                     </div>
 
                                                                 </>
@@ -133,22 +143,22 @@ const Blog = () => {
                                 </div>
 
                                 <div className="sidebar-widget latest-post mb-3">
-                                    <h5>Popular Posts</h5>
+                                    <h5> Popular Blogs </h5>
 
                                     {
-                                        blogData !== null ? (
+                                        popularBlogData !== null ? (
                                             <>
                                                 {
-                                                    blogData?.displayBlogs?.map((blog, key) => {
-                                                        const { createdAt, blogName } = blog
+                                                    popularBlogData?.displayPopularBlogData?.map(blog => {
+                                                        const { createdAt, blogTitle } = blog
                                                         // const d = new createdAt()
                                                         // var time = d.toDateString()
                                                         return (
                                                             <>
 
-                                                                <div className="py-2" key={key}>
+                                                                <div className="py-2" key={blog.id}>
                                                                     <span className="text-sm text-muted"> {createdAt} </span>
-                                                                    <h6 className="my-2"><a href="/blogSingle"> {blogName} </a></h6>
+                                                                    <h6 className="my-2"><Link to={`/blogSingle/${blog?._id}`}> {blogTitle} </Link></h6>
                                                                 </div>
 
                                                             </>
@@ -166,47 +176,40 @@ const Blog = () => {
                                 </div>
 
                                 <div className="sidebar-widget category mb-3">
-                                    <h5 className="mb-4">Categories</h5>
+                                    <h5 className="mb-4"> Categories </h5>
+
+                                    {/* Medicine, Equipments, Heart, Free counselling, Lab test */}
 
                                     <ul className="list-unstyled">
-                                        <li className="align-items-center">
-                                            <a href="#">Medicine</a>
-                                            <span>(14)</span>
-                                        </li>
-                                        <li className="align-items-center">
-                                            <a href="#">Equipments</a>
-                                            <span>(2)</span>
-                                        </li>
-                                        <li className="align-items-center">
-                                            <a href="#">Heart</a>
-                                            <span>(10)</span>
-                                        </li>
-                                        <li className="align-items-center">
-                                            <a href="#">Free counselling</a>
-                                            <span>(5)</span>
-                                        </li>
-                                        <li className="align-items-center">
-                                            <a href="#">Lab test</a>
-                                            <span>(5)</span>
-                                        </li>
+
+                                        {
+                                            categoryData !== null ? (
+                                                <>
+                                                    {
+                                                        categoryData?.displayCategoryData?.map(category => {
+                                                            const { createdAt, categoryName } = category
+                                                            // const d = new createdAt()
+                                                            // var time = d.toDateString()
+                                                            return (
+                                                                <>
+                                                                    <li className="align-items-center" key={category.id}>
+                                                                        <a href="#"> {categoryName} </a>
+                                                                        <span> (14) </span>
+                                                                    </li>
+                                                                </>
+                                                            )
+                                                        })
+                                                    }
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Vortex visible={true} height="50" width="50" ariaLabel="vortex-loading" wrapperStyle={{}} wrapperclassName="vortex-wrapper" colors={['red', 'green', 'blue', 'yellow', 'orange', 'purple']} />
+                                                </>
+                                            )
+                                        }
+
                                     </ul>
                                 </div>
-
-
-                                <div className="sidebar-widget tags mb-3">
-                                    <h5 className="mb-4">Tags</h5>
-
-                                    <a href="#">Doctors</a>
-                                    <a href="#">agency</a>
-                                    <a href="#">company</a>
-                                    <a href="#">medicine</a>
-                                    <a href="#">surgery</a>
-                                    <a href="#">Marketing</a>
-                                    <a href="#">Social Media</a>
-                                    <a href="#">Branding</a>
-                                    <a href="#">Laboratory</a>
-                                </div>
-
 
                                 <div className="sidebar-widget schedule-widget mb-3">
                                     <h5 className="mb-4">Time Schedule</h5>

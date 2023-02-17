@@ -13,7 +13,9 @@ const initialState = {
     redirectToIndex: null,
     isLoggedInToken: false,
     redirectToLogin: null,
-    isLoggedInName: false
+    isLoggedInName: false,
+    loggedInEmail: false,
+    loggedInPassword: false
 }
 
 export const registerUser = createAsyncThunk(
@@ -59,6 +61,8 @@ export const AuthSlice = createSlice({
             localStorage.removeItem("image")
             localStorage.removeItem("status")
             state.isLoggedInName = false
+            state.loggedInEmail = false
+            state.loggedInPassword = false
         },
         check_token: (state, { payload }) => {
             let token = localStorage.getItem("token")
@@ -98,12 +102,16 @@ export const AuthSlice = createSlice({
             localStorage.setItem("name", payload?.user?.name)
             localStorage.setItem("image", payload?.user?.image)
             localStorage.setItem("status", payload?.user?.status)
+            localStorage.setItem("email", payload?.user?.email)
             state.redirectToIndex = "/"
             state.isLoggedInToken = true
             state.loading = false
 
-            console.log('-------------------------------', payload?.user?.name)
-            console.log('-------------------------------', payload?.user?.status)
+            state.loggedInEmail = true
+            state.loggedInPassword = true
+
+            // console.log('payload?.user?.name', payload?.user?.name)
+            // console.log('payload?.user?.status', payload?.user?.status)
         },
         [loginUser.rejected]: (state, action) => {
             state.loading = false
@@ -112,4 +120,4 @@ export const AuthSlice = createSlice({
     }
 })
 
-export const { setUser, setLogout, reset_redirectTo, handleLogoutName, handleLogoutToken, check_token } = AuthSlice.actions
+export const { setUser, setLogout, reset_redirectTo, handleLogoutName, handleLogoutToken, check_token, loggedInEmail, loggedInPassword} = AuthSlice.actions

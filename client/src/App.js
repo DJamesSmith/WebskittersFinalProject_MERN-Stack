@@ -52,7 +52,7 @@ function App() {
     const PrivateRouteNames = [
         { path: '/appointment', Component: <Appointment /> },
         { path: '/blog', Component: <Blog /> },
-        { path: '/blogSingle', Component: <BlogSingle /> }
+        { path: '/blogSingle/:id', Component: <BlogSingle /> }
 
         // { path: '/blog-details/:id', Component: <BlogDetails /> }
     ]

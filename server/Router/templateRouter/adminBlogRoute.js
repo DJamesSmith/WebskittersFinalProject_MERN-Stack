@@ -40,9 +40,9 @@ router.get('/allBlogs', adminController.allBlogs)
 router.get('/addBlog', adminController.addBlog)
 router.post('/createBlog', upload.single('blogImage'), adminController.createBlog)
 
-// PUT
-router.get('/editBlog/:id', adminController.singleBlog)
-router.post('/updateBlog/:id', upload.single('blogImage'), adminController.updateBlog)
+// // PUT
+// router.get('/editBlog/:id', adminController.singleBlog)
+// router.post('/updateBlog/:id', upload.single('blogImage'), adminController.updateBlog)
 
 // DELETE
 router.get('/deleteBlog/:id', adminController.deleteBlog)

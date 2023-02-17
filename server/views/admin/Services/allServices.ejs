@@ -77,14 +77,18 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <% let c = 0 %>
                                 <% if(displaydata.length > 0) {%>
                                     <% for(let service of displaydata){ %>
                                         <% const p = service.id %>
+                                        <% const desc = service.description %>
                                         <tr>
-                                            <td scope="row"> <%=p.substring(20, 24)%> </td>
+                                            <!-- <td scope="row"> <%=p.substring(20, 24)%> </td> -->
+                                            <td scope="row"> <%= ++c %> </td>
                                             <td> <img src="/serviceUploads/<%= service.image %>" style="border-radius: 50%;" alt="" height="50" width="50"> </td>
                                             <td> <%= service.serviceName %> </td>
                                             <td style="text-align: justify;"> <%= service.description %> </td>
+                                            <!-- <td style="text-align: justify;"> <%= desc.substring(0, 60) %> ... <a href=""> Read more </a> </td> -->
                                             <td> <a href="/admin/editService/<%=service.id%>"> <button type="button" class="btn btn-outline-primary"> Edit </button> </a> </td>
                                             <td> <a href="/admin/deleteService/<%=service.id%>"> <button class="btn btn-outline-danger"> Delete </button> </a> </td>
                                         </tr>

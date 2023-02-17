@@ -89,7 +89,7 @@ exports.createUser = async (req, res) => {
         password: setpassword,
         mobile: req.body.mobile,
         image: req.file.filename,
-        status: 1
+        status: true
     })
     User.save()
         .then(result => {

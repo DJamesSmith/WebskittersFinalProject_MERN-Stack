@@ -78,11 +78,13 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <% let c = 0 %>
                                 <% if(displaydata.length > 0) {%>
                                     <% for(let deptartmentDetails of displaydata){ %>
                                         <% const p = deptartmentDetails.id %>
                                         <tr>
-                                            <td scope="row"> <%=p.substring(20, 24)%> </td>
+                                            <!-- <td scope="row"> <%=p.substring(20, 24)%> </td> -->
+                                            <td scope="row"> <%= ++c %> </td>
                                             <td> <img src="/departmentUploads/<%= deptartmentDetails.deptImage %>" style="border-radius: 50%;" alt="" height="50" width="50"> </td>
                                             <td> <%= deptartmentDetails.deptName %> </td>
                                             <td> <%= deptartmentDetails.deptDescription %> </td>

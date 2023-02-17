@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { fetchService } from '../Redux/ServiceSlice'
@@ -21,7 +21,7 @@ const Service = () => {
                 <nav className="navbar navbar-expand-lg navigation" id="navbar">
                     <div className="container">
                         <a className="navbar-brand" href="/">
-                            <img src="./Assets/images/logo.png" alt="" className="img-fluid" />
+                            <img src="./Assets/images/cure-and-care-logo.png" alt="" className="img-fluid" style={{ height: '2em' }} />
                         </a>
 
                         <button className="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarmain"
@@ -68,6 +68,7 @@ const Service = () => {
                                 <>
                                     {
                                         serviceData?.displaydata?.map((service, key) => {
+                                            const desc = service.description
                                             return (
                                                 <>
 
@@ -77,7 +78,8 @@ const Service = () => {
                                                             {/* <img src={service.image} alt="" className="img-fluid" /> */}
                                                             <div className="content">
                                                                 <h4 className="mt-4 mb-2 title-color" key={key}> {service.serviceName} </h4>
-                                                                <p className="mb-4"> {service.description} </p>
+                                                                {/* <p className="mb-4"> {service.description} </p> */}
+                                                                <p className="mb-4"> {desc.substring(0, 60)} <Link to='' style={{ marginLeft: '10px', color: 'blue' }}> Read More </Link> ... </p>
                                                             </div>
                                                         </div>
                                                     </div>

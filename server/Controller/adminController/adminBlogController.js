@@ -1,87 +1,72 @@
 const BlogModel = require('../../Model/admin/Blog')
+const CategoryModel = require('../../Model/admin/Category')
 
 // GET - All Blogs
-exports.allBlogs = async (req, res) => {
-
-    try {
-
-        var search = ''
-        if (req.query.search) {
-            search = req.query.search
+exports.allBlogs = (req, res) => {
+    BlogModel.find()
+    .exec((error, blogData) => {
+        if (!error) {
+            res.render('Blogs/AllBlogs', {
+                title: 'AdminLTE | All Blogs',
+                dashboardtitle: 'Blogs Page',
+                message: req.flash('message'),
+                error: req.flash('error'),
+                displaydata: blogData
+            })
         }
-
-        var page = 1
-        if (req.query.page) {
-            page = req.query.page
-        }
-
-        const limit = 5
-
-        const blogData = await BlogModel.find({
-            $or: [
-                { blogName: { $regex: '.*' + search + '.*', $options: 'i' } },
-                { blogQuote: { $regex: '.*' + search + '.*', $options: 'i' } }
-            ]
-        })
-            .limit(limit * 1)
-            .skip((page - 1) * limit)
-            .exec()
-
-        const count = await BlogModel.find({
-            $or: [
-                { blogName: { $regex: '.*' + search + '.*', $options: 'i' } },
-                { blogQuote: { $regex: '.*' + search + '.*', $options: 'i' } }
-            ]
-        })
-            .countDocuments()
-
-        res.render('Blogs/AllBlogs', {
-            title: 'AdminLTE | All Blogs',
-            dashboardtitle: 'Blogs Page',
-            message: req.flash('message'),
-            error: req.flash('error'),
-            displaydata: blogData,
-            totalPages: Math.ceil(count / limit),
-            currentPage: page,
-            previousPage: page - 1,
-            nextPage: page - (-1),
-            count: count,
-            limit: limit
-        })
-
-    } catch (error) {
-        console.log(error.message)
-    }
+    })
 }
 
 // GET - Add Blog
 exports.addBlog = (req, res) => {
-    res.render('Blogs/addBlog', {
-        title: 'AdminLTE | Add New Blog',
-        dashboardtitle: 'Blogs Page',
-        message: req.flash('message')
+    CategoryModel.find((err, data) => {
+        //console.log(data)
+        if (!err) {
+            res.render('Blogs/addBlog', {
+                title: 'AdminLTE | Add New Blog',
+                dashboardtitle: 'Blogs Page',
+                message: req.flash('message'),
+                error: req.flash('error'),
+                displaydata: data
+            })
+        }
     })
 }
 
 // POST - Add Blog
 exports.createBlog = (req, res) => {
-    //console.log(req.body)
-    const Blog = new BlogModel({
-        blogName: req.body.blogName,
-        blogQuote: req.body.blogQuote,
-        blogImage: req.file.filename
+    BlogModel.findOne({
+        slug: req.body.blogTitle.trim().replace(/[&\/\\#, +()$~%.'":*?<>{}]/g, '_').toLowerCase()
+    }).exec((error, data) => {
+        if (data) {
+            req.flash('error', "Blog Title Already Exists")
+            res.redirect("/admin/addBlog")
+        } else {
+            BlogModel({
+                blogImage: req.file.filename,
+                blogTitle: req.body.blogTitle,
+                blogSubtitle: req.body.blogSubtitle,
+                blogDescription: req.body.blogDescription,
+                blogQuote: req.body.blogQuote,
+                blogGist: req.body.blogGist,
+                blogConcluder: req.body.blogConcluder,
+                slug: req.body.blogTitle.trim().replace(/[&\/\\#, +()$~%.'":*?<>{}]/g, "_").toLowerCase(),
+                category: req.body.category
+            })
+                .save()
+                .then(result => {
+                    console.log("Post Added.")
+                    req.flash("message", "Blog Post Added successfully.")
+                    req.flash("error", "Something Went Wrong.")
+                    res.redirect("/admin/allBlogs")
+                })
+                .catch(err => {
+                    req.flash("message", "Something Went Wrong.")
+                    req.flash("error", "Something Went Wrong.")
+                    res.redirect("/admin/addBlog")
+                })
+        }
     })
-    Blog.save()
-        .then(result => {
-            console.log(result, "Blog data Created Successfully.")
-            req.flash('message', 'Blog Added Successfully.')
-            res.redirect('/admin/allBlogs')
-        })
-        .catch(err => {
-            console.log(err, "No Data Saved.")
-            req.flash('error', 'You can not send Empty data.')
-            res.redirect('/admin/addBlog')
-        })
 }
 
 // GET - Single Blog for "Edit Blog Page"

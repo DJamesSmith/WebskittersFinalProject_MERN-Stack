@@ -23,7 +23,7 @@ const Doctors = () => {
                 <nav className="navbar navbar-expand-lg navigation" id="navbar">
                     <div className="container">
                         <a className="navbar-brand" href="/">
-                            <img src="./Assets/images/logo.png" alt="" className="img-fluid" />
+                            <img src="./Assets/images/cure-and-care-logo.png" alt="" className="img-fluid" style={{ height: '2em' }} />
                         </a>
 
                         <button className="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarmain"
@@ -120,7 +120,8 @@ const Doctors = () => {
                                                             {/* <img src={service.image} alt="" className="img-fluid" /> */}
                                                             <div className="content">
                                                                 <h4 className="mt-4 mb-2 title-color" key={key}> {doctor.docName} </h4>
-                                                                <h6 className="mt-4 mb-2 title-color" key={key}> {doctor.department.deptName} </h6>
+                                                                {/* <h6 className="mt-4 mb-2 title-color" key={key}> {doctor.department.deptName} </h6> */}
+                                                                <p key={key}> {doctor.department.deptName} </p>
                                                             </div>
                                                         </div>
                                                     </div>

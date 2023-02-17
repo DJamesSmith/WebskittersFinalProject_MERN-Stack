@@ -82,12 +82,14 @@
                             </thead>
 
                             <tbody>
+                                <% let c = 0 %>
                                 <% if(displaydata.length > 0) {%>
                                     <% for(let user of displaydata) { if(user.type != 0) { %>
                                         <% const p = user.id %>
                                         <% const pass = user.password %>
                                         <tr>
-                                            <td scope="row"> <%= p.substring(20, 24) %> </td>
+                                            <!-- <td scope="row"> <%= p.substring(20, 24) %> </td> -->
+                                            <td scope="row"> <%= ++c %> </td>
                                             <td> <img src="/userUploads/<%= user.image %>" style="border-radius: 50%;" alt="" height="50" width="50"> </td>
                                             <td> <%= user.name %> </td>
                                             <td> <%= user.email %> </td>

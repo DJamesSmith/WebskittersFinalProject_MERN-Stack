@@ -49,11 +49,13 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <% let c = 0 %>
                                 <% if(displaydata.length > 0) {%>
                                     <% for(let appointment of displaydata){ %>
                                         <% const p = appointment.id %>
                                         <tr>
-                                            <td scope="row"> <%=p.substring(20, 24)%> </td>
+                                            <!-- <td scope="row"> <%=p.substring(20, 24)%> </td> -->
+                                            <td scope="row"> <%= ++c %> </td>
                                             <td style="color: yellow;"> <b> <%= appointment.department.deptName %> </b> </td>
                                             <td> <b style="color: yellow;"> <%= appointment.doctor.docName %> </b> </td>
                                             <td> <%= appointment.date %> </td>

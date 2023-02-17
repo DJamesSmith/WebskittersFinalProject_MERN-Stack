@@ -1,8 +1,8 @@
-const departmentModel = require('../../Model/admin/Department')
+const DepartmentModel = require('../../Model/admin/Department')
 
 // GET - All Departments
 exports.allDepartments = (req, res) => {
-    departmentModel.find((error, data) => {
+    DepartmentModel.find((error, data) => {
         console.log(data)
         if (!error) {
             res.status(200).send({ success: true, msg: "All Departments data from API fetched Successfully !", displaydata: data })
@@ -15,7 +15,7 @@ exports.singleDepartment = (req, res) => {
 
     const departmentId = req.params.id
 
-    departmentModel.findById(departmentId)
+    DepartmentModel.findById(departmentId)
         .then(data => {
             res.status(200).send({ success: true, msg: `Department ID ${departmentId} from API fetched Successfully !`, department: data })
         })
@@ -29,7 +29,7 @@ exports.singleDepartment = (req, res) => {
 // POST - Add Department
 exports.createDepartment = ((req, res) => {
     //console.log(req.body)
-    const Department = new departmentModel({
+    const Department = new DepartmentModel({
         deptImage: req.file.filename,
         deptName: req.body.deptName,
         deptDescription: req.body.deptDescription
@@ -56,7 +56,7 @@ exports.updateDepartment = (req, res) => {
     const deptName = req.body.deptName
     const deptDescription = req.body.deptDescription
 
-    departmentModel.findById(departmentID)
+    DepartmentModel.findById(departmentID)
         .then(async result => {
             result.deptImage = deptImage
             result.deptName = deptName
@@ -79,9 +79,9 @@ exports.deleteDepartment = (req, res) => {
 
     console.log('departmentID Value: ', departmentID)
 
-    departmentModel.deleteOne({ _id: departmentID })
+    DepartmentModel.deleteOne({ _id: departmentID })
         .then(data => {
-            res.status(200).send({ success: true, msg: `Data with Service ID [${departmentID}] using API deleted Successfully !`, department: data })
+            res.status(200).send({ success: true, msg: `Data with Department ID [${departmentID}] using API deleted Successfully !`, department: data })
         })
         .catch(error => {
             console.log(`Error: ${error}`)

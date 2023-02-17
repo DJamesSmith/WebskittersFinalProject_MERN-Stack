@@ -98,9 +98,7 @@ exports.createDepartment = ((req, res) => {
         })
 })
 
-
-
-// GET - Single Deaprtment for "Edit Department Page"
+// GET - Single Department for "Edit Department Page"
 exports.singleDepartment = ((req, res) => {
 
     const departmentID = req.params.id

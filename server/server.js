@@ -72,6 +72,12 @@ app.use('/admin', adminAppointmentRoute)
 const appointmentRoute = require('../server/Router/apiRouter/appointmentRoute')                           // For ReactJS API
 app.use('/api', appointmentRoute)
 
+// Categories
+const adminCategoryRoute = require('../server/Router/templateRouter/adminCategoryRoute')                  // For Admin
+app.use('/admin', adminCategoryRoute)
+const categoryRoute = require('../server/Router/apiRouter/categoryRoute')                                 // For ReactJS API
+app.use('/api', categoryRoute)
+
 // Blogs
 const adminBlogRoute = require('../server/Router/templateRouter/adminBlogRoute')                          // For Admin
 app.use('/admin', adminBlogRoute)

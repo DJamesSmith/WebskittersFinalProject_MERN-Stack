@@ -43,8 +43,8 @@ const Nav = () => {
                     <div className="row align-items-center">
                         <div className="col-lg-6">
                             <ul className="top-bar-info list-inline-item pl-0 mb-0">
-                                {/* <li className="list-inline-item"><a href="mailto:dion.smith070@gmail.com"><i className="icofont-support-faq mr-2"></i> dion.smith070@gmail.com </a></li> */}
-                                <li className="list-inline-item"><a href="dion.smith070@gmail.com"><i className="icofont-support-faq mr-2"></i> dion.smith070@gmail.com </a></li>
+                                {/* <li className="list-inline-item"><a href="mailto:john@gmail.com"><i className="icofont-support-faq mr-2"></i> john@gmail.com </a></li> */}
+                                <li className="list-inline-item"><a href="john@gmail.com"><i className="icofont-support-faq mr-2"></i> support.us0@gmail.com </a></li>
                                 <li className="list-inline-item"><i className="icofont-location-pin mr-2"></i> Address Ta-134/A, New York, USA </li>
                             </ul>
                         </div>

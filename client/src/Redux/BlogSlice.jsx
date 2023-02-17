@@ -5,6 +5,7 @@ import axiosInstance from '../API/APIUrl'                   // http://localhost:
 const initialState = ({
     blogData: [],
     singleBlogData: {},
+    popularBlogData: [],
     status: 'success'
 })
 
@@ -20,8 +21,30 @@ export const fetchBlog = createAsyncThunk(
         }
     })
 
+export const fetchSingleBlog = createAsyncThunk(
+    "SingleBlog/fetch",
+    async id => {
+        try {
+            const res = await axiosInstance.get(`singleBlog/${id.id}`)
+            return res?.data
+        } catch (error) {
+            console.log(error)
+        }
+    })
+
+export const popularBlog = createAsyncThunk(
+    "PopularBlogs/fetch",
+    async () => {
+        try {
+            const res = await axiosInstance.get('popularBlogs')
+            return res?.data
+        } catch (error) {
+            console.log(error)
+        }
+    })
+
 export const BlogSlice = createSlice({
-    name: 'blog',
+    name: 'Blog',
     initialState,
     reducer: {},
     extraReducers: {
@@ -38,6 +61,32 @@ export const BlogSlice = createSlice({
             // console.log('', payload)
         },
         [fetchBlog.rejected]: state => {
+            state.status = "rejected"
+        },
+
+        // Single Blog
+        [fetchSingleBlog.pending]: state => {
+            state.status = "Loading..."
+            state.singleBlogData = {}
+        },
+        [fetchSingleBlog.fulfilled]: (state, { payload }) => {
+            state.status = "success"
+            state.singleBlogData = payload
+        },
+        [fetchSingleBlog.rejected]: state => {
+            state.status = "Rejected"
+        },
+
+        // Popular Blogs
+        [popularBlog.pending]: state => {
+            state.status = "Loading..."
+            state.popularBlogData = null
+        },
+        [popularBlog.fulfilled]: (state, { payload }) => {
+            state.status = "success"
+            state.popularBlogData = payload
+        },
+        [popularBlog.rejected]: state => {
             state.status = "rejected"
         }
     }
