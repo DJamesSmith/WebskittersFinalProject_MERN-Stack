@@ -6,6 +6,7 @@ const path = require('path')
 const cookieParser = require('cookie-parser')
 const flash = require('connect-flash')
 const session = require('express-session')
+require("dotenv").config()
 
 const app = express()
 
@@ -96,10 +97,9 @@ app.use('/api', userRoute)
 
 // -------------------------------------- Routes --------------------------------------
 
-const dbcon = ""
-const port = process.env.PORT || 3002
+const port = process.env.PORT
 
-mongoose.connect(dbcon, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         app.listen(port, () => {
             console.log(`Database & Server connected. Running port at http://localhost:${port}/admin`)
